@@ -1,0 +1,5 @@
+Credentials cache: API:FA6AF2BE-6417-42F7-A50A-72E60246E9DF
+        Principal: alellouc@42NICE.FR
+
+  Issued                Expires             Flags    Principal
+Feb 10 10:21:44 2021  Feb 10 20:21:35 2021  FPIA   krbtgt/42NICE.FR@42NICE.FR
