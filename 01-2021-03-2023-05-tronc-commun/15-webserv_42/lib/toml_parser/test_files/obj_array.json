@@ -1,0 +1,41 @@
+{
+	"chacal": {
+		"name": "B É B O U"
+	},
+	"lexa": {
+		"a": [
+			{
+				"name": "¿¿¿"
+			}
+		],
+		"int": 42
+	},
+	"test": [
+		{
+			"foo": "bar",
+			"a": {
+				"fizz": "buzz"
+			}
+		},
+		{
+			"titi": "tata",
+			"sub": [
+				{
+					"toto": "tutu"
+				},
+				{
+					"pouet": "prout"
+				}
+			],
+			"a": {
+				"fizz": "buzz"
+			}
+		}
+	],
+	"pouet": {
+		"foo": "bar"
+	},
+	"truc": {
+		"foo": "bar"
+	}
+}

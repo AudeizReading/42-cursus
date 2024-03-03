@@ -1,0 +1,17 @@
+
+F 249,230,159
+C 93,173,226
+
+WE ./textures/mossy.xpm
+EA ./textures/greystone.xpm
+SO ./textures/purplestone.xpm
+NO ./textures/wood.xpm
+
+
+11111111111111
+10000000000001
+10N00000000001
+10000000000001
+10000000000001
+10000000000001
+11111111111111

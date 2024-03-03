@@ -1,0 +1,31 @@
+[chacal]
+name = "B \u00c9 B O U"
+
+[[lexa.a]]
+name = "\u00bf\u00bf\u00bf"
+[lexa]
+int = 42
+
+#Array named test
+[[test]] # This is test[0]
+foo = "bar"
+	[test.a] # This is test[0]["a"]
+	fizz = "buzz"
+# End of first object in array
+
+[pouet] # This isn't part of the array
+foo = "bar"
+
+[[test]] # This is test[1]
+titi = "tata"
+	# This is an array named "sub" in test[1]
+	[[test.sub]] # This is test[1]["sub"][0]
+		toto = "tutu"
+	[[test.sub]] # This is test[1]["sub"][1]
+		pouet = "prout"
+
+[truc] # This isn't part of the array
+foo = "bar"
+
+[test.a] # This is test[1]["a"]
+fizz = "buzz"

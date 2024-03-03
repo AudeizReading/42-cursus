@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "MatchMaking" ADD COLUMN     "matched" BOOLEAN NOT NULL DEFAULT false,
+ALTER COLUMN "startedAt" DROP NOT NULL,
+ALTER COLUMN "startedAt" DROP DEFAULT;

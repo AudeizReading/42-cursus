@@ -1,0 +1,9 @@
+.DS_Store
+*.swp
+.env
+.ssl/
+/app/data/
+node_modules/
+# Faites pas gaffe, c'est des marabouteries à moi que je veux éviter de vous imposer
+app/pong/prisma/migrations/20230109233931_added_invite_notif_type_in_enum/migration.sql
+app/pong/prisma/migrations/20230110005217_removed_me_being_stupid/migration.sql

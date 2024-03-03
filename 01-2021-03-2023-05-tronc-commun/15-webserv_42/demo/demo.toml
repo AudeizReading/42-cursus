@@ -1,0 +1,81 @@
+[http]
+include = ["demo/mime_types.toml"]
+
+	# Basic demo for server and a lot of locations, autoindex, etc
+	[[http.server]]
+	listen_port = 4242
+	listen_addr = "127.0.0.1"
+
+		[[http.server.location]]
+		URI = "/"
+		root = "./demo/www"
+		index = "index.html"
+
+		[[http.server.location]]
+		URI = "cgi-bin"
+		root = "./demo/www/cgi-bin"
+		include = ["demo/cgi_params.toml"]
+
+		[[http.server.location]]
+		URI = "upload_me"
+		root = "./demo/www"
+		index = "upload.html"
+		
+		[[http.server.location]]
+		URI = "foo/bar/fizz"
+		root = "./demo/www"
+		index = "index.html"
+
+		[[http.server.location]]
+		URI = "www"
+		root = "./demo/www"
+		index = ""
+		dir_listing = true
+	
+	# Demo custom error pages and multi CGI, and redirect
+	[[http.server]]
+	listen_port = 2121
+	error_404 = "test/test_page.html"
+		[[http.server.location]]
+		URI = "cgi-bin"
+		root = "./demo/www/cgi-bin"
+		include = ["./demo/cgi_params_php.toml"]
+		cgi_file_ext = "php"
+		[[http.server.location]]
+		URI = "redirect"
+		root = "./demo/www"
+		redirect = "https://virtualairfestivals.com/"
+
+	# Limit max body size
+	[[http.server]]
+	listen_port = 1234
+	client_max_body_size = 100
+
+	# A LOT of tests for server_name matching. Maybe reduce the number of them ?
+	[[http.server]]
+	name = "blue"
+	listen_port = 8080
+	server_name = ["localhost"]
+		[[http.server.location]]
+		URI = "/"
+		root = "./demo/servers/blue"
+	[[http.server]]
+	name = "green"
+	listen_port = 8080
+	server_name = ["127.0.0.1"]
+		[[http.server.location]]
+		URI = "/"
+		root = "./demo/servers/green"
+	[[http.server]]
+	name = "red"
+	listen_port = 8080
+	server_name = ["c2r12p1.42nice.fr", "c2r12p1"] # Change me to wherever you are in the cluster!
+		[[http.server.location]]
+		URI = "/"
+		root = "./demo/servers/red"
+	[[http.server]] # No server_name, so matches requests with no "Host" field
+	name = "black"
+	listen_port = 8080
+		[[http.server.location]]
+		URI = "/"
+		root = "./demo/servers/black"

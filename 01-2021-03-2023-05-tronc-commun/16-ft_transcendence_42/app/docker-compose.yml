@@ -1,0 +1,55 @@
+version: '3.1'
+
+services:
+  psql:
+    container_name: psql
+    image: postgres:15-alpine3.17
+    restart: on-failure
+    env_file: pong/.env
+    networks:
+      - dream
+    # ports:
+    #   - 5432:5432
+    environment:
+      POSTGRES_DB: ${PSQL_DATABASE}
+      POSTGRES_USER: ${PSQL_USER}
+      POSTGRES_PASSWORD: ${PSQL_PASSWORD}
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: on-failure
+    env_file: pong/.env
+    networks:
+      - dream
+    ports:
+      - 8080:8080
+
+  pong:
+    build:
+      context: ./pong
+    container_name: pong
+    env_file: pong/.env
+    networks:
+      - dream
+    ports:
+      - 8190:8190
+      - 8192:8192
+    restart: on-failure
+
+  front:
+    build:
+      context: ./front
+    container_name: front
+    networks:
+      - dream
+    ports:
+      - 3000:3000
+    restart: on-failure
+
+networks:
+  dream:
+    name: dream
+    driver: bridge

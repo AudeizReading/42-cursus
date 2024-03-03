@@ -1,0 +1,90 @@
+version: "3.9"
+
+services:
+    nginx:
+        container_name: nginx
+        image: nginx
+        build:
+            context: ./nginx
+            args:
+                - MAINTAINER
+                - SSL_PATH
+                - FQDN
+        restart: always
+        volumes: 
+        - front-vol:/var/www
+        ports: 
+            - "443:443"
+        init: true
+        env_file: ".env"
+        networks:
+            - entrypoint-tier
+        depends_on:
+            - wordpress
+
+    mariadb:
+        container_name: mariadb
+        image: mariadb
+        build:
+            context: mariadb
+            args:
+                - MAINTAINER
+                - INCEPTION_DB
+                - INCEPTION_ADMIN
+                - INCEPTION_ADMIN_PW
+                - INCEPTION_EDITOR
+                - INCEPTION_EDITOR_PW
+        restart: always
+        env_file: ".env"
+        volumes: 
+            - back-vol:/var/lib/mysql
+        ports: 
+            - "3306:3306"
+        networks:
+            - entrypoint-tier
+
+    wordpress:
+        container_name: wordpress
+        image: wordpress
+        build:
+            context: wordpress
+            args:
+                - MAINTAINER
+                - FQDN
+                - INCEPTION_DB
+                - INCEPTION_HOST
+                - INCEPTION_ADMIN
+                - INCEPTION_ADMIN_PW
+                - INCEPTION_EDITOR
+                - INCEPTION_EDITOR_PW
+                - ADMIN_EMAIL
+                - EDITOR_EMAIL
+        restart: always
+        depends_on:
+        - mariadb
+        volumes: 
+            - front-vol:/var/www
+        ports: 
+            - "9000:9000"
+        networks:
+            - entrypoint-tier
+        env_file: ".env"
+
+
+networks:
+    entrypoint-tier:
+        attachable: true
+
+volumes:
+    front-vol:
+        name: front-vol
+        driver_opts:
+            type: "nfs"
+            o: bind
+            device: $HOME/data/front-vol
+    back-vol:
+        name: back-vol
+        driver_opts:
+            type: "nfs"
+            o: bind
+            device: $HOME/data/back-vol

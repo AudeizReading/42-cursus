@@ -1,0 +1,10 @@
+[test.b]
+foo = true
+
+[[test]] # Illegal, test was declared as a group but is now an array
+truc = "machin"
+
+[[test.b.foo]] # Illegal, foo is already declared as a bool
+bidule = "muche"
+
+[test.b.foo] # Also illegal

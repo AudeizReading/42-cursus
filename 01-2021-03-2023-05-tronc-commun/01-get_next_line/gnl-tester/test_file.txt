@@ -1,0 +1,19 @@
+Ce projet va non seulement vous permettre d'ajouter une fonction très pratique a votre collection, mais vous permettra également d'aborder un nouvel element surprenant de la programmation en C : les variables statiques.
+
+* Des appels successifs a votre fonction get_next_line doivent vous permettre de lire l'entièreté du texte disponible sur le file descriptor, une ligne a la fois jusqu'au EOF.
+* La libft n'est pas autorisée sur ce projet. Vous devez ajouter le fichier get_next_line_utils.c qui contiendra les fonctions nécessaires au fonctionnement de votre get_next_line.
+* Assurez-vous que votre fonction se comporte correctement lorsque vous lisez depuis un fichier ou l'entrée standard.
+* Votre programme doit compiler avec le flag -D BUFFER_SIZE=xx. Ce define doit être utilisé dans vos appels de read du get_next_line, pour définir la taille du buffer. Cette valeur sera modifiée lors de l'évaluation et par la moulinette.
+* Compilation : gcc -Wall -Werror -Wextra -D BUFFER_SIZE=32 get_next_line.c get_next_line_utils.c
+* Votre read DOIT utiliser le BUFFER_SIZE pour lire depuis un fichier ou depuis le stdin.
+* Dans le fichier header get_next_line.h, vous devez avoir au moins le prototype de la fonction.
+* Nous considérons que get_next_line a un comportement indéterminé si, entre deux appels, le file descriptor change de fichier alors qu'EOF n'a pas été atteint sur le premier fichier.
+* Non, lseek n'est pas une fonction autorisée. La lecture du file descriptor ne doit être faite qu'une seule fois.
+* Enfin, nous considérons que get_next_line a un comportement indéterminé si nous lisons un fichier binaire. Cependant si vous le souhaitez, vous pouvez rendre ce comportement coherent.
+* Les variables globales sont interdites.
+
+PARTIE BONUS
+Le projet get_next_line laisse peu de place à l'imagination, mais si vous avez complété entièrement la partie obligatoire, vous pouvez faire les bonus proposés ici. Rendez les 3 fichiers initiaux _bonus pour cette partie.
+* Complétez get_next_line avec une seule variable statique.
+* Complétez get_next_line en lui permettant de gérer plusieurs fd. Par exemple, si les fd 3, 4 et 5 sont accessibles en lecture, alors vous pouvez appeler get_next_line une fois sur 3, puis sur 4, puis sur 5, puis le rappeler sur 3, etc. Sans jamais perdre le contenu lu sur chacun des fd, et sans le mélanger.
+Ligne sans \n

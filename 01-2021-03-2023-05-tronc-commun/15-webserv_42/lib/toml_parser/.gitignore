@@ -1,0 +1,22 @@
+# Local garbage
+.vscode
+*.dSYM
+.DS_Store
+
+# Object files
+*.o
+
+# Libraries
+*.a
+*.so
+*.dylib
+
+# Binaries
+*.out
+*.debug
+toml_test
+
+# Whatever
+*.txt
+*_old.cpp
+*_prout.cpp

@@ -1,0 +1,59 @@
+# This is the prototype/proposal of what will be the expected standard of the confirguration file.
+# One we all agree on this, we'll all have to stick to its formatting. No deviating.
+# I'll start work on parsing everything on monday, after we discuss this and agree on a final design.
+
+# root_string = "hello"
+[http]
+include = ["mime_types.toml"]		# All include directives are optional. Put whatever we need in there.
+
+	[[http.server]]
+	listen_port = 8080						# Mandatory parameter.
+	listen_addr = "127.0.0.1"				# Optional. Defaults to "0.0.0.0", meaning accepts requests from anyone.
+	server_name = ["localhost"]				# Optional. Defaults to [""], i.e. no "Host" field.
+	client_max_body_size = 1048576			# Optional. Defaults to 1 MiB (1048576 bytes).
+
+	error_400 = "./res/error/400.html"		# Optional. Defaults to "res/error/4XX.html".
+	error_500 = "./foo/bar.html"			# Directive can be any of 4XX/5XX HTTP 1.1 errors.
+
+	# If no location is provided, a default one is provided as follows
+		# [[http.server.location]]
+		# route = "/"
+		# root = "/var/www"
+
+[hello]
+truc = "muche"
+[http.a]
+bool = true
+
+	[[http.server]]							# Is first server for this port, so is default.
+	listen_port = 4242
+	server_name = ["c4r2p6.42nice.fr", "www.c4r2p6.42nice.fr",
+					"c4r2p6"]
+
+		[[http.server.location]]
+		route = "/"								# Mandatory parameter.
+		root = "./demo/www"						# Mandatory parameter.
+		index = "index.html"					# Optional. Defaults to "index.html".
+		allowed_methods = ["POST", "GET"]		# Optional. Defaults to allow POST, GET, and DELETE.
+		dir_listing = true						# Optional. Defaults to false.
+		include = ["fast_cgi.toml"]
+
+		[[http.server.location]]
+		route = "img"							# Points to /var/www/img, see NGINX doc
+		root = "/var/www"
+		index = "issberg.png"
+
+		[[http.server.location]]
+		route = "somethind_old"
+		root = "/var/www"
+		redirect = "./demo/www"					# Optional. No default.
+
+	[[http.server]]
+	listen_port = 4242
+	listen_addr = ""
+	# This server has no server_name, so it's defaulted to [""].
+	# Instead of the default server, this server should thus
+	# match all requests with no "Host" field.
+	# http://nginx.org/en/docs/http/request_processing.html
+	root = "./demo/www"
+	index = "index.html"

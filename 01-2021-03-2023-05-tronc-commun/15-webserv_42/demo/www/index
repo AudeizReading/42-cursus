@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8" />
+	<title>Vous Etes Perdu ?</title>
+	<style>img { max-width: 100%; }</style>
+</head>
+<body style="background-color: lightblue;">
+	<h1>Perdu sur l'Internet ?</h1>
+	<h2>Pas de panique, on va vous aider</h2>
+	<p style="font-weight: bold;margin: 0 0 10px 142px;">┌── votre iceberg est ici<br>▼</p>
+	<img style="width: 340px" src="/cgi-bin/image.pl" />
+	<!-- <form method="POST" action="/cgi-bin/apply-for-iceberg.pl?form=R-42&ampcontext=dev%20test"> -->
+	<form method="POST" action="upload.html" enctype="application/x-www-form-urlencoded">
+		<!-- <input type="hidden" name="form" value="R-42" /> -->
+		<input type="hidden" name="goal" value="Need another iceberg" />
+		<p>
+		<span>Ce n'est pas mon iceberg.</span> <br/>
+			<input type="submit" name="submit" value="Réserver un iceberg" />
+		</p>
+	</form>
+</body>
+</html>

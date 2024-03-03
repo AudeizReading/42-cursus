@@ -1,0 +1,3 @@
+.vogignore
+/hooks/
+/test/

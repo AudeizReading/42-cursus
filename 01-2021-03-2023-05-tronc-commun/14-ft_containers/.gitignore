@@ -1,0 +1,30 @@
+/.DS_Store
+/*/*.sw[op]
+*.sw[op]
+*.[ao]
+*/*.[ao]
+*/*.vim
+*.vim
+/ft_containers
+/*/*.drawio
+/*.drawio
+/*.dSYM
+*/*.dSYM
+/tags
+/Screen Shot 2022-08-28 at 01.09.19.png
+/Screen Shot 2022-08-29 at 01.55.49.png
+/containers_test/
+/binary_trees/x-BinaryTree.hpp
+/binary_trees/x-RedBlackTree.hpp
+/binary_trees/x-NodeBinaryTree.hpp
+/binary_trees/x-NodeBinaryTreeImpl.hpp
+/binary_trees/x-custom_stl.hpp
+/binary_trees/x-stl.hpp
+/iterators/x-bidirectionnal_iterator.hpp
+iterators/x-AssociativeIteratorAdaptator.hpp
+iterators/x-BinaryTreeIterator.hpp
+iterators/x-RBTIterator.hpp
+docs/
+docs/*
+tests/outputs/*
+tests/log/*

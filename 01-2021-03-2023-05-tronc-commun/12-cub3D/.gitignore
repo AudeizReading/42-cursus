@@ -1,0 +1,4 @@
+*.[oa]
+*.sw[op]
+bin
+.DS_Store

@@ -1,0 +1,28 @@
+name: Test
+
+on:
+  push:
+    branches:
+    - main
+    - tester
+  pull_request:
+    branches:
+    - main
+    - tester
+  workflow_dispatch:
+    branches: 
+    - main
+    - tester
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout repository and submodules
+      uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: test
+      run: sh test_me.sh

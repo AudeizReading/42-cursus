@@ -1,0 +1,138 @@
+# Document config;
+# auto servers = config["http"]["server"].Array()
+# servers[0].at_or("listen_addr", make_string(""))
+
+[http]
+include = ["demo/mime_types.toml"]		# All include directives are optional. Put whatever we need in there.
+
+	[[http.server]]
+	listen_port = 8081						# Mandatory parameter.
+	listen_addr = "127.0.0.1"				# Optional. Defaults to "0.0.0.0", meaning accepts requests from anyone.
+	#server_name = ["localhost"]				# Optional. Defaults to [""], i.e. no "Host" field.
+	client_max_body_size = 41943040			# 40Mo
+	# client_max_body_size = 4194304		# Optional. Defaults to 4 MiB (4194304 bytes).
+	# listen_backlog = 32					# Optional. Defaults to 128.
+
+	error_400 = "./res/error/400.html"		# Optional. Defaults to "res/error/XXX.html".
+											# Directive can be any of webserv supported errors.
+	# error_500 = "./foo/bar.html"			# These are illegal errors, here to test parsing.
+	# error_500 = 1234
+	# error_666 = "./res/error/400.html"
+
+	# If no location is provided, a default one is provided as follows
+		# [[http.server.location]]
+		# URI = "/"
+		# root = "./demo/www"
+
+	[[http.server]]							# Is first server for this port, so is default.
+	listen_port = 4243
+	listen_addr = "127.0.0.1"
+	client_max_body_size = 41943040
+	#server_name = ["c4r2p6.42nice.fr", "www.c4r2p6.42nice.fr",
+	#				"c4r2p6"], il faut mettre l'ip bind à c4r2p6
+
+		[[http.server.location]]
+		URI = "/"								# Mandatory parameter.
+		root = "./demo/www"						# Mandatory parameter.
+		index = "index.html"					# Optional. Defaults to "index.html".
+		dir_listing = true						# Optional. Defaults to false.
+		# include = ["fast_cgi.toml"]
+
+		[[http.server.location]]
+		URI = "/img/"							# Points to /var/www/img, see NGINX doc
+		root = "./demo/www/img/"
+		index = "issberg.png"
+
+		[[http.server.location]]
+		URI = "www"
+		root = "./demo/www"
+		index = "img/issberg.png"
+
+		[[http.server.location]]
+		URI = "foo/bar/fizz"
+		root = "./demo/www"
+		index = "index.html"
+
+		[[http.server.location]]
+		URI = "/something_old"
+		root = "/var/www"
+		redirect = "./demo/www"					# Optional. Defaults to "", i.e. no redirect.
+
+	[[http.server]]
+	listen_port = 4242
+	client_max_body_size = 41943040
+
+		[[http.server.location]]
+		URI = "/"								# Mandatory parameter.
+		root = "./demo/www"						# Mandatory parameter.
+		index = "index.html"					# Optional. Defaults to "index.html".
+		# allowed_methods = ["POST", "HEAD"]		# Optional. Defaults to allow POST, GET, and DELETE.
+		dir_listing = true						# Optional. Defaults to false.
+		# include = ["fast_cgi.toml"]
+
+		[[http.server.location]]
+		URI = "/perdu"
+		redirect = "https://perdu.com/"
+
+		[[http.server.location]]
+		URI = "/upload/"
+		root = "./demo/www/upload"
+		dir_listing = true
+
+		[[http.server.location]]
+		URI = "/img"							# Points to /var/www/img, see NGINX doc
+		root = "./demo/www/img"
+		index = "issberg.png"
+
+		[[http.server.location]]
+		URI = "www"
+		root = "./demo/www"
+		index = "img/issberg.png"
+
+		[[http.server.location]]
+		URI = "/something_old"
+		root = "/var/www"
+		redirect = "./demo/www"					# Optional. Defaults to "", i.e. no redirect.
+
+	[[http.server]]
+	listen_port = 4244
+	# This server has no server_name, so it's defaulted to [""].
+	# Instead of the default server, this server should thus
+	# match all requests with no "Host" field.
+	# http://nginx.org/en/docs/http/request_processing.html
+
+	[[http.server]]
+	listen_port = 5000
+	client_max_body_size = 2000
+		[[http.server.location]]
+		URI = "/"
+		root = "./demo/www2"
+		index = "index.html"
+
+	[[http.server]]
+	name = "blue"
+	listen_port = 8082
+	server_name = ["localhost"]
+		[[http.server.location]]
+		URI = "/"
+		root = "./demo/servers/blue"
+	[[http.server]]
+	name = "green"
+	listen_port = 8082
+	server_name = ["127.0.0.1"]
+		[[http.server.location]]
+		URI = "/"
+		root = "./demo/servers/green"
+	[[http.server]]
+	name = "red"
+	listen_port = 8082
+	server_name = ["0.0.0.0"]
+		[[http.server.location]]
+		URI = "/"
+		root = "./demo/servers/red"
+	[[http.server]]
+	name = "black"
+	listen_port = 8082
+		[[http.server.location]]
+		URI = "/"
+		root = "./demo/servers/black"

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8" />
+	<title>Upload</title>
+	<link href="main-style.css" rel="stylesheet" type="text/css">
+	<link href="http://fonts.cdnfonts.com/css/iceberg" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/dedab4d2ca.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<header>
+		<h1>mandatory requests</h1>
+	</header>
+	<div class="illustration">
+		<div class="i-large"></div>
+		<div class="i-medium"></div>
+		<div class="i-small"></div>
+	</div>
+	<div class="form_container">
+		<form id="upload-form" method="POST" action="/cgi-bin/apply-for-iceberg.pl?/upload" enctype="multipart/form-data" alt="Upload file(s)">
+			<h2>UPLOAD request</h2>
+			<p>
+				<label for="upload_input_type_file">
+					Select a file to upload <br/>    
+					<i class="fa-regular fa-folder-open"></i>
+					<input id="upload_input_type_file" type="file" name="form" accept="image/png, image/jpeg" onchange="previewPicture(this);" required />
+				</label>
+			</p>
+			<p>
+				<input type="submit" name="submit" value="Book an iceberg" />
+				<input type="reset" name="reset" value="Reset" />
+			</p>
+		</form>
+	</div>
+	<img src="#" id="img-prev" hidden>
+	<script type="text/javascript" >
+    // L'image img#image
+    var image = document.getElementById("img-prev");
+
+    // La fonction previewPicture
+    var previewPicture  = function (e) {
+
+        // e.files contient un objet FileList
+        const [picture] = e.files
+
+        // "picture" est un objet File
+        if (picture) {
+            // On change l'URL de l'image
+            image.style.width = "96px";
+			image.style.height = "96px";
+            image.src = URL.createObjectURL(picture);
+			image.hidden = false;
+        }
+    }
+	</script>
+	<p>
+		<a href="../index.html" alt="Are you lost?">Are you lost?</a>
+	</p>
+</body>
+</html>

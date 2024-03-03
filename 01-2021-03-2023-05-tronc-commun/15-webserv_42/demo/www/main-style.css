@@ -1,0 +1,224 @@
+/* Adobe Kuler (monochrome) based on lightblue (#ADD8E6(3)): #4D6066(1: dark)  #69CAEA(2: blue) #2E5866(4: dark) #86A7B3(5: light) */
+/* Another blue that could match the theme #307bba; */
+
+/* General style */
+body {
+	background-color: lightblue;
+	color: #2E5866;
+	font-family: 'Iceberg', sans-serif;
+
+	margin: auto;
+	padding: auto;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+header {
+    margin: 1em;
+    padding: 0.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1, h2, h3 {
+	color: #69CAEA;
+	text-transform : uppercase;
+	text-shadow: 3px 3px 3px white;
+	text-align: center;
+}
+
+h2.no_mt {
+	margin-top: 0;
+}
+
+img.clickable {
+	cursor: pointer;
+}
+
+p {
+	margin: 1em;
+	padding: 0.5em;
+}
+
+img {
+	max-width: 100%;
+}
+
+#here {
+	font-weight: bold;
+	margin: 0 0 10px 142px;
+}
+
+a {
+	color: #2E5866;
+}
+
+a:hover, a:visited {
+	color: white;
+	text-shadow: 1px 2px 5px #4D6066;
+}
+
+a:visited {
+	color: #2E5866;
+	text-shadow: 1px 2px 5px #4D6066;
+}
+
+.hidden {
+	display: none;
+	width: 0px;
+	height: 0px;
+	margin: 0px;
+	padding: 0px;
+}
+
+/* Gallery style*/
+.gallery {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	padding: 0;
+}
+
+.gallery li, .form_container li {
+  list-style-type: none;
+  text-align: center;
+}
+
+.img_gallery {
+	max-width: 612px;
+	max-height: 612px;
+	width: 90%;
+	border: #86A7B3 2px solid;
+	border-radius: 10%;
+	margin: auto;
+}
+
+
+/* Form style*/
+.form_container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	width: 100%;
+}
+
+.p_container {
+	margin-top: 1em;
+    padding-top: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+	font-family: 'Iceberg', sans-serif;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	padding:auto;
+}
+
+#upload-form {
+	margin-top: 0px;
+}
+
+#gallery-form {
+}
+
+input[type="submit"], input[type="reset"], label {
+	font-size: 1em;
+	color: white;
+	text-shadow: 1px 2px 5px #4D6066;
+	background-color: lightblue;
+
+	border-style: solid;
+	border-color: #86A7B3 #4D6066 #4D6066 #86A7B3;
+	border-radius: 0% 10% / 10% 40%;
+	margin: 1em;
+	padding: 0.5em;
+	cursor: pointer;
+	font-family: 'Iceberg', sans-serif;
+}
+
+input[type="submit"]:hover, input[type="reset"]:hover, label:hover {
+	box-shadow: 10px 10px 20px #86a7b3;
+}
+
+input[type="file"] {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+label {
+    display: inline-block;
+    text-align: center;
+    padding: auto;
+}
+
+/* Snow animation
+ * https://www.creativejuiz.fr/blog/css-css3/creer-une-animation-de-neige-ou-de-particules-en-css3
+ */
+.illustration {
+	position: relative;
+	margin: 0 auto;
+	width : 612px;
+	height: 405px;
+	border: #86A7B3 2px solid;
+	border-radius: 10%;
+	background : url("./img/istockphoto-1124563104-612x612.jpeg") no-repeat top center;
+}
+
+.i-large,
+.i-medium,
+.i-small {
+	position : absolute;
+	top: 0; right: 0; bottom: 0; left: 0;
+	width : 612px;
+	border-radius: 10%;
+	height: 405px;
+}
+
+.i-large {
+	background: url("./img/kisspng-snowflake-schema-tattoo-grey-gray-shining-snowflakes-5a954fa9d92a05.7741385315197346978895.png") repeat 0px 0px;
+	-webkit-animation: dropFlowParticles 6s linear infinite;
+	     -o-animation: dropFlowParticles 6s linear infinite;
+	        animation: dropFlowParticles 6s linear infinite;
+	        opacity: 75%;
+}
+.i-medium {
+	background: url("./img/kisspng-printworx-nj-snowflake-desktop-wallpaper-snowflakes-5ab485b41ee320.1380978515217801481265.png") repeat 0px 0px;
+	-webkit-animation: dropFlowParticles 12s linear infinite;
+	     -o-animation: dropFlowParticles 12s linear infinite;
+	        animation: dropFlowParticles 12s linear infinite;
+	        opacity: 95%;
+}
+.i-small {
+	background:url("./img/kisspng-drawing-transparency-and-translucency-snowflake-5a83c4b3e6b483.072921821518585011945.png") repeat 0px 0px;
+	-webkit-animation: dropFlowParticles 27s linear infinite;
+	     -o-animation: dropFlowParticles 27s linear infinite;
+	        animation: dropFlowParticles 27s linear infinite;
+	        opacity: 25%;
+}
+
+@-webkit-keyframes dropFlowParticles {
+	from { background-position: 0 0; }
+	to { background-position: 612px 405px; }
+}
+@keyframes dropFlowParticles {
+	from { background-position: 0 0; }
+	to { background-position: 612px 405px; }
+}

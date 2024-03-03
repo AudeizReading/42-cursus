@@ -1,0 +1,41 @@
+rootString = "Hello, world!"			
+[main]
+int = 42 # test comment
+float = 21.0 # test comment
+[main.sub]
+bool = true#test comment
+[test]
+salut = "c'est\\\\\t\t\"Fanta\""    	# SALUT	   	
+coucou = "\u2705 How, ar\u20AC \t you \u00bf\t"
+[test.a.b.c]
+[test.a]
+simple1 = [0, 1, 2]
+simple2 = [
+
+	# coucou
+	"Salut", # Ca# va?  		 
+	#la forme?		  	
+	"c'est",
+	"Fanta"
+	]
+simple3 = [1.0, 2.0, 3.0,]
+simple4 = [true,false, true]
+less-simple = [
+	[0, 1, 2], # test
+	["one", "two, \u2705 \"\"three", "three"]
+]
+wtf = [
+	[
+		[0, 1],
+		[2, 3]
+	],
+	[
+		[4, 5],
+		[6, 7]
+	]
+]
+
+[[lexa]]
+i = 21
+[[lexa]]
+i = 42

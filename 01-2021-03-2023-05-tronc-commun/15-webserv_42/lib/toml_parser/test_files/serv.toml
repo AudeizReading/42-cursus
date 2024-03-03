@@ -1,0 +1,7 @@
+[server]
+name = "Hello world"
+port = 4242
+logfile = "/etc/log/server"
+	[server.location]
+	root = "var/www/virtual/big.server.com/htdocs"
+	expires = 30
