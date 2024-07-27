@@ -1,0 +1,67 @@
+{
+	"name": "red-tetris-frontend",
+	"version": "1.0.0",
+	"contributors": [
+		{
+			"name": "Bryan Ledda",
+			"email": "bledda@student.42nice.fr",
+			"url": "https://github.com/louchebem06"
+		},
+		{
+			"name": "Aude Laëtitia Lellouche",
+			"email": "alellouc@student.42nice.fr",
+			"url": "https://github.com/AudeizReading"
+		}
+	],
+	"private": true,
+	"scripts": {
+		"install:back": "npm install -C ../backend",
+		"dev": "concurrently \"npm run start -C ../backend\" \"npm run dev:frontend\"",
+		"prod": "concurrently \"npm run start -C ../backend\" \"npm run preview\"",
+		"dev:frontend": "npm run build:svelteconfig && vite dev -c vite.dev.config.ts",
+		"build:svelteconfig": "esbuild svelte.config.ts --outfile=svelte.config.js",
+		"build": "npm run build:svelteconfig && vite build -c vite.prod.config.ts",
+		"build:map": "npm run build:svelteconfig && vite build -c vite.dev.config.ts",
+		"build:clean": "rm -rf .nyc_output && rm -rf .svelte-kit && rm -rf build",
+		"preview": "vite preview -c vite.dev.config.ts",
+		"lint": "prettier --check . && eslint .",
+		"format": "prettier --write .",
+		"check": "npm run build:svelteconfig &&  npm run check:lint",
+		"check:lint": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "npm run build:svelteconfig && npm run check:lint --watch",
+		"playwright:codegen": "playwright codegen",
+		"test": "playwright test",
+		"test:ui": "playwright test --ui",
+		"coverage": "npx nyc report",
+		"test:coverage": "npm run build:svelteconfig && npm run build:clean && npm run build:map && npm run test && npm run coverage",
+		"test:coverage:web": "npm run test:coverage && open coverage/index.html"
+	},
+	"devDependencies": {
+		"@playwright/test": "^1.45.1",
+		"@sveltejs/adapter-static": "^3.0.2",
+		"@sveltejs/kit": "^2.5.18",
+		"@sveltejs/vite-plugin-svelte": "^3.1.1",
+		"@typescript-eslint/eslint-plugin": "^7.16.0",
+		"@typescript-eslint/parser": "^7.16.0",
+		"concurrently": "^8.2.2",
+		"eslint": "^8.57.0",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-plugin-prefer-arrow-functions": "^3.3.2",
+		"eslint-plugin-svelte": "^2.42.0",
+		"jsdom": "^24.1.0",
+		"prettier": "^3.3.2",
+		"prettier-plugin-svelte": "^3.2.5",
+		"sass": "^1.77.8",
+		"svelte": "^4.2.18",
+		"svelte-check": "^3.8.4",
+		"tslib": "^2.6.3",
+		"typescript": "^5.5.3",
+		"vite": "^5.3.3",
+		"vite-plugin-istanbul": "^6.0.2"
+	},
+	"type": "module",
+	"dependencies": {
+		"socket.io-client": "^4.7.5",
+		"svelte-notifications": "github:louchebem06/svelte-notifications#fix-warn-vite-plugin-svelte"
+	}
+}

@@ -1,0 +1,37 @@
+{
+	"parser": "@typescript-eslint/parser",
+	"extends": ["plugin:@typescript-eslint/recommended", "prettier"],
+	"plugins": ["prettier"],
+	"parserOptions": {
+		"ecmaVersion": 2018,
+		"sourceType": "module",
+	},
+	"ignorePatterns": [
+		".eslintrc",
+		"dist",
+		"src/tests/coverage-final.json",
+		"src/tests/coverage-reports/",
+		"src/tests/coverage-reports/*",
+		"node_modules",
+		"jest.config.ts",
+		"prettierrc.json",
+		"package*.json",
+		"tsconfig.json",
+		"README.md",
+		"package.json",
+		"asyncapi.yaml",
+	],
+	"rules": {
+		"@typescript-eslint/explicit-member-accessibility": "error",
+		"@typescript-eslint/interface-name-prefix": "off",
+		"@typescript-eslint/explicit-function-return-type": "error",
+		"@typescript-eslint/explicit-module-boundary-types": "warn",
+		"@typescript-eslint/no-explicit-any": "warn",
+		"max-len": ["error", { "code": 120 }],
+		"@typescript-eslint/naming-convention": "error",
+		"@typescript-eslint/no-unused-vars": "error",
+		"@typescript-eslint/no-var-requires": "error",
+		"@typescript-eslint/ban-ts-comment": 0,
+		"require-await": "error"
+	},
+}

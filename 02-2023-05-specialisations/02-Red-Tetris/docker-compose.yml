@@ -1,0 +1,41 @@
+services:
+  fontend:
+    container_name: frontend
+    image: red-tetris/frontend
+    build:
+      context: frontend/
+      args:
+        - PUBLIC_DOMAIN_BACK
+        - PUBLIC_PORT_BACK
+        - PUBLIC_PROTOCAL_WS
+    env_file:
+      - .env
+    ports:
+      - "$PORT_FRONTEND:80"
+    restart: always
+    hostname: nginx
+
+  backend:
+    container_name: backend
+    image: red-tetris/backend
+    build:
+      context: backend/
+      args:
+        - PORT
+        - HOST
+        - PROTOCOL
+        - TICKS
+        - TICKS_INTERVAL_MS
+        - DESTROY_TIMER
+        - DISCO_TIMER
+        - START_GAME_TIMER
+        - PORT_FRONTEND
+    env_file:
+      - .env
+    ports:
+      - "$PORT:$PORT"
+    restart: always
+    hostname: node
+    volumes:
+      - ./backend/data:/usr/src/app/dist/data
+      - ./backend/logs:/usr/src/app/dist/logs

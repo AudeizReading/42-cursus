@@ -1,0 +1,62 @@
+{
+	"root": true,
+	"extends": [
+		"eslint:recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:svelte/recommended",
+		"prettier"
+	],
+	"parser": "@typescript-eslint/parser",
+	"plugins": ["@typescript-eslint", "prefer-arrow-functions"],
+	"parserOptions": {
+		"sourceType": "module",
+		"ecmaVersion": 2020,
+		"extraFileExtensions": [".svelte"]
+	},
+	"env": {
+		"browser": true,
+		"es2017": true,
+		"node": true
+	},
+	"overrides": [
+		{
+			"files": ["*.svelte"],
+			"parser": "svelte-eslint-parser",
+			"parserOptions": {
+				"parser": "@typescript-eslint/parser"
+			}
+		}
+	],
+	"rules": {
+		"@typescript-eslint/interface-name-prefix": "off",
+		"@typescript-eslint/explicit-function-return-type": "error",
+		"@typescript-eslint/explicit-module-boundary-types": "warn",
+		"@typescript-eslint/no-explicit-any": "warn",
+		"max-len": ["error", { "code": 100 }],
+		"@typescript-eslint/naming-convention": "error",
+		"@typescript-eslint/no-unused-vars": "error",
+		"@typescript-eslint/no-var-requires": "error",
+		"require-await": "error",
+		"prefer-arrow-functions/prefer-arrow-functions": [
+			"error",
+			{
+				"classPropertiesAllowed": false,
+				"disallowPrototype": false,
+				"returnStyle": "unchanged",
+				"singleReturnOnly": false
+			}
+		],
+		"svelte/no-at-html-tags": "error",
+		"svelte/no-target-blank": "error",
+		"svelte/no-at-debug-tags": "error",
+		"svelte/block-lang": ["error", { "script": "ts", "style": "scss" }],
+		"svelte/no-dupe-else-if-blocks": "error",
+		"svelte/no-dupe-style-properties": "error",
+		"svelte/first-attribute-linebreak": "error",
+		"svelte/html-self-closing": "error",
+		"svelte/html-quotes": "error",
+		"svelte/html-closing-bracket-spacing": "error",
+		"svelte/require-stores-init": "error",
+		"svelte/no-unused-class-name": "error"
+	}
+}

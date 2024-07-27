@@ -1,0 +1,18 @@
+{
+	"branches": 50,
+	"lines": 70,
+	"functions": 70,
+	"statements": 70,
+	"watermarks": {
+		"statements": [70, 80],
+		"branches": [50, 60],
+		"functions": [70, 80],
+		"lines": [70, 80]
+	},
+	"check-coverage": true,
+	"all": true,
+	"report-dir": "./coverage",
+	"temp-dir": ".nyc_output",
+	"reporter": ["text", "html"],
+	"exclude-after-remap": false
+}

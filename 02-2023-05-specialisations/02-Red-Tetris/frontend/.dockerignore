@@ -1,0 +1,29 @@
+# Docker
+Dockerfile
+.dockerignore
+
+# Dev
+node_modules
+playwright.config.ts
+.eslintignore
+.eslintrc
+.nycrc
+.nyc_output
+.prettierignore
+.prettierrc
+
+# Build
+svelte.config.js
+.svelte-kit
+build
+
+# Test
+tests
+test-results
+
+# Config
+.env
+.env.example
+
+# Git
+.gitignore

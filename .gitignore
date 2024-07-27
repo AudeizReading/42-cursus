@@ -53,3 +53,7 @@ dkms.conf
 
 # vscode
 .vscode/
+.env
+**/.env
+**/**/ */.env
+./**/.env

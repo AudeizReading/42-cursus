@@ -1,0 +1,24 @@
+@import url(//fonts.googleapis.com/earlyaccess/nats.css);
+@import './variables';
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: 'NATS', sans-serif;
+	line-height: 105%;
+}
+
+body {
+	background: $background;
+}
+
+button {
+	cursor: pointer;
+}
+
+p,
+input,
+form,
+button {
+	font-size: 20px;
+}
