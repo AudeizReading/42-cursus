@@ -1,0 +1,200 @@
+.content {
+	width: 100vw;
+	height: 100vh;
+	background: black;
+
+	.myWebcam {
+		position: absolute;
+		z-index: 10;
+		background: black;
+
+		&.SEND_VIDEO {
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			object-fit: cover;
+			object-position: 50% 50%;
+		}
+
+		&.VIDEO {
+			top: 10px;
+			right: 10px;
+			width: 50vw;
+			transition: all 2s ease;
+		}
+	}
+
+	.callWebcam {
+		position: absolute;
+		z-index: 9;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		object-fit: cover;
+		object-position: 50% 50%;
+		background: black;
+	}
+
+	.callAudio {
+		position: absolute;
+		top: 0;
+		left: 0;
+		opacity: 0;
+		width: 0;
+		height: 0;
+	}
+
+	.specteAudio {
+		position: absolute;
+		width: 100vw;
+		height: 100vh;
+		top: 0;
+		left: 0;
+		z-index: 9;
+	}
+
+	.userContact {
+		position: absolute;
+		z-index: 10;
+		width: 75vh;
+		height: 75vh;
+		border-radius: 100%;
+		overflow: hidden;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	.blur {
+		position: absolute;
+		z-index: 11;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background: rgba(255, 255, 255, 0.2);
+		backdrop-filter: blur(13.2px);
+	}
+
+	.username {
+		position: absolute;
+		top: 30vh;
+		left: 50vw;
+		transform: translateX(-50%);
+		z-index: 12;
+		display: flex;
+		gap: 2vh;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		p {
+			margin: 0;
+			padding: 0;
+			color: white;
+			font-size: 8vw;
+			text-wrap: nowrap;
+		}
+	}
+
+	.pictureUser {
+		position: absolute;
+		z-index: 11;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			opacity: 0.5;
+		}
+	}
+
+	.btnRefuse {
+		position: absolute;
+		z-index: 20;
+		border-radius: 100%;
+		padding: 20px;
+		width: 30px;
+		height: 30px;
+		background: red;
+		border: none;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		&.SEND_VIDEO,
+		&.VIDEO,
+		&.SEND_AUDIO,
+		&.AUDIO {
+			bottom: 10vh;
+			left: 50vw;
+			transform: translateX(-50%);
+		}
+
+		&.RECEIPE_AUDIO,
+		&.RECEIPE_VIDEO {
+			bottom: 10vh;
+			left: 10vw;
+		}
+	}
+
+	.btnAccept {
+		position: absolute;
+		z-index: 20;
+		border-radius: 100%;
+		padding: 20px;
+		width: 30px;
+		height: 30px;
+		background: green;
+		border: none;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		bottom: 10vh;
+		right: 10vw;
+	}
+
+	.end {
+		.callEnd {
+			position: absolute;
+			top: 5vh;
+			left: 5vw;
+			width: 90vw;
+			height: 90vw;
+			overflow: hidden;
+			mask:
+				radial-gradient(at 70% 31%, #000 29%, #0000 30%),
+				radial-gradient(at 30% 31%, #000 29%, #0000 30%),
+				linear-gradient(#000 0 0) bottom/100% 50% no-repeat;
+			clip-path: polygon(-41% 0, 50% 91%, 141% 0);
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+
+		p {
+			position: absolute;
+			bottom: 10vh;
+			left: 5vw;
+			width: 90vw;
+			margin: 0;
+			padding: 0;
+			font-size: 5vw;
+			text-align: center;
+		}
+	}
+}

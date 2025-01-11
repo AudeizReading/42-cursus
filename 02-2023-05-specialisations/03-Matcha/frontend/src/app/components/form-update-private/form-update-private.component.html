@@ -1,0 +1,25 @@
+@if (profile) {
+	<form class="signin-form" [formGroup]="privateForm" (ngSubmit)="onSubmit()">
+		<div class="tabview-profile-container flex-end">
+			<button class="btn-base" [disabled]="disabledSave">Save</button>
+		</div>
+
+		<div class="form-signin-input">
+			<app-input-icon
+				id="email"
+				type="email"
+				[placeholder]="profile.email!"
+				icon="email"
+				[parentForm]="privateForm"
+			/>
+			<app-input-icon
+				id="password"
+				type="{{ field }}"
+				[placeholder]="'Password'"
+				icon="password"
+				[parentForm]="privateForm"
+				(toggleEyeVisibility)="onToggleEyeVisibility()"
+			/>
+		</div>
+	</form>
+}

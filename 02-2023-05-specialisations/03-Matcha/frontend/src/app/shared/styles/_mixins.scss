@@ -1,0 +1,84 @@
+@use 'color';
+// media queries
+@mixin respond-to-max($breakpoint, $orientation: landscape) {
+	@media screen and (max-width: $breakpoint) and (orientation: $orientation) {
+		@content;
+	}
+}
+
+@mixin respond-to-max-wth-hght($breakpoint1, $breakpoint2) {
+	@media screen and (max-width: $breakpoint1) and (max-height: $breakpoint2) {
+		@content;
+	}
+}
+
+@mixin respond-to-min($breakpoint, $orientation: landscape) {
+	@media screen and (min-width: $breakpoint) and (orientation: $orientation) {
+		@content;
+	}
+}
+
+@mixin respond-to-min-wth-hght($breakpoint1, $breakpoint2) {
+	@media screen and (min-width: $breakpoint1) and (min-height: $breakpoint2) {
+		@content;
+	}
+}
+
+@mixin respond-to-orientation($orientation: landscape) {
+	@media screen and (orientation: $orientation) {
+		@content;
+	}
+}
+
+@mixin box-shadow($x, $y, $blur, $spread, $color) {
+	box-shadow: $x $y $blur $spread $color;
+}
+
+@mixin respond-to-hover {
+	@media (hover: hover) and (pointer: fine) {
+		@content;
+	}
+}
+
+@mixin border-radius-25 {
+	border-radius: 25px; // Bord arrondi
+}
+
+@mixin cut-out-effect {
+	// rend le texte transparent (prend le background-color de l'élément parent)
+	mix-blend-mode: screen; // needed for cutout effect
+	color: black; // needed for cutout effect
+}
+
+@mixin fit-size {
+	width: 100%;
+	height: 100%;
+}
+
+@mixin flex-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+@mixin flex-center-column {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+@mixin progressing() {
+	$pink: color.get-palette-value('background', base);
+	@include border-radius-25();
+	box-shadow: inset 0 0.05em 0.05em rgba(lighten($pink, 30%), 0.35);
+	background: linear-gradient($pink, lighten($pink, 20%), $pink);
+	transition: all 4s ease-in-out;
+}
+
+@mixin center-absolute {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}

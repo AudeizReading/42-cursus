@@ -1,0 +1,34 @@
+@if (isLoading) {
+	<app-load-spinner></app-load-spinner>
+} @else {
+	<h2 class="completion-h2">Profile Completion</h2>
+	<p class="completion-p">Select the gender that looks like you best.</p>
+	<form class="completion-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+		<div class="completion-container-form">
+			<label for="gender">Available Genders: </label>
+			<app-select-input
+				[selectClasses]="'select-primary'"
+				[labelClasses]="'label-primary'"
+				[id]="'gender'"
+				[parentForm]="form"
+				[options]="genders"
+			>
+			</app-select-input>
+		</div>
+		<div class="validation-btn-form">
+			<app-input
+				[inputClasses]="'btn-primary btn-base'"
+				[id]="'reset'"
+				[parentForm]="form"
+				[type]="'reset'"
+				(inputClick)="onReset($event)"
+			></app-input>
+			<app-input
+				[inputClasses]="'btn-primary btn-base'"
+				[id]="'submit'"
+				[parentForm]="form"
+				[type]="'submit'"
+			></app-input>
+		</div>
+	</form>
+}

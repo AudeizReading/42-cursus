@@ -1,0 +1,22 @@
+<div class="content">
+	@if (!lastMessageRead) {
+		<div class="bulle messageRead"></div>
+	}
+	<div class="pictureContent">
+		<img src="{{ urlPicture }}" loading="lazy" alt="picture user" />
+		@if (isOnline) {
+			<div class="bulle online"></div>
+		}
+	</div>
+	<div class="messageContent">
+		<div class="firstContent">
+			<p>{{ displayName }}</p>
+			@if (!isOnline) {
+				<p>{{ getDate() }}</p>
+			}
+		</div>
+		<div class="secondContent">
+			<p>{{ lastMessage }}</p>
+		</div>
+	</div>
+</div>

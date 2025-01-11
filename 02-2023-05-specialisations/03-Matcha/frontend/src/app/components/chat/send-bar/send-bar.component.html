@@ -1,0 +1,29 @@
+<div class="containerSendButton">
+	<div class="container">
+		@if (!loadSendMedia) {
+			<app-media-send-bar
+				(chatMediaAction)="onSendMedia($event)"
+				(callEmit)="onSendCall($event)"
+				[user]="user"
+				[correspondant]="correspondant"
+			/>
+		} @else {
+			<div class="load">
+				<app-loader />
+			</div>
+		}
+		<div class="sendBar" [formGroup]="form">
+			<input
+				class="sendInput"
+				type="text"
+				placeholder="Write your message here"
+				(input)="onInput($event)"
+				[formControlName]="'message'"
+				(keydown)="onKeyDown($event)"
+			/>
+			<button class="sendButton" (click)="onSend($event)">
+				<app-send />
+			</button>
+		</div>
+	</div>
+</div>

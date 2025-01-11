@@ -1,0 +1,31 @@
+<h2 class="completion-h2">Profile Completion</h2>
+
+<form class="completion-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+	<div class="completion-container-form completion-container-form-map">
+		<label for="type">Select your location on the map (or let your GPS do the trick): </label>
+		@if (latitude !== undefined && longitude !== undefined) {
+			<app-map
+				[latitude]="latitude"
+				[longitude]="longitude"
+				[zoom]="zoom"
+				(moving)="updateCoordinates($event)"
+			></app-map>
+		}
+		<button type="button" class="btn-primary btn-base" (click)="checkGeoPermission()">Use GPS</button>
+	</div>
+	<div class="validation-btn-form">
+		<app-input
+			[inputClasses]="'btn-primary btn-base'"
+			[id]="'reset'"
+			[parentForm]="form"
+			[type]="'reset'"
+			(inputClick)="onReset($event)"
+		></app-input>
+		<app-input
+			[inputClasses]="'btn-primary btn-base'"
+			[id]="'submit'"
+			[parentForm]="form"
+			[type]="'submit'"
+		></app-input>
+	</div>
+</form>

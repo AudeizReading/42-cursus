@@ -1,0 +1,395 @@
+@use 'color';
+@use 'font';
+@use 'mixins';
+app-event {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	.tabs {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+		background-color: white;
+		margin: 10px 5px;
+		padding: 5px 0;
+		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+		max-height: 30px;
+		height: 30px;
+		font-size: inherit;
+		.tab {
+			position: relative;
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			button {
+				background: transparent;
+				border: none;
+				color: #fd3f92;
+				font-size: 1rem;
+				padding: 0;
+				margin: 0;
+				text-transform: uppercase;
+				padding-left: 20px;
+				&:hover {
+					color: #ff87bb;
+				}
+			}
+			button:not(:nth-last-child(2)) {
+				border-left: 1px solid #ececec;
+			}
+			button::before {
+				content: ''; /* Nécessaire pour afficher le pseudo-élément */
+				position: absolute; /* Permet de le positionner par rapport à l'élément parent */
+				left: 10px; /* Positionne à gauche de l'élément */
+				top: 50%; /* Centre verticalement */
+				transform: translate(50%, -50%); /* Ajuste le positionnement pour centrer parfaitement */
+				text-align: left;
+				width: 5px; /* Largeur du cercle */
+				height: 5px; /* Hauteur du cercle */
+				background-color: #fd3f92; /* Couleur du cercle, à ajuster selon tes besoins */
+				border-radius: 50%; /* Rend l'élément circulaire */
+				display: none; /* Masque par défaut */
+			}
+
+			// bubulle active
+			button.active::before {
+				display: block; /* Masque par défaut */
+			}
+		}
+	}
+	.tab-content,
+	.tab-panel {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		overflow: hidden;
+		width: 100%;
+		height: 100%;
+	}
+	.events-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		overflow: hidden;
+		width: 100%;
+		height: 100%;
+		padding: 20px;
+
+		.createEvent {
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: center;
+			width: 100%;
+			height: 100%;
+			margin: auto;
+			flex: 1 1 auto;
+			overflow-y: auto;
+			overflow-x: hidden;
+			form {
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-start;
+				align-items: center;
+				width: 95%;
+				height: 100%;
+				gap: 5%;
+				padding: 10px;
+				header {
+					width: 100%;
+					height: 100%;
+					display: flex;
+					justify-content: space-between;
+					flex: 1 1 100%;
+					.containerInputPicture {
+						flex: 1 1 100%;
+						width: 100%;
+						height: 100%;
+						.containerPictureForEvent {
+							width: 100%;
+							height: 100%;
+							display: flex;
+							justify-content: center;
+							.event-picture {
+								width: 100px;
+								height: 100px;
+								object-fit: cover;
+								border-radius: 0px;
+							}
+						}
+					}
+					p {
+						font-size: 1rem;
+					}
+					.close {
+						background-color: transparent;
+						border: none;
+						outline: none;
+					}
+
+					.location {
+						flex: 1 1 100%;
+						width: 100%;
+						height: 100%;
+						max-width: 50vw;
+						.location-choice-container {
+							display: flex;
+							justify-content: flex-start;
+							width: 100%;
+							app-fake-location-dialog {
+								height: fit-content;
+								display: flex;
+							}
+						}
+						.coord {
+							display: flex;
+							gap: 25px;
+							.coords-context-p {
+								margin: 0;
+								padding: 0;
+								text-overflow: ellipsis;
+								text-wrap: nowrap;
+								overflow: hidden;
+								width: 100%;
+								max-width: 50vw;
+							}
+						}
+					}
+				}
+				article {
+					width: 90%;
+					height: 100%;
+					margin: auto;
+					gap: 10px;
+					display: flex;
+					flex-direction: column;
+					justify-content: flex-start;
+					align-items: center;
+				}
+
+				.select-input-container,
+				.select-input-label,
+				.containerPictureForEvent,
+				.containerInputPicture,
+				p {
+					width: 100%;
+				}
+				.select-input {
+					width: 100%;
+					border-radius: inherit;
+					background-color: #ff87bb;
+					color: color.get-palette-value('foreground', text); // Couleur du texte
+					padding-right: 2.5em; // Espacement intérieur à right
+					padding-left: 1em; // Espacement intérieur à gauche
+					border: 1px solid color.get-palette-value('background', base);
+					font-size: font.$sm; // Taille de la police
+					transition:
+						box-shadow 180ms ease-in-out,
+						border-color 180ms ease-in-out;
+					height: 50px;
+					border-radius: 50px;
+					border: 1px solid #fd3f92;
+					background: #ff87bb;
+					box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+					display: flex;
+					overflow: hidden;
+					gap: 15px;
+					option {
+						position: relative;
+						background-color: #ff87bb; // Couleur de fond
+						color: color.get-palette-value('foreground', text); // Couleur du texte
+					}
+				}
+
+				.select-input:focus,
+				.select-input:active {
+					outline: transparent solid 3px;
+					border-color: color.get-palette-value('foreground', focus);
+				}
+				.textarea-description {
+					width: 100%;
+					height: 50px;
+					border-radius: 5px;
+					border: 1px solid #fd3f92;
+					background: #ff87bb;
+					box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+					display: flex;
+					overflow: hidden;
+					gap: 15px;
+					padding-left: 50px;
+					color: white;
+				}
+				textarea::placeholder {
+					color: white;
+				}
+				input.eventButton {
+					display: inline-block;
+					max-width: fit-content;
+					text-align: center;
+					margin: 0;
+					padding: 0;
+				}
+			}
+		}
+
+		.eventList {
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			display: flex;
+			flex-wrap: wrap;
+			padding: 10px;
+			padding-bottom: 0;
+			gap: 15px;
+			margin: 0 auto;
+			.no-event {
+				width: 100%;
+				height: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 1.5rem;
+				color: inherit;
+			}
+			.event-list-container {
+				width: 100%;
+				height: 100%;
+				overflow: auto;
+				overflow-x: hidden;
+				display: flex;
+				justify-content: space-evenly;
+				flex-wrap: wrap;
+				margin: 0 auto;
+				.eventItem {
+					width: auto;
+					height: fit-content;
+					overflow: hidden;
+					border-radius: 14px;
+					background: #ff87bb;
+					box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+					padding: 20px;
+					margin: 10px;
+					* {
+						color: inherit;
+						font-size: 1rem;
+						margin: 0;
+						padding: 0;
+					}
+					.eventItemHeader {
+						.event-match-container {
+							display: flex;
+							gap: 10px;
+
+							.event-match-picture {
+								width: 30px;
+								height: 30px;
+								object-fit: cover;
+								border-radius: 30px;
+							}
+						}
+						.event-datas-container {
+							display: flex;
+							.event-name {
+								p {
+									margin: 0;
+									font-size: 0.8rem;
+									text-align: left;
+									width: 100%;
+								}
+							}
+							.event-datetime {
+								p {
+									margin: 0;
+									font-size: 0.8rem;
+									text-align: center;
+									width: 100%;
+								}
+							}
+							.event-status {
+								width: 100%;
+								text-align: right;
+							}
+						}
+						padding-bottom: 5px;
+						border-bottom: solid 1px white;
+					}
+					.eventItemBody {
+						padding: 5px;
+						width: 100%;
+						overflow: hidden;
+						display: flex;
+						flex-direction: column;
+						.event-datas-container {
+							display: flex;
+							flex-direction: column;
+							padding-bottom: 10px;
+
+							.event-datetime {
+								p {
+									margin: 0;
+									padding: 0;
+									font-size: 0.8rem;
+									width: 100%;
+
+									text-overflow: ellipsis;
+									text-wrap: nowrap;
+									overflow: hidden;
+								}
+							}
+							.event-location {
+								p {
+									margin: 0;
+									font-size: 0.8rem;
+									width: 100%;
+									text-overflow: ellipsis;
+									text-wrap: nowrap;
+									overflow: hidden;
+								}
+							}
+						}
+						.event-picture-container {
+							display: flex;
+							justify-content: center;
+							.event-picture {
+								width: 100%;
+								height: 200px;
+								max-height: 200px;
+								object-fit: cover;
+								border-radius: 0px;
+								padding-bottom: 10px;
+							}
+						}
+
+						.event-description {
+							overflow: auto;
+							overflow-x: hidden;
+							width: 100%;
+							height: 100%;
+							max-height: 175px;
+							p {
+								width: 100%;
+								height: 100%;
+								padding-bottom: 10px;
+								text-wrap: wrap;
+							}
+						}
+					}
+
+					.eventItemFooter {
+						display: flex;
+						justify-content: space-between;
+						align-items: center;
+						width: 100%;
+						min-height: 75px;
+						gap: 25px;
+						justify-content: space-evenly;
+					}
+				}
+			}
+		}
+	}
+}

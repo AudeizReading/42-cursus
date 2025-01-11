@@ -1,0 +1,7 @@
+<button class="btn-like" (click)="onClick()">
+	@if (liked) {
+		<app-icon [icon]="'liked'" [width]="'37'" [height]="'37'" [iconType]="'svg'"></app-icon>
+	} @else {
+		<app-icon [icon]="'unliked'" [width]="'37'" [height]="'37'" [iconType]="'svg'"></app-icon>
+	}
+</button>

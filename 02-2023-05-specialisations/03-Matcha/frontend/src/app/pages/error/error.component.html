@@ -1,0 +1,16 @@
+<app-layout>
+	<div layoutHeader>
+		<app-header-action
+			[title]="title"
+			[back]="{ active: true, title: 'back', location: state.previousUrl }"
+		></app-header-action>
+	</div>
+	<div layoutMain class="error-main">
+		<app-modal>
+			<p>
+				<span>{{ state.message }}</span>
+			</p>
+		</app-modal>
+	</div>
+	<div layoutFooter></div>
+</app-layout>

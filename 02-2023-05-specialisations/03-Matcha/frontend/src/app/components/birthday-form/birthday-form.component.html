@@ -1,0 +1,23 @@
+<h2 class="completion-h2">Profile Completion</h2>
+<p class="completion-p">How old are you ?</p>
+<form class="completion-form" [formGroup]="form" (ngSubmit)="onSubmit($event)">
+	<div class="completion-container-form">
+		<label for="birthday">Pick your BirthDay: </label>
+		<app-input-icon [parentForm]="form" type="date" id="birthday" placeholder="Date Of Birth" icon="date" />
+	</div>
+	<div class="validation-btn-form">
+		<app-input
+			[inputClasses]="'btn-primary btn-base'"
+			[id]="'reset'"
+			[parentForm]="form"
+			[type]="'reset'"
+			(inputClick)="onReset($event)"
+		></app-input>
+		<app-input
+			[inputClasses]="'btn-primary btn-base'"
+			[id]="'submit'"
+			[parentForm]="form"
+			[type]="'submit'"
+		></app-input>
+	</div>
+</form>

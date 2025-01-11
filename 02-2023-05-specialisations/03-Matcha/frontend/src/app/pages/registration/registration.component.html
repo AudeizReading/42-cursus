@@ -1,0 +1,16 @@
+<app-layout>
+	<div layoutHeader>
+		<app-header-action
+			[title]="'registration'"
+			[back]="{ active: true, title: 'home', location: '/' }"
+			[notif]="false"
+			[logout]="true"
+		></app-header-action>
+	</div>
+	@if (!this.isSuccessful) {
+		<app-form-signup layoutMain (resultEmitter)="onRegister($event)"></app-form-signup>
+	} @else {
+		<p layoutMain class="registration-msg">{{ message }}</p>
+	}
+	<div layoutFooter></div>
+</app-layout>

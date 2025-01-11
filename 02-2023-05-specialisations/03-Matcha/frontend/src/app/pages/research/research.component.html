@@ -1,0 +1,51 @@
+<app-layout>
+	<div layoutHeader>
+		<app-header-action
+			[title]="'search'"
+			[back]="{ active: false, title: 'home', location: '/' }"
+			[notif]="config.isOk ? true : false"
+		></app-header-action>
+	</div>
+	<div layoutMain class="research-container">
+		@if (config.isOk) {
+			<app-search-bar-research (search)="onSearch($event)" />
+			@if (config.end && profiles.length === 0) {
+				<p class="end">There is no profile anymore to research</p>
+			} @else {
+				@if (config.loader && profiles.length === 0) {
+					<app-loader />
+				} @else {
+					<div
+						#research
+						id="research-card-container"
+						[ngClass]="'profiles'"
+						appScrollend
+						(notifyScrollEnd)="onScroll($event)"
+					>
+						@for (profile of profiles; track profile) {
+							<div class="card">
+								<app-card-browsing
+									[ownerTags]="ownerTag"
+									[ownerPosition]="ownerPosition"
+									[profile]="profile"
+									[displayLikeUnlikeButton]="false"
+									[displayTag]="true"
+								/>
+							</div>
+						}
+						@if (config.loader) {
+							<div class="loaderNewCard">
+								<app-loader />
+							</div>
+						}
+					</div>
+				}
+			}
+		}
+	</div>
+	<div layoutFooter>
+		@if (config.isOk) {
+			<app-footer-action></app-footer-action>
+		}
+	</div>
+</app-layout>

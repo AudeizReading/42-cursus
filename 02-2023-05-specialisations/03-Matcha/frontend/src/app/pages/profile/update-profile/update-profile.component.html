@@ -1,0 +1,184 @@
+<app-layout>
+	<div layoutHeader>
+		<app-header-action
+			[title]="'settings'"
+			[back]="{ active: true, title: 'profile', location: '/profile/me' }"
+			[notif]="true"
+		></app-header-action>
+	</div>
+	<div layoutMain class="profile-container">
+		<p-tabView
+			class="tabview-profile-container"
+			[activeIndex]="activeMainIndex"
+			(onChange)="onMainTabChange($event)"
+		>
+			<p-tabPanel header="Informations" class="tabview-profile-container informations">
+				<p-tabView
+					[activeIndex]="activeSubMainIndex"
+					(onChange)="onPicturesSubMainTabChange($event)"
+					class="block-100 infos-view"
+				>
+					<p-tabPanel header="Public" [style]="tabViewStyles['publicPanels']">
+						<app-form-update-profile
+							(resultEmitter)="onProfileDatasUpdate($event)"
+						></app-form-update-profile>
+					</p-tabPanel>
+					<p-tabPanel header="Private">
+						<ng-template pTemplate="content">
+							<app-form-update-private
+								(resultEmitter)="onProfileDatasUpdate($event)"
+							></app-form-update-private>
+							<div class="oauth-link">
+								<app-oauth-link oauthType="google" [oauthDatas]="profile.oauthGoogleDatas" />
+								<app-oauth-link oauthType="facebook" [oauthDatas]="profile.oauthFacebookDatas" />
+							</div>
+						</ng-template>
+					</p-tabPanel>
+					<p-tabPanel
+						header="Pictures"
+						class="tabview-profile-container block-100 fileupload"
+						[style]="tabViewStyles['picturesPanels']"
+					>
+						<ng-template pTemplate="content">
+							<app-update-pictures />
+						</ng-template>
+					</p-tabPanel>
+					<p-tabPanel header="Tags">
+						<ng-template pTemplate="content">
+							<app-tag-update [removeLast]="false" />
+						</ng-template>
+					</p-tabPanel>
+				</p-tabView>
+			</p-tabPanel>
+			<p-tabPanel header="History" class="tabview-profile-container">
+				<ng-template pTemplate="content">
+					<p-tabView [activeIndex]="activeSubMainIndex" (onChange)="onSubMainTabChange($event)">
+						<p-tabPanel header="Like">
+							<p-tabView
+								[activeIndex]="activeSubSubMainIndex"
+								(onChange)="onSubSubMainTabChange($event)"
+								[scrollable]="true"
+							>
+								@if (history) {
+									<p-tabPanel
+										header="I Liked ({{ history.totalLikees }})"
+										[style]="tabViewStyles['historyPanels']"
+									>
+										<app-cards-history
+											[type]="'profile'"
+											[history]="history.likeesCards"
+											id="history-I-liked"
+											appScrollend
+											[threshold]="0.75"
+											(notifyScrollEnd)="onHistoryScrollEnd($event)"
+										></app-cards-history>
+									</p-tabPanel>
+									<p-tabPanel
+										header="Liked by ({{ history.totalLikes }})"
+										[style]="tabViewStyles['historyPanels']"
+									>
+										<ng-template pTemplate="content">
+											<app-cards-history
+												[type]="'profile'"
+												[history]="history.likersCards"
+												id="history-they-like-me"
+												appScrollend
+												[threshold]="0.75"
+												(notifyScrollEnd)="onHistoryScrollEnd($event)"
+											></app-cards-history>
+										</ng-template>
+									</p-tabPanel>
+								} @else {
+									<p-tabPanel header="I Liked (0)" [style]="tabViewStyles['historyPanels']">
+									</p-tabPanel>
+
+									<p-tabPanel header="Liked by by (0)" [style]="tabViewStyles['historyPanels']">
+									</p-tabPanel>
+								}
+							</p-tabView>
+						</p-tabPanel>
+						<p-tabPanel header="View">
+							<ng-template pTemplate="content">
+								<p-tabView [scrollable]="true">
+									@if (history) {
+										<p-tabPanel
+											header="I Viewed ({{ history.totalVisits }})"
+											[style]="tabViewStyles['historyPanels']"
+										>
+											<app-cards-history
+												[type]="'profile'"
+												id="history-I-viewed"
+												[history]="history.visitsCards"
+												appScrollend
+												[threshold]="0.75"
+												(notifyScrollEnd)="onHistoryScrollEnd($event)"
+											></app-cards-history>
+										</p-tabPanel>
+										<p-tabPanel
+											header="Viewed by ({{ history.totalViews }})"
+											[style]="tabViewStyles['historyPanels']"
+										>
+											<ng-template pTemplate="content">
+												<app-cards-history
+													[type]="'profile'"
+													id="history-they-view-me"
+													[history]="history.viewersCards"
+													appScrollend
+													[threshold]="0.75"
+													(notifyScrollEnd)="onHistoryScrollEnd($event)"
+												></app-cards-history>
+											</ng-template>
+										</p-tabPanel>
+									} @else {
+										<p-tabPanel
+											header="I Viewed (0)"
+											[style]="tabViewStyles['historyPanels']"
+										></p-tabPanel>
+
+										<p-tabPanel header="Viewed by (0)" [style]="tabViewStyles['historyPanels']">
+										</p-tabPanel>
+									}
+								</p-tabView>
+							</ng-template>
+						</p-tabPanel>
+						@if (history && history.totalBlocked && history.totalBlocked > 0) {
+							<p-tabPanel header="Blocked">
+								<ng-template pTemplate="content">
+									<p-tabView [scrollable]="true">
+										<p-tabPanel
+											header="I Blocked ({{ history.totalBlocked }})"
+											[style]="tabViewStyles['historyPanels']"
+										>
+											<app-cards-history
+												id="history-I-blocked"
+												[history]="history.blockedCards"
+												[type]="'blocked'"
+												(unblock)="onUnblockRequest($event)"
+												appScrollend
+												[threshold]="0.75"
+												(notifyScrollEnd)="onHistoryScrollEnd($event)"
+											></app-cards-history>
+										</p-tabPanel>
+									</p-tabView>
+								</ng-template>
+							</p-tabPanel>
+						}
+					</p-tabView>
+				</ng-template>
+			</p-tabPanel>
+			<p-tabPanel header="Location" class="tabview-profile-container block">
+				<ng-template pTemplate="content">
+					<app-location
+						[coords]="profile.coords"
+						[userId]="profile.id!"
+						[type]="profile.locationType!"
+						(updateLocation)="onDatasUpdatedByChildren($event)"
+					/>
+				</ng-template>
+			</p-tabPanel>
+		</p-tabView>
+	</div>
+	<div layoutFooter>
+		<app-footer-action></app-footer-action>
+	</div>
+</app-layout>

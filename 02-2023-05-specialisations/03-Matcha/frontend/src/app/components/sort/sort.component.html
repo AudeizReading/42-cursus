@@ -1,0 +1,14 @@
+<button class="sort" (click)="onButtonClick()">
+	<p>{{ label }}</p>
+	<div class="icon">
+		@if (order === undefined) {
+			<app-icon-idle color="#FD3F92" />
+		}
+		@if (order === 'ASC') {
+			<app-icon-asc color="#FD3F92" />
+		}
+		@if (order === 'DESC') {
+			<app-icon-desc color="#FD3F92" />
+		}
+	</div>
+</button>

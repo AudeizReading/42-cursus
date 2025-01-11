@@ -1,0 +1,16 @@
+app-cards-history {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	overflow: auto;
+	.cards-container {
+		width: 95%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 50px;
+		margin: auto;
+	}
+}

@@ -1,0 +1,27 @@
+<form class="signup-form" [formGroup]="form" (ngSubmit)="onRegister(form)">
+	<app-input-icon id="username" type="text" placeholder="Username" icon="username" [parentForm]="form" />
+	<app-input-icon id="firstName" type="text" placeholder="Firstname" icon="username" [parentForm]="form" />
+	<app-input-icon id="lastName" type="text" placeholder="LastName" icon="username" [parentForm]="form" />
+	<app-input-icon id="email" type="email" placeholder="Email" icon="email" [parentForm]="form" />
+	<app-input-icon
+		id="newPassword"
+		type="{{ field }}"
+		placeholder="Password"
+		icon="password"
+		[parentForm]="form"
+		(toggleEyeVisibility)="onToggleEyeVisibility()"
+	/>
+	<app-input-icon
+		id="confirmPassword"
+		type="{{ fieldConfirm }}"
+		placeholder="Confirm Password"
+		icon="password"
+		[parentForm]="form"
+		(toggleEyeVisibility)="onToggleEyeConfirmVisibility()"
+	/>
+
+	<div class="form-registration-div">
+		<app-input [inputClasses]="'btn-primary btn-base'" [id]="'registration'" [parentForm]="form" [type]="'submit'">
+		</app-input>
+	</div>
+</form>

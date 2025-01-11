@@ -1,0 +1,5 @@
+@use 'mixins';
+app-tags-form {
+	@include mixins.fit-size();
+	@include mixins.flex-center-column();
+}

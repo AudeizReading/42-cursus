@@ -1,0 +1,22 @@
+<div class="notificationCard">
+	<div class="content">
+		<div class="userInformation">
+			<img src="{{ urlPicture }}" alt="picture user" loading="lazy" />
+			<p>{{ displayName }}</p>
+		</div>
+		<div class="message">
+			<p>{{ message }}</p>
+		</div>
+	</div>
+	<div class="options">
+		<div class="tools">
+			<div [class.hidden]="isRead">
+				<app-icon-eye color="#FD3F92"></app-icon-eye>
+			</div>
+			<button (click)="onDelete()">
+				<app-icon-trash color="#FD3F92"></app-icon-trash>
+			</button>
+		</div>
+		<button class="actionButton" (click)="onAction()">{{ labelButton }}</button>
+	</div>
+</div>

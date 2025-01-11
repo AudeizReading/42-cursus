@@ -1,0 +1,205 @@
+<app-layout>
+	<div layoutHeader>
+		<app-header-action
+			[title]="'My events'"
+			[back]="{ active: true, title: backName, location: backTo }"
+			[notif]="true"
+		></app-header-action>
+	</div>
+	<div layoutMain class="events-container">
+		<div class="tabs">
+			<div class="tab">
+				<button
+					class="btn-tab"
+					[ngClass]="{ active: activeTab === 'creation' }"
+					(click)="onTabChange('creation')"
+				>
+					Creation
+				</button>
+			</div>
+			<div class="tab">
+				<button class="btn-tab" [ngClass]="{ active: activeTab === 'list' }" (click)="onTabChange('list')">
+					Events
+				</button>
+			</div>
+		</div>
+		<div class="tab-content">
+			@if (activeTab === 'creation') {
+				<div class="tab-panel">
+					<div class="createEvent">
+						<form [formGroup]="form" (submit)="onCreate($event)">
+							<header>
+								<div class="containerInputPicture">
+									@if (loadPicture) {
+										<app-loader />
+									} @else if (inputFile) {
+										<div class="containerPictureForEvent">
+											<button type="button" class="close" (click)="onRemovePicture()">
+												<app-icon-trash color="white" />
+											</button>
+											<img class="event-picture" [src]="inputFile.url" [alt]="inputFile.name" />
+										</div>
+									} @else {
+										<input
+											type="file"
+											accept="image/*"
+											[formControlName]="'fileId'"
+											(change)="onChangePicture($event)"
+										/>
+									}
+								</div>
+								<div class="location">
+									<input [hidden]="true" [formControlName]="'location'" />
+									<div class="coord">
+										<app-fake-location-dialog
+											[usecase]="'event'"
+											[coords]="coords"
+											(closed)="onLocationSelected($event)"
+										></app-fake-location-dialog>
+										<button type="button" class="close" (click)="onRemoveLocation()">
+											<app-icon-trash color="white" />
+										</button>
+									</div>
+									<div class="coord">
+										@if (coords && settings) {
+											<p class="coords-context-p">{{ settings.context }}</p>
+										}
+									</div>
+								</div>
+							</header>
+
+							<article>
+								<div [ngClass]="'select-input-container'">
+									<label [ngClass]="'select-input-label'" [for]="'matchId'">
+										Choose a match to invite:
+										<select
+											[attr.autocomplete]="'on'"
+											[ngClass]="'select-input'"
+											[id]="'matchId'"
+											[name]="'matchId'"
+											[formControlName]="'matchId'"
+											(scroll)="onScrollMatches($event)"
+										>
+											@if (matches.length > 0) {
+												@for (option of matches; track $index) {
+													@if (isMatchSelected(option.userId)) {
+														<option [value]="option.userId" selected>
+															{{ option.username }}
+														</option>
+													} @else {
+														<option [value]="option.userId">
+															{{ option.username }}
+														</option>
+													}
+												}
+											}
+										</select>
+									</label>
+								</div>
+								<app-input-icon id="datetime" type="datetime-local" icon="date" [parentForm]="form" />
+								<app-input-icon
+									id="name"
+									icon="username"
+									type="text"
+									[placeholder]="'Event Title'"
+									[parentForm]="form"
+								/>
+							</article>
+							<article>
+								<app-textarea
+									#descriptionTextArea
+									[textareaClasses]="'textarea-description'"
+									[labelClasses]="'label-textarea'"
+									[id]="'description'"
+									[placeholder]="'A description of the event'"
+									[formControlName]="'description'"
+								></app-textarea>
+							</article>
+							<footer>
+								<button type="submit" class="eventButton btn-base">Create event</button>
+							</footer>
+						</form>
+					</div>
+				</div>
+			} @else if (activeTab === 'list') {
+				<div class="tab-panel">
+					<div class="eventList">
+						@if (list.length === 0) {
+							<div class="no-event">
+								<p>No events</p>
+							</div>
+						} @else {
+							<div class="event-list-container" (scroll)="onScrollEvents($event)">
+								@for (event of list; track $index) {
+									<div class="eventItem">
+										<header class="eventItemHeader">
+											<div class="event-match-container">
+												<h2 class="event-match-name">
+													@if (profile.id !== event.user.id) {
+														{{ event.user.username }} has invited you
+													} @else {
+														You have invited {{ event.match.username }}
+													}
+													to the event
+												</h2>
+												<img
+													class="event-match-picture"
+													src="{{
+														profile.id !== event.user.id
+															? event.user.defaultPicture.url
+															: event.match.defaultPicture.url
+													}}"
+													alt="{{
+														profile.id !== event.user.id
+															? event.user.username
+															: event.match.username
+													}}"
+												/>
+											</div>
+											<div class="event-datas-container">
+												<h3 class="event-name">{{ event.name }}</h3>
+												<p class="event-status">{{ event.status }}</p>
+											</div>
+										</header>
+										<div class="eventItemBody">
+											<div class="event-datas-container">
+												<div class="event-datetime">
+													<p>{{ event.datetime | date: 'medium' }}</p>
+												</div>
+												<div class="event-location">
+													<p>{{ event.settings.context }}</p>
+												</div>
+											</div>
+											@if (event.file) {
+												<div class="event-picture-container">
+													<img
+														class="event-picture"
+														src="{{ event.file.url }}"
+														alt="{{ event.name }}"
+													/>
+												</div>
+											}
+											<div class="event-description">
+												<p class="event-description">{{ event.description }}</p>
+											</div>
+										</div>
+										@if (profile.id !== event.user.id && event.status === 'WAITING') {
+											<footer class="eventItemFooter">
+												<button class="btn-base" (click)="onAccept(event.id)">Accept</button>
+												<button class="btn-base" (click)="onDecline(event.id)">Decline</button>
+											</footer>
+										}
+									</div>
+								}
+							</div>
+						}
+						@if (loading) {
+							<app-loader></app-loader>
+						}
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+	<app-footer-action layoutFooter></app-footer-action>
+</app-layout>

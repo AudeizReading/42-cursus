@@ -1,0 +1,69 @@
+app-form-completion {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	app-tag-update {
+		display: block;
+		width: 100%;
+	}
+	app-tag-update .tagsUpdate app-tag-search .search {
+		width: 100%;
+		max-width: 100%;
+	}
+}
+
+.completion-h2 {
+	margin-bottom: 0;
+	text-align: center;
+}
+
+.completion-p {
+	flex: 1 1 1;
+	text-align: left;
+	width: 75%;
+	@media screen and (min-width: 400px) {
+		text-align: center;
+	}
+}
+
+.completion-form {
+	display: flex;
+	flex-direction: column;
+	flex: 10 1 auto;
+	justify-content: center;
+	align-items: center;
+	@media screen and (min-width: 400px) {
+		max-width: 350px;
+	}
+	width: 100%;
+	height: 100%;
+	max-width: 90vw;
+}
+
+.completion-container-form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	width: inherit;
+	flex: 1 1 auto;
+	@media screen and (min-height: 700px) {
+		flex: 2 1 auto;
+	}
+}
+
+.completion-container-form-map {
+	flex: 20 1 auto;
+}
+
+.completion-container-form-preview-result {
+	display: flex;
+	width: 100%;
+	flex: 8 1;
+	align-items: center;
+	justify-content: flex-start;
+	margin-top: 10%;
+	min-height: 180px; // si on touche min-height, il faut aussi update dans la directive grid-tags.directive.ts: les getter viewportMaxHeight() et maxRows()
+}

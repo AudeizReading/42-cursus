@@ -1,0 +1,34 @@
+<div class="search">
+	<input type="text" placeholder="Search Tag" (input)="onChange($event)" />
+	@if (tags.length !== 0) {
+		<div class="tagsList">
+			@if (searchString.length >= 3 && !tagExist()) {
+				<div class="info">
+					@if (create) {
+						<p>This tag '{{ searchString }}' was not found, do you want to create it?</p>
+						<button (click)="onCreate()">Create #{{ searchString }}</button>
+					} @else {
+						<p>This tag '{{ searchString }}' was not found.</p>
+					}
+				</div>
+			}
+			@for (tag of tags; track tag) {
+				<button (click)="onClick(tag)">
+					<app-tag tag="{{ tag.name }}"></app-tag>
+				</button>
+			}
+		</div>
+	}
+	@if (tags.length === 0 && searchString.length >= 3 && !tagExist()) {
+		<div class="tagsList">
+			<div class="info">
+				@if (create) {
+					<p>This tag was not found, do you want to create it?</p>
+					<button type="button" (click)="onCreate()">Create #{{ searchString }}</button>
+				} @else {
+					<p>This tag was not found.</p>
+				}
+			</div>
+		</div>
+	}
+</div>

@@ -1,0 +1,24 @@
+@if (isLoading) {
+	<app-loader></app-loader>
+} @else if (notifications.length === 0) {
+	<p>No notification</p>
+} @else {
+	<div class="notifications" (scrollend)="onScroll($event)" #notifs>
+		@for (notification of notifications; track notification) {
+			<app-notification-card
+				id="{{ notification.id }}"
+				urlPicture="{{ notification.url }}"
+				displayName="{{ notification.name }}"
+				[ngClass]="notification.isRead ? 'read' : 'unread'"
+				[isRead]="notification.isRead"
+				labelButton="{{ notification.labelButton }}"
+				message="{{ notification.message }}"
+				(actionNotif)="onAction(notification)"
+				(deleteNotif)="onDelete(notification)"
+			/>
+		}
+	</div>
+	@if (isWaitingData && !isLoading) {
+		<app-loader></app-loader>
+	}
+}

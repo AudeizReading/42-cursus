@@ -1,0 +1,349 @@
+@use 'mixins';
+.container {
+	height: 45px;
+	width: 45px;
+	padding: 2.5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+
+	.addButton {
+		background: #fd3f92;
+		width: 80%;
+		height: 80%;
+		border-radius: 100%;
+		border: none;
+		margin: 0;
+		padding: 5px;
+		aspect-ratio: 1/1;
+		filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+	}
+
+	.menuFile {
+		background: #fd3f92;
+		position: absolute;
+		bottom: calc(100% + 5px);
+		left: 0;
+		padding: 10px 10px 0 10px;
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		border-radius: 10px;
+		border: 1px solid #000000;
+		z-index: 2000;
+
+		.label {
+			width: 100%;
+			margin: 0;
+			padding: 0;
+			text-align: left;
+			text-wrap: nowrap;
+			font-size: 14px;
+		}
+
+		.call {
+			cursor: pointer;
+		}
+		.zoning {
+			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 100px;
+			gap: 10px;
+			& input,
+			& input::-webkit-file-upload-button {
+				position: absolute;
+				@include mixins.fit-size();
+				cursor: pointer;
+				border: none;
+				outline: none;
+				opacity: 0;
+				top: 0;
+			}
+			& input::-webkit-file-upload-button {
+				z-index: 3000;
+			}
+			.icon {
+				width: 12px;
+				height: 12px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			.title {
+				font-size: 10px;
+				text-wrap: nowrap;
+			}
+		}
+
+		.actions {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			.micro,
+			.webcamButton,
+			.callAudio,
+			.callVideo {
+				width: 35px;
+				height: 35px;
+				border-radius: 100%;
+				border: 1px solid #fd3f92;
+				background: #391a28;
+				padding: 5px;
+				margin: 0 auto 15px auto;
+			}
+
+			.micro {
+				transition: width 0.5s;
+				transition: height 0.5s;
+				transition: background-color 0.5s;
+
+				&:active {
+					width: 45px;
+					height: 45px;
+					background: #fd3f92;
+				}
+			}
+		}
+
+		.newEvent {
+			background: none;
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			border: none;
+
+			.iconNewEvent {
+				width: 24px;
+				height: 24px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			p {
+				font-size: 12px;
+				margin: 0;
+				padding: 0;
+				color: white;
+				text-wrap: nowrap;
+			}
+		}
+	}
+}
+
+.container-webcam {
+	width: min(50vw, 50vh);
+	height: min(50vw, 50vh);
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding-top: 20px;
+	border-radius: 10px;
+	background: rgba(0, 0, 0, 0.652);
+
+	.close {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		aspect-ratio: 1/1;
+		background: none;
+		border: none;
+	}
+
+	.webcam {
+		top: 35px;
+		left: 35px;
+		width: calc(min(50vw, 50vh) - 70px);
+		height: calc(min(50vw, 50vh) - 70px);
+		border-radius: 8px;
+		overflow: hidden;
+		position: absolute;
+
+		video {
+			width: 100%;
+			height: 100%;
+			z-index: 0;
+		}
+
+		.recording {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			width: 20px;
+			height: 20px;
+			border-radius: 100%;
+			background: #fd3f92;
+			animation: blink 1s infinite;
+		}
+
+		@keyframes blink {
+			0% {
+				opacity: 1;
+			}
+			50% {
+				opacity: 0;
+			}
+			100% {
+				opacity: 1;
+			}
+		}
+
+		button {
+			position: absolute;
+			bottom: 5px;
+			left: 50%;
+			transform: translateX(-50%);
+			z-index: 1;
+			width: 50px;
+			height: 50px;
+			border-radius: 100%;
+			background: none;
+			border: none;
+			box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+
+			&.video {
+				background: #fd3f92;
+			}
+
+			&.picture {
+				background: #e7e3e3;
+			}
+		}
+	}
+
+	.modes {
+		position: absolute;
+		bottom: 5px;
+		left: 50%;
+		transform: translateX(-50%);
+		display: flex;
+		gap: 10px;
+
+		.mode {
+			position: relative;
+
+			input {
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				opacity: 0;
+				cursor: pointer;
+			}
+
+			label {
+				font-size: 12px;
+				margin: 0;
+				padding: 0;
+				cursor: pointer;
+
+				&.active {
+					color: #fd3f92;
+				}
+			}
+		}
+	}
+}
+
+.createEvent {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: rgba(0, 0, 0, 0.5);
+	border-radius: 8px;
+	padding: 10px;
+	max-height: 80vh;
+	overflow-y: auto;
+
+	.close {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		aspect-ratio: 1/1;
+		background: none;
+		border: none;
+	}
+
+	.contentFormCreateEvent {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		margin-top: 30px;
+
+		.containerInputPicture {
+			.containerPictureForEvent {
+				position: relative;
+				background: black;
+				width: 100%;
+				aspect-ratio: 1/1;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				img {
+					display: block;
+					width: 100%;
+					aspect-ratio: 1 / 1;
+					object-fit: contain;
+				}
+			}
+		}
+
+		.location {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			width: 100%;
+
+			.coord {
+				display: flex;
+				flex-direction: column;
+				gap: 2px;
+
+				p {
+					font-size: 12px;
+					margin: 0;
+					padding: 0;
+				}
+			}
+
+			button {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				aspect-ratio: 1/1;
+				background: none;
+				border: none;
+			}
+		}
+
+		.saveButton {
+			padding: 10px 20px;
+			border-radius: 3px;
+			background: linear-gradient(90deg, #fd3f92 0%, #ad004c 100%);
+			box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+			border: none;
+			color: white;
+			text-wrap: nowrap;
+			overflow: hidden;
+
+			p {
+				margin: 0;
+				padding: 0;
+				font-size: 12px;
+			}
+		}
+	}
+}

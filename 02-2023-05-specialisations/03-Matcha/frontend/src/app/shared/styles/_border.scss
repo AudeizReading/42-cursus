@@ -1,0 +1,32 @@
+@use 'size';
+@use 'color';
+// border-width
+$border-width-thin: 0.0625em;
+$border-width-medium: 0.125em;
+$border-width-thick: 0.1875em;
+
+// border-style
+$border-style-solid: solid;
+$border-style-dashed: dashed;
+$border-style-dotted: dotted;
+$border-style-double: double;
+$border-style-groove: groove;
+$border-style-ridge: ridge;
+$border-style-inset: inset;
+$border-style-outset: outset;
+
+// border-radius
+$border-radius-xxxxs: size.$xxxxs;
+$border-radius-xxxs: size.$xxxs;
+$border-radius-xxs: size.$xxs;
+$border-radius-xs: size.$xs;
+$border-radius-sm: size.$sm;
+$border-radius-md: size.$md;
+$border-radius-lg: size.$lg;
+$border-radius-xl: size.$xl;
+$border-radius-xxl: size.$xxl;
+
+$btn-primary: 1px solid color.get-palette-value('background', border, button, 0);
+$btn-primary-hover: 1px solid color.get-palette-value('background', border, button-hover);
+$btn-primary-active: 2px solid color.get-palette-value('background', border, button-active);
+$badge-secondary: 1px solid color.get-palette-value('background', border, icon);

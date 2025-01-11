@@ -1,0 +1,36 @@
+services:
+  backend:
+    container_name: backend_prod
+    build:
+      target: prod
+    environment:
+      PORT: 3000
+      SWAGGER_UI_DOC: true
+      MAILER_SERVICE: "gmail"
+      TEST: false
+      FRONTEND_EMAIL_VALIDATE_URL: "${FRONTEND_URL}/email/validate/"
+      FRONTEND_EMAIL_RECOVERY_URL: "${FRONTEND_URL}/user/changePasswordByToken/"
+      FRONTEND_FONT_TITLE_URL: "${FRONTEND_URL}/assets/fonts/Cera-Pro/cerapro-medium.otf"
+      FRONTEND_FONT_BODY_URL: "${FRONTEND_URL}/assets/fonts/Cera-Pro/cerapro-regular.otf"
+      FRONTEND_FONT_EMPHASE_URL: "${FRONTEND_URL}/assets/fonts/Cera-Pro/cerapro-regularitalic.otf"
+      GOOGLE_REDIRECT_URI: "${FRONTEND_URL}/api/v1/oauth/google"
+      FACEBOOK_REDIRECT_URI: "${FRONTEND_URL}/api/v1/oauth/facebook"
+      FACEBOOK_PUBLIC: ${FACEBOOK_PUBLIC?FACEBOOK_PUBLIC is required}
+      FACEBOOK_SECRET: ${FACEBOOK_SECRET?FACEBOOK_SECRET is required}
+      GOOGLE_PUBLIC: ${GOOGLE_PUBLIC?GOOGLE_PUBLIC is required}
+      GOOGLE_SECRET: ${GOOGLE_SECRET?GOOGLE_SECRET is required}
+      FRONTEND_URL: ${FRONTEND_URL?FRONTEND_URL is required}
+      SECRET_JWT: ${SECRET_JWT?SECRET_JWT is required}
+      MAILER_PASSWORD: ${MAILER_PASSWORD?MAILER_PASSWORD is required}
+      MAILER_EMAIL: ${MAILER_EMAIL?MAILER_EMAIL is required}
+      HERE_API: ${HERE_API?HERE_API is required}
+      REDIS_HOST: "redis"
+    volumes:
+      - sql-data:/var/tmp/data
+      - file-data:/var/tmp/uploadFile
+
+volumes:
+  sql-data:
+    name: sql-data
+  file-data:
+    name: file-data

@@ -1,0 +1,10 @@
+<div class="preview-container">
+	<div class="btn-container">
+		@for (item of renderBtnsAction; track $index) {
+			<app-preview-action-button [action]="item" (clickAction)="onClick($event)" />
+		}
+	</div>
+	<div class="img-container">
+		<img src="{{ config.url }}" alt="{{ config.name }}" loading="lazy" />
+	</div>
+</div>

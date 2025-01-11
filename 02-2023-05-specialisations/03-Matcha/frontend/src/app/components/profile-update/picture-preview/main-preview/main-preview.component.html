@@ -1,0 +1,7 @@
+<div class="main-picture-container">
+	@if (config && config.name && config.name !== 'placeholder') {
+		<app-picture-preview [config]="config" (clickAction)="onClick($event)" />
+	} @else {
+		<app-preview-placeholder [config]="config" (clickAction)="onClick($event)" />
+	}
+</div>

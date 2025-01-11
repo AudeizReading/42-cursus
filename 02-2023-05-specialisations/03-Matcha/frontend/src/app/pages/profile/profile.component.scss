@@ -1,0 +1,21 @@
+app-profile {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}
+
+.profile-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	@media screen and (min-width: 769px) {
+		max-width: 1200px;
+		margin: auto;
+	}
+}

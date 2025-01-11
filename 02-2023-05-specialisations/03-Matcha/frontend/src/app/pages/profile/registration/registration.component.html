@@ -1,0 +1,14 @@
+<app-layout>
+	<div layoutHeader>
+		<app-header-action
+			[title]="'profile'"
+			[back]="{ active: false, title: 'home', location: '/' }"
+			[notif]="false"
+			[logout]="true"
+		></app-header-action>
+	</div>
+	<div layoutMain class="profile-container">
+		<app-form-completion (valid)="checkedProfile($event)"></app-form-completion>
+	</div>
+	<div layoutFooter></div>
+</app-layout>

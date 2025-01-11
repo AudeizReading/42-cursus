@@ -1,0 +1,89 @@
+name: Frontend Workflow
+
+on: workflow_call
+
+jobs:
+  setup-frontend:
+    name: Frontend Setup
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.19.1
+
+      - name: Cache node_modules
+        id: cache-node-modules
+        uses: actions/cache@v4
+        with:
+          path: frontend/node_modules
+          key: frontend-node-modules-${{ hashFiles('frontend/package-lock.json') }}
+          restore-keys: |
+            frontend-node-modules-
+
+      - name: Install dependencies
+        working-directory: frontend/
+        run: npm install --include=optional
+
+  lint-frontend:
+    name: Check lint frontend
+    runs-on: self-hosted
+    needs: setup-frontend
+
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.19.1
+
+      - name: Cache node_modules
+        id: cache-node-modules-lint
+        uses: actions/cache@v4
+        with:
+          path: frontend/node_modules
+          key: frontend-node-modules-${{ hashFiles('frontend/package-lock.json') }}
+          restore-keys: |
+            frontend-node-modules-
+
+      - name: Run Norm Lint
+        working-directory: frontend/
+        run: npm run lint
+
+  test-frontend:
+    name: Check test frontend
+    runs-on: self-hosted
+    needs: setup-frontend
+
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.19.1
+
+      - name: Cache node_modules
+        id: cache-node-modules-test
+        uses: actions/cache@v4
+        with:
+          path: frontend/node_modules
+          key: frontend-node-modules-${{ hashFiles('frontend/package-lock.json') }}
+          restore-keys: |
+            frontend-node-modules-
+
+      - name: Create .env file
+        working-directory: frontend/
+        run: |
+          npm run env:cp
+          npm run env
+          npm run proxy:config
+
+      - name: Run build
+        working-directory: frontend/
+        run: npm run build
+
+      # - name: Run tests and coverage
+      #   working-directory: frontend/
+      #   run: npm run test

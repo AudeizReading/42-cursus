@@ -1,0 +1,67 @@
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!--  eslint-disable @angular-eslint/template/elements-content -->
+<section class="carousel-pictures-section">
+	@for (picture of pictures; track $index) {
+		@if ($index === currentSlide) {
+			<div class="profile-details-viewport">
+				<img
+					[src]="picture.url"
+					[width]="picture.width"
+					[height]="picture.height"
+					alt="Preview of {{ picture.originalName }}"
+					title="Preview of {{ picture.originalName }}"
+				/>
+			</div>
+		}
+	}
+	<aside class="carousel-indicators">
+		<button (click)="onOpenPicture()"></button>
+		<div class="action-container">
+			@for (picture of pictures; track $index) {
+				<div
+					class="carousel-indicator {{ $index === currentSlide ? 'active' : '' }}"
+					tabindex="0"
+					(click)="onClick($index)"
+					(keyup)="onClick($index)"
+					title="Click to go to the preview {{ $index + 1 }}"
+				></div>
+			}
+		</div>
+	</aside>
+	<ng-content></ng-content>
+</section>
+
+@if (pictures[this.currentSlide] && openModal) {
+	<div class="fillSizePicture">
+		<button (click)="onClosePicture()"></button>
+		<img [src]="pictures[this.currentSlide].url" alt="Preview of {{ pictures[this.currentSlide].originalName }}" />
+		@if (pictures.length > 1) {
+			<div class="navigator">
+				<span (click)="onClosePicture()"></span>
+				<button (click)="onPrev()">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						height="24px"
+						viewBox="0 -960 960 960"
+						width="24px"
+						fill="#e8eaed"
+					>
+						<path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z" />
+					</svg>
+				</button>
+				<button (click)="onNext()">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						height="24px"
+						viewBox="0 -960 960 960"
+						width="24px"
+						fill="#e8eaed"
+					>
+						<path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
+					</svg>
+				</button>
+			</div>
+		}
+	</div>
+}

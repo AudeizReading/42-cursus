@@ -1,0 +1,36 @@
+<div class="searchBar {{ isOpen ? 'open' : '' }}">
+	<div class="search">
+		<app-sort [order]="orders[0]" column="location" label="KM" (changeSort)="onChangeSort($event)" />
+		<app-gap [min]="location.min" [max]="location.max" column="location" (changeGap)="onChangeGap($event)" />
+	</div>
+	<div class="search">
+		<app-sort [order]="orders[1]" column="fameRating" label="Rating" (changeSort)="onChangeSort($event)" />
+		<app-gap [min]="fameRating.min" [max]="fameRating.max" column="fameRating" (changeGap)="onChangeGap($event)" />
+	</div>
+	<div class="search">
+		<app-sort [order]="orders[3]" column="age" label="Age" (changeSort)="onChangeSort($event)" />
+		<app-gap [min]="age.min" [max]="age.max" column="age" (changeGap)="onChangeGap($event)" />
+	</div>
+	<div class="search">
+		<app-sort [order]="orders[2]" column="commonTag" label="Tag" (changeSort)="onChangeSort($event)" />
+	</div>
+	<div class="inputSearch">
+		<app-tag-search (selectedTag)="addTag($event)" [create]="false" />
+		<div class="tags">
+			@if (tags.length === 0) {
+				<p>No tag filter</p>
+			}
+			@for (tag of tags; track tag) {
+				<app-tag
+					tag="{{ tag.name }}"
+					[canDelete]="true"
+					[realDelete]="false"
+					[emitDelete]="true"
+					(action)="onDeleteTag($event)"
+				/>
+			}
+		</div>
+	</div>
+	<!-- eslint-disable-next-line @angular-eslint/template/elements-content -->
+	<button (click)="toggleOpen()"></button>
+</div>

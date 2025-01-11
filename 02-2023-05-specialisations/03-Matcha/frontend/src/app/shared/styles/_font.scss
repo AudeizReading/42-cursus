@@ -1,0 +1,46 @@
+// fonts
+// dl https://www.typemates.com/fonts/cera-pro/try (les autres versions sont verolees, recup celles du site officiel
+@use './size';
+
+@import url('https://fonts.googleapis.com/css?family=Caveat&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+
+@font-face {
+	font-family: 'Dolce Vita Light';
+	src: url('../../../assets/fonts/sans-serif/Dolce\ Vita\ Light.ttf') format('ttf');
+}
+
+@font-face {
+	font-family: 'Cera Pro Medium';
+	src: url('../../../assets/fonts/Cera-Pro/Cera-Pro-Medium-Demo.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'Cera Pro Regular';
+	src: url('../../../assets/fonts/Cera-Pro/Cera-Pro-Regular-Demo.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'Cera Pro Regular Italic';
+	src: url('../../../assets/fonts/Cera-Pro/Cera-Pro-Regular-Italic-Demo.otf') format('opentype');
+}
+
+$title: 'Cera Pro Medium';
+$emphase: 'Cera Pro Regular Italic';
+$body: 'Cera Pro Regular';
+
+$xs: size.$xs;
+$sm: size.$sm;
+$md: size.$md;
+$lg: size.$lg;
+$xl: size.$xl;
+$xxl: size.$xxl;
+$xxxl: size.$xxxl;
+
+$base-size: $md;
+
+$weight-light: 300;
+$weight-normal: 400;
+$weight-bold: 700;
+
+$weight-base: $weight-normal;

@@ -1,0 +1,25 @@
+@if (profile !== undefined && currentIndex >= 0 && currentIndex < items.length) {
+	@switch (currentIndex) {
+		@case (0) {
+			<app-genders (valid)="onComponentValidated($event)"></app-genders>
+		}
+		@case (1) {
+			<app-description-profile (valid)="onComponentValidated($event)"></app-description-profile>
+		}
+		@case (2) {
+			<app-sexual-preferences (valid)="onComponentValidated($event)"></app-sexual-preferences>
+		}
+		@case (3) {
+			<app-file-upload (valid)="onComponentValidated($event)"></app-file-upload>
+		}
+		@case (4) {
+			<app-birthday-form (valid)="onComponentValidated($event)"></app-birthday-form>
+		}
+		@case (5) {
+			<app-tags-form (valid)="onComponentValidated($event)"></app-tags-form>
+		}
+		@case (6) {
+			<app-location-form (valid)="onComponentValidated($event)"></app-location-form>
+		}
+	}
+}

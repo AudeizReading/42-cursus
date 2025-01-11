@@ -1,0 +1,11 @@
+export { BrowsingComponent } from './browsing/browsing.component';
+export { ChatComponent } from './chat/chat.component';
+export { HomeComponent } from './home/home.component';
+export { RegistrationComponent } from './registration/registration.component';
+export { ErrorComponent } from './error/error.component';
+export { EventComponent } from './event/event.component';
+export { EmailValidationComponent } from './email-validation/email-validation.component';
+export { PasswordValidationComponent } from './password-validation/password-validation.component';
+export { RecoveryComponent } from './recovery/recovery.component';
+export { ProfileComponent } from './profile/profile.component';
+export { ResearchComponent } from './research/research.component';

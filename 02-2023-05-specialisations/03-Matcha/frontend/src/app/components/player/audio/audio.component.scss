@@ -1,0 +1,11 @@
+app-audio {
+	ngx-audio-wave {
+		.ngx-audio-wave-wrapper {
+			min-height: auto !important;
+
+			.ngx-audio-wave {
+				width: 200px !important;
+			}
+		}
+	}
+}

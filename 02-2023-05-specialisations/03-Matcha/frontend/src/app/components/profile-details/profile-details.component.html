@@ -1,0 +1,83 @@
+@if (profile !== undefined) {
+	<app-profile-pictures [pictures]="pictures">
+		<app-star-rating [rating]="fameRating"></app-star-rating>
+	</app-profile-pictures>
+
+	<section appGridProfileDetails class="profile-details-section">
+		<h1 class="profile-details-username">
+			<span class="text-overflow">
+				{{ profile.username }}, <span class="profile-details-age text-overflow">{{ age }}</span></span
+			>
+			<div class="profile-details-status-container profile-details-status-container-{{ status }}"></div>
+			@if (profile.reported && profile.reported > 0) {
+				<span class="reported">This profile is reported: {{ profile.reported }}</span>
+			}
+		</h1>
+		<div class="profile-details-status-container-last-connect">
+			@if (status === 'offline') {
+				Last connexion: {{ lastCo !== 'Never connected' ? (lastCo | date) : lastCo }}
+			}
+		</div>
+		@if (profile.locations !== undefined) {
+			<app-city class="profile-details-city-container" [coords]="coords"></app-city>
+		}
+
+		<aside class="profile-details-badge-container">
+			<app-badge [badge]="profile.gender | lowercase" [badgeClasses]="profile.gender | lowercase"></app-badge>
+			<app-badge
+				[badge]="profile.sexualPreference | lowercase"
+				[badgeClasses]="profile.sexualPreference | lowercase"
+			></app-badge>
+		</aside>
+
+		<app-tags
+			id="profile-details-tags"
+			appGridTags
+			[nbTags]="tags.length"
+			class="profile-details-tags-container"
+			[tags]="tags"
+		></app-tags>
+		<div class="profile-details-names-container">
+			<h2 class="profile-details-names">
+				<span class="text-overflow">
+					{{ profile.firstName }}
+					{{ profile.lastName }}
+				</span>
+			</h2>
+			@if (me) {
+				<div class="profile-details-email">
+					{{ profile.email }}
+				</div>
+			}
+		</div>
+		<p class="profile-details-description">
+			<span class="text-overflow">
+				{{ profile.description }}
+			</span>
+		</p>
+		<div class="profile-details-actions">
+			@if (me) {
+				<button
+					class="btn-base"
+					[routerLink]="['/profile/settings']"
+					[state]="{
+						previousUrl: router.url,
+						currentUrl: state.url,
+						code: 200,
+						status: 'OK',
+						message: 'Authorized',
+					}"
+				>
+					Settings and analytics
+				</button>
+			} @else {
+				<app-like [liked]="!liked" (like)="onLike($event)"></app-like>
+				@if (match) {
+					<button [routerLink]="['/chat/conversation', profile.id]" class="btn-base btn-send-message">
+						Send Message
+					</button>
+				}
+			}
+		</div>
+	</section>
+}

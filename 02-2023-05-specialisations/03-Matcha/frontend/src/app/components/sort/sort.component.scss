@@ -1,0 +1,18 @@
+.sort {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	border: none;
+	background: #391625;
+	padding: 0 10px;
+	border-radius: 10px;
+
+	p {
+		color: #fd3f92;
+		font-size: 12px;
+	}
+	.icon {
+		width: 25px;
+		height: 25px;
+	}
+}

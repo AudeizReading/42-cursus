@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+<symbol preservedAspectRatio="xMidYMid meet" width="30" height="30" viewBox="0 0 30 30" fill="none" id="notification">
+<g id="Group 7">
+<path id="Vector" d="M22.2013 10.6814C22.2013 8.64414 21.4426 6.69035 20.0921 5.24982C18.7416 3.80928 16.9099 3 15 3C13.0901 3 11.2585 3.80928 9.90796 5.24982C8.55746 6.69035 7.79876 8.64414 7.79876 10.6814C7.79876 19.643 4.19812 22.2034 4.19812 22.2034H25.8019C25.8019 22.2034 22.2013 19.643 22.2013 10.6814Z" stroke="#FD3F92" fill="#FD3F92" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M17.0764 25.8041C16.8654 26.1678 16.5626 26.4698 16.1982 26.6797C15.8338 26.8896 15.4206 27 15.0001 27C14.5795 27 14.1664 26.8896 13.802 26.6797C13.4376 26.4698 13.1347 26.1678 12.9237 25.8041" stroke="#FD3F92" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</symbol>
+</svg>

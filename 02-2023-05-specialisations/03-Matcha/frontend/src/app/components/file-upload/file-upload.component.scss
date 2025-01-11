@@ -1,0 +1,190 @@
+@use 'color';
+@use 'shadow';
+@use 'border';
+@use 'mixins';
+
+app-file-upload {
+	@include mixins.flex-center-column();
+	width: 90%;
+	height: 100%;
+	margin: 0 auto;
+	h2 {
+		font-size: 1.5rem;
+	}
+	@include mixins.respond-to-hover {
+		h2 {
+			font-size: 2.5rem;
+		}
+	}
+	p {
+		font-size: 1rem;
+		margin: 0;
+	}
+	.completion-form {
+		flex: 1 1 auto;
+		height: auto;
+		padding-bottom: 10px;
+	}
+}
+
+.form-file-group {
+	width: 100%;
+	height: 70%;
+	max-width: 80vw;
+	position: relative;
+	overflow-y: auto;
+	overflow-x: hidden;
+	border: border.$btn-primary;
+	box-shadow: shadow.$btn-primary;
+	@include mixins.border-radius-25();
+	background-color: color.get-palette-value('background', base); // Couleur de fond
+	color: color.get-palette-value('foreground', text); // Couleur du texte
+	.form-file-group-input-container {
+		@include mixins.fit-size();
+		@include mixins.border-radius-25();
+		position: absolute;
+		top: 0;
+		z-index: 1000;
+		& input,
+		& input::-webkit-file-upload-button {
+			@include mixins.fit-size();
+			@include mixins.border-radius-25();
+			border: none;
+			outline: none;
+			opacity: 0;
+			position: sticky;
+			top: 0;
+		}
+		& input::-webkit-file-upload-button {
+			z-index: 1000;
+		}
+	}
+	.form-file-group-label-container {
+		background-color: transparent;
+		@include mixins.cut-out-effect();
+		@include mixins.fit-size();
+		@include mixins.center-absolute();
+		@include mixins.flex-center();
+		.form-file-group-label {
+			font-size: revert;
+			font-weight: bold;
+			@include mixins.cut-out-effect();
+			@include mixins.flex-center();
+			z-index: 1;
+			width: 150px;
+			height: 150px;
+			border-radius: 100%; // Bord arrondi
+			padding: 5% 5%;
+			text-wrap: wrap;
+			text-align: center;
+			background-color: rgba(255, 255, 255, 0.35);
+		}
+	}
+
+	.form-file-group-preview-imgs-container {
+		@include mixins.center-absolute();
+		width: 180px;
+		height: 180px;
+		overflow-y: auto;
+		z-index: 1000;
+	}
+	@include mixins.respond-to-hover {
+		.form-file-group-preview-imgs-container {
+			width: 250px;
+			height: 250px;
+			.form-file-group-preview-container {
+				width: 230px;
+			}
+			.form-file-group-preview-container:hover .form-file-group-preview-img .form-file-group-preview-img-overlay,
+			.form-file-group-preview-container:hover .form-file-group-preview-img .btn-close {
+				opacity: 1;
+				transition: all 0.5s ease;
+				cursor: pointer;
+			}
+		}
+	}
+	.form-file-group-preview-container {
+		position: relative;
+		width: 100%;
+		height: fit-content;
+		margin: 0 0 5% 0;
+		background-color: transparent;
+		z-index: 1500;
+		.form-file-group-preview-img {
+			top: 0;
+			width: calc(100% - 10px);
+			height: fit-content;
+			z-index: 1500;
+			.preview-img {
+				width: calc(100% - 10px);
+				height: fit-content;
+				object-fit: contain;
+				border: 5px solid white;
+			}
+			.form-file-group-preview-img-overlay {
+				position: absolute;
+				top: 0;
+				width: calc(100% - 10px);
+				height: calc(100% - 2.5px);
+				@include mixins.flex-center-column();
+				background-color: color.get-palette-value('background', surface);
+				@include mixins.respond-to-hover {
+					opacity: 0;
+				}
+				.form-file-group-preview-img-overlay-content {
+					padding: 0 10px;
+					width: 75%;
+					font-size: auto;
+					text-align: center;
+				}
+			}
+
+			.btn-close {
+				position: absolute;
+				top: 95%;
+				right: 50%;
+				transform: translate(50%, -100%);
+				width: 2rem;
+				height: 2rem;
+				border-radius: 50%;
+				border: 0.15rem solid color.get-palette-value('background', hover);
+				z-index: 1600;
+				cursor: pointer;
+			}
+			.btn-close::before,
+			.btn-close::after {
+				content: '';
+				position: absolute;
+				top: calc(50% - 0.075rem);
+				right: calc(50% - 0.75rem);
+				width: 1.5rem;
+				height: 0.15rem;
+				background-color: color.get-palette-value('background', hover);
+			}
+			.btn-close::before {
+				transform: rotate(-45deg);
+			}
+
+			.btn-close::after {
+				transform: rotate(45deg);
+			}
+
+			@include mixins.respond-to-hover {
+				.btn-close {
+					opacity: 0;
+				}
+				.btn-close:hover {
+					cursor: pointer;
+					background-color: color.get-palette-value('background', hover);
+					transition: background-color 0.5s ease;
+				}
+				.btn-close:hover::before,
+				.btn-close:hover::after {
+					display: block;
+					background-color: color.get-palette-value('background', base);
+					transition: background-color 0.5s ease;
+				}
+			}
+		}
+	}
+}

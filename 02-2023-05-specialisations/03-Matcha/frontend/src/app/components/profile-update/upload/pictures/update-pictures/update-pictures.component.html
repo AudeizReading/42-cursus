@@ -1,0 +1,4 @@
+@if (opened) {
+	<app-upload-pictures (askCloseModal)="onExit()" (selectedPreviews)="onSave($event)" />
+}
+<app-preview-container [main]="main" [aux]="aux" (clickAction)="onPreviewClick($event)" />

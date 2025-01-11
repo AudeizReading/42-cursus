@@ -1,0 +1,62 @@
+@if (back && back.active) {
+	<div class="header-action-back" (click)="backAction()" (keypress)="backAction()" role="back" tabindex="0">
+		<app-icon [icon]="'arrowLeft'" [iconClasses]="'icon-base icon-action'" [iconType]="'svg'"></app-icon>
+		<p class="header-action-back-content">{{ back.title | uppercase }}</p>
+	</div>
+} @else {
+	<div class="header-action-back" (click)="backAction()" (keypress)="backAction()" role="back" tabindex="0">
+		<app-icon [icon]="'arrowLeft'" [iconClasses]="'icon-base shadow'" [iconType]="'svg'"></app-icon>
+		<p class="header-action-back-content shadow">{{ back.title | uppercase }}</p>
+	</div>
+}
+<p class="header-action-title-content">
+	@if (load) {
+		<app-loader />
+	} @else {
+		{{ title | uppercase }}
+	}
+</p>
+<div class="header-action-right-side">
+	<div class="logout">
+		@if (logout) {
+			<div
+				class="header-action-logout"
+				(click)="logoutAction()"
+				(keypress)="logoutAction()"
+				role="logout"
+				tabindex="1"
+			>
+				<app-icon [icon]="'logout'" [iconClasses]="'icon-base icon-action'" [iconType]="'svg'"></app-icon>
+			</div>
+		}
+	</div>
+	<div class="notif">
+		@if (notif) {
+			<app-button-notification (click)="notifAction()" [nbOfNotification]="nbNotifs" />
+			@if (toggleNotif && notif) {
+				<app-modal>
+					<app-notif
+						[notifications]="notifs"
+						[canScroll]="canScroll"
+						(deleteNotif)="onDeleteNotif($event)"
+						(actionNotif)="onActionNotif($event)"
+						(scrollNotif)="onScrollNotif()"
+						(setAsRead)="onViewNotifs($event)"
+					></app-notif>
+				</app-modal>
+			}
+		}
+	</div>
+	<div class="more">
+		@if (more) {
+			<div class="header-action-more" (click)="moreAction()" (keypress)="moreAction()" role="more" tabindex="3">
+				<app-icon [icon]="'more'" [iconClasses]="'icon-base icon-action'" [iconType]="'svg'"></app-icon>
+			</div>
+			@if (toggleMore && more) {
+				<app-modal>
+					<app-more actions="actionMore" (actionClick)="onEndAction()"></app-more>
+				</app-modal>
+			}
+		}
+	</div>
+</div>

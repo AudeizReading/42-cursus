@@ -1,0 +1,28 @@
+@use 'color';
+@use 'font';
+.select-primary {
+	width: 100%;
+	border-radius: inherit;
+	background-color: transparent;
+	color: color.get-palette-value('foreground', text); // Couleur du texte
+	padding-right: 0.5em; // Espacement intérieur à right
+	padding-left: 1em; // Espacement intérieur à gauche
+	border: 1px solid color.get-palette-value('background', base);
+	font-size: font.$sm; // Taille de la police
+	transition:
+		box-shadow 180ms ease-in-out,
+		border-color 180ms ease-in-out;
+
+	option {
+		position: relative;
+		background-color: color.get-palette-value('background', base); // Couleur de fond
+		color: color.get-palette-value('foreground', text); // Couleur du texte
+	}
+}
+
+.select-primary:focus,
+.select-primary:active {
+	outline: transparent solid 3px;
+	border-color: color.get-palette-value('foreground', focus);
+	box-shadow: 0 0 0px 3px rgba(color.get-palette-value('background', focus), 0.2);
+}

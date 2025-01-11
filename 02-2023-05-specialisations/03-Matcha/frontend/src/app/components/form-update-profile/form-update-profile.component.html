@@ -1,0 +1,78 @@
+@if (profile) {
+	<form class="signin-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+		<div class="tabview-profile-container flex-end">
+			<button class="btn-base" [disabled]="disabledSave">Save</button>
+		</div>
+
+		<div class="form-signin-input">
+			<app-input-icon
+				id="username"
+				type="text"
+				[placeholder]="profile.username!"
+				icon="username"
+				[parentForm]="form"
+			/>
+			<app-input-icon
+				id="firstname"
+				type="text'"
+				[placeholder]="profile.firstName!"
+				icon="username"
+				[parentForm]="form"
+			/>
+			<app-input-icon
+				id="lastname"
+				type="text"
+				[placeholder]="profile.lastName!"
+				icon="username"
+				[parentForm]="form"
+			/>
+			<app-input-icon id="birthday" type="date" icon="date" [parentForm]="form" />
+			@if (genders.length > 0) {
+				<label [for]="'gender'"
+					>Gender
+					<select [ngClass]="'select-input'" [id]="'gender'" [formControlName]="'gender'">
+						@for (option of genders; track $index) {
+							@if (option === profile.gender) {
+								<option [value]="option" selected>
+									{{ option }}
+								</option>
+							} @else {
+								<option [value]="option">
+									{{ option }}
+								</option>
+							}
+						}
+					</select>
+				</label>
+			}
+
+			@if (sexualities.length > 0) {
+				<label [for]="'sexualPreference'"
+					>Sexual preference
+					<select [ngClass]="'select-input'" [id]="'sexualPreference'" [formControlName]="'sexualPreference'">
+						@for (option of sexualities; track $index) {
+							@if (option === profile.sexualPreference) {
+								<option [value]="option" selected>
+									{{ option }}
+								</option>
+							} @else {
+								<option [value]="option">
+									{{ option }}
+								</option>
+							}
+						}
+					</select>
+				</label>
+			}
+
+			<app-textarea
+				#descriptionTextArea
+				[textareaClasses]="'textarea-description'"
+				[labelClasses]="'label-textarea'"
+				[id]="'description'"
+				[placeholder]="profile.description!"
+				[formControlName]="'description'"
+			></app-textarea>
+		</div>
+	</form>
+}

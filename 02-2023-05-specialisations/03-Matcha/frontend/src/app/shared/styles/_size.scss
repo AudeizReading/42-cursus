@@ -1,0 +1,107 @@
+$xxxxs: 0.25rem;
+$xxxs: 0.5rem;
+$xxs: 0.625rem;
+$xs: 0.75rem;
+$xsm: 0.785rem;
+$sm: 1rem;
+$md: 1.5rem;
+$lg: 2rem;
+$xl: 2.5rem;
+$xxl: 3rem;
+$xxxl: 3.5rem;
+
+// container
+$body: 65vh;
+$body-padding: spacing-base;
+$header: 20vh;
+$footer: 10vh;
+
+// button
+$button-sizes: (
+	x-small: (
+		max-width: 80px,
+		width: 20vw,
+		height: 5vh,
+		font-size: $xxs,
+	),
+	small: (
+		max-width: 25vw,
+		width: 80px,
+		height: 40px,
+		font-size: $xsm,
+	),
+	medium: (
+		max-width: 25vw,
+		width: 120px,
+		height: 40px,
+		font-size: $sm,
+	),
+	large: (
+		max-width: 60vw,
+		width: 180px,
+		height: 48px,
+		font-size: $md,
+	),
+	x-large: (
+		max-width: 80vw,
+		width: 240px,
+		height: 56px,
+		font-size: $lg,
+	),
+);
+
+// Fonction pour générer les styles des boutons
+@mixin button-styles($size) {
+	$size-props: map-get($button-sizes, $size);
+
+	// Retourner les styles générés
+
+	width: map-get($size-props, width);
+	height: map-get($size-props, height);
+	font-size: map-get($size-props, font-size);
+}
+
+// tag
+$tag-sizes: (
+	x-small: (
+		max-width: 15vw,
+		width: auto,
+		height: 14px,
+		font-size: $xxxs,
+	),
+	small: (
+		max-width: 72px,
+		width: 72px,
+		height: 20px,
+		font-size: $xxs,
+	),
+	medium: (
+		max-width: 20vw,
+		width: auto,
+		height: 20px,
+		font-size: $xs,
+	),
+	large: (
+		max-width: 24vw,
+		width: auto,
+		height: 24px,
+		font-size: $sm,
+	),
+	x-large: (
+		max-width: 32vw,
+		width: auto,
+		height: 36px,
+		font-size: $md,
+	),
+);
+
+// Fonction pour générer les styles des tags
+@mixin tag-styles($size) {
+	$size-props: map-get($tag-sizes, $size);
+
+	// Retourner les styles générés
+
+	width: map-get($size-props, width);
+	height: map-get($size-props, height);
+	font-size: map-get($size-props, font-size);
+}

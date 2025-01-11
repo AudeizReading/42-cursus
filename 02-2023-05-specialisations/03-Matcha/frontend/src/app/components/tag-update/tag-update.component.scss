@@ -1,0 +1,23 @@
+.tagsUpdate {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	gap: 10px;
+	width: 100%;
+
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 5px;
+		width: 100%;
+		border-radius: 10px;
+		border: 1px solid #fd3f92;
+		background: #391a28;
+
+		p {
+			font-size: 12px;
+			text-align: center;
+			width: 100%;
+		}
+	}
+}

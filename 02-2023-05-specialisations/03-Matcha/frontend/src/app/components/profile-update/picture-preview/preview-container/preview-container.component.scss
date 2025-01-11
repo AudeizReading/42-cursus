@@ -1,0 +1,11 @@
+app-preview-container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-width: 450px;
+	@media screen and (max-width: 450px) {
+		max-width: 90vw;
+	}
+	height: 100%;
+	margin: auto;
+}

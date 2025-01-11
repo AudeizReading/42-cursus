@@ -1,0 +1,16 @@
+<app-header [headerClasses]="headerClasses ?? ''" [shadow]="shadow">
+	<ng-content headerContent select="[layoutHeader]"></ng-content>
+</app-header>
+
+<main class="main-container">
+	<ng-content select="[layoutMain]"></ng-content>
+</main>
+
+<app-footer
+	[footerClasses]="footerClasses ?? ''"
+	[btnClasses]="btnClasses ?? ''"
+	[link]="footerLink ?? ''"
+	[shadow]="shadow"
+>
+	<ng-content select="[layoutFooter]"></ng-content>
+</app-footer>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+<symbol preservedAspectRatio="xMidYMid meet" width="24" height="24" viewBox="0 0 24 24" fill="none" id="profile">
+<g id="Property 1=profile">
+<g id="Group 4">
+<path id="Vector" d="M3 22.2857V19C3 15.134 6.13401 12 10 12H14C17.866 12 21 15.134 21 19V22.2857" stroke="#FD3F92" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M12 11.9999C14.8404 11.9999 17.1429 9.69741 17.1429 6.85709C17.1429 4.01677 14.8404 1.71423 12 1.71423C9.15971 1.71423 6.85718 4.01677 6.85718 6.85709C6.85718 9.69741 9.15971 11.9999 12 11.9999Z" stroke="#FD3F92" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+</symbol>
+</svg>

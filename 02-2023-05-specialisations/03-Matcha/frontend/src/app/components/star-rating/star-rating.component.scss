@@ -1,0 +1,35 @@
+@use 'mixins';
+app-star-rating {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	margin: auto;
+	overflow: hidden;
+	width: auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 5px;
+	z-index: 1500;
+
+	.rating-container-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: space-evenly;
+		z-index: 2000;
+		overflow: hidden;
+		cursor: pointer;
+	}
+
+	.rating-container {
+		position: relative;
+		opacity: 0;
+		border-radius: 3px;
+		padding: 10px 20px;
+		background-color: rgba(251, 188, 5, 0.15);
+		z-index: -1;
+		.rating-container-fame {
+			color: white;
+		}
+	}
+}

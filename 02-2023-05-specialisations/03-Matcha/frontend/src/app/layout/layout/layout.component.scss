@@ -1,0 +1,15 @@
+app-layout {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+	margin: auto;
+	.main-container {
+		position: relative;
+		overflow: auto;
+		flex-shrink: 12;
+		flex-grow: 12;
+		width: 100%;
+	}
+}

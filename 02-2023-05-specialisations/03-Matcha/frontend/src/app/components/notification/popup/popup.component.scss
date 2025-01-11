@@ -1,0 +1,64 @@
+.notificationPopUp {
+	border-radius: 10px;
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+	padding: 10px;
+	margin-left: 10px;
+	max-width: 500px;
+
+	&.warn {
+		background: #503c04;
+	}
+	&.error {
+		background: #220101;
+	}
+	&.action {
+		background: #391625;
+	}
+	&.success {
+		background: #184925;
+	}
+
+	.content {
+		display: flex;
+		justify-content: space-between;
+		align-items: start;
+
+		p {
+			&.warn {
+				color: #fbbc05;
+			}
+			&.error {
+				color: #ff0040;
+			}
+			&.action {
+				color: #fd3f92;
+			}
+			&.success {
+				color: #34a853;
+			}
+			width: 100%;
+			margin: 2px 10px;
+			font-size: 16px;
+		}
+
+		.icon,
+		.buttonClose {
+			width: 30px;
+			height: 30px;
+			padding: 0;
+			background: none;
+			border: none;
+		}
+	}
+
+	.actionButton {
+		display: block;
+		margin: auto;
+		padding: 10px 20px;
+		border-radius: 3px;
+		background: linear-gradient(90deg, #fd3f92 0%, #ad004c 100%);
+		box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+		border: none;
+		color: white;
+	}
+}

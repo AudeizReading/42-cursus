@@ -1,0 +1,10 @@
+<div class="badge-container badge-sm badge-container-{{ badgeClasses | lowercase }}">
+	<app-icon
+		[width]="'24'"
+		[height]="'24'"
+		[icon]="badge | lowercase"
+		iconClasses="icon-base"
+		iconType="svg"
+	></app-icon>
+	<p class="badge-content">{{ badge | uppercase }}</p>
+</div>

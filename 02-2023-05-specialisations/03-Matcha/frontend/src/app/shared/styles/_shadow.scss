@@ -1,0 +1,13 @@
+@use 'color';
+
+$quaternary-30pc-2-2-3-0: 2px 2px 3px 0px color.get-palette-value('background', shadow, button, first);
+$tertiary-10pc-2-2-5-0: 2px 2px 5px 0px color.get-palette-value('background', shadow, button, second);
+$quaternary-30pc-1-1-2-0: 1px 1px 2px 0px color.get-palette-value('background', shadow, checkbox, first);
+$tertiary-10pc-2-2-3-5: 2px 2px 3px 0px color.get-palette-value('background', shadow, checkbox, second);
+$secondary-35pc-1-1-3-0: 0px 0px 1px 3px color.get-palette-value('background', shadow, icon, first);
+$primary-darker-50pc-0-0-10-10: inset 0 0 10px 0px color.get-palette-value('background', shadow, button, third);
+
+$btn-primary: $quaternary-30pc-2-2-3-0, $tertiary-10pc-2-2-3-5;
+$btn-primary-active: $primary-darker-50pc-0-0-10-10;
+$checkbox-primary: $quaternary-30pc-1-1-2-0, $tertiary-10pc-2-2-3-5;
+$badge-secondary: $secondary-35pc-1-1-3-0;

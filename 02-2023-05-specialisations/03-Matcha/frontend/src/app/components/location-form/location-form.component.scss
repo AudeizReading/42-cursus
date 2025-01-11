@@ -1,0 +1,25 @@
+@use 'mixins';
+app-location-form {
+	@include mixins.fit-size();
+	@include mixins.flex-center-column();
+
+	h2 {
+		font-size: 1.5rem;
+	}
+	@include mixins.respond-to-hover {
+		h2 {
+			font-size: 2.5rem;
+		}
+	}
+	p {
+		font-size: 1rem;
+		margin: 0;
+	}
+	.completion-container-form-map {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 10px;
+	}
+}

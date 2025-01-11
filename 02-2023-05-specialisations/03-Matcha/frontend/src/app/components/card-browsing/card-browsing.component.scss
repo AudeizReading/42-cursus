@@ -1,0 +1,170 @@
+.card {
+	position: relative;
+	background: #391625;
+	box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+	height: 80%;
+	max-width: 100%;
+	width: auto;
+	aspect-ratio: 2/3;
+	padding: 10px;
+	border-radius: 15px;
+	border: 0.005px solid white;
+
+	&.online {
+		border: 0.005px solid #fd3f92;
+	}
+
+	.id {
+		position: absolute;
+		bottom: 0;
+		left: 10px;
+		transform-origin: left center;
+		transform: rotate(-90deg);
+		text-wrap: nowrap;
+		p {
+			margin: 0;
+			padding: 0;
+			font-size: 12px;
+		}
+	}
+
+	.content {
+		background-image: url('../../../assets/img/background-card.png');
+		height: calc(100% - (14px * 2));
+		width: calc(100% - (14px * 2));
+		background-size: cover;
+		margin: 14px;
+
+		.header {
+			display: flex;
+			justify-content: space-between;
+			padding: 0 10px;
+
+			p {
+				padding: 0;
+				margin: 0;
+
+				b {
+					font-size: 10px;
+				}
+			}
+		}
+
+		.picture {
+			width: 80%;
+			aspect-ratio: 3/2;
+			margin: auto;
+			position: relative;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				border: 5px solid #391625;
+			}
+
+			.gender,
+			.sexualPreference {
+				position: absolute;
+				bottom: 10px;
+			}
+
+			.gender {
+				left: 0;
+			}
+
+			.sexualPreference {
+				right: 0;
+			}
+		}
+
+		.actions {
+			position: absolute;
+			bottom: 35px;
+			left: 0;
+			width: calc(100%);
+			display: flex;
+			align-items: center;
+			justify-content: space-around;
+
+			button {
+				padding: 10px 20px;
+				border-radius: 3px;
+				background: linear-gradient(90deg, #fd3f92 0%, #ad004c 100%);
+				box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+				border: none;
+				color: white;
+				text-wrap: nowrap;
+				overflow: hidden;
+			}
+		}
+
+		.displayName {
+			display: flex;
+			gap: 5px;
+			position: absolute;
+			bottom: 0;
+			right: 10px;
+			p {
+				margin: 0;
+				padding: 0;
+				font-size: 12px;
+			}
+		}
+
+		.fameRating {
+			position: absolute;
+			top: 0;
+			right: 10px;
+			transform-origin: right;
+			transform: rotate(-90deg);
+			p {
+				margin: 0;
+				padding: 0;
+				font-size: 12px;
+			}
+		}
+
+		.nbOfTagCommon {
+			position: absolute;
+			top: 0;
+			left: 10px;
+			p {
+				margin: 0;
+				padding: 0;
+				font-size: 12px;
+			}
+		}
+
+		.description {
+			margin: 0 10px 10px 10px;
+			overflow: auto;
+			p {
+				font-size: 15px;
+				margin: 0;
+				padding: 0;
+			}
+		}
+
+		.tags {
+			max-height: 50px;
+			overflow-x: hidden;
+			overflow-y: auto;
+			display: flex;
+			gap: 5px;
+			flex-wrap: wrap;
+		}
+
+		.distance {
+			position: absolute;
+			bottom: 2px;
+			left: 20px;
+
+			p {
+				margin: 0;
+				padding: 0;
+				font-size: 12px;
+			}
+		}
+	}
+}

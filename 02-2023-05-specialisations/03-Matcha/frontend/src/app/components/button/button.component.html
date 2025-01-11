@@ -1,0 +1,4 @@
+<button [ngClass]="btnClasses" [type]="type" (click)="onClick()">
+	<ng-content select="[buttonIcon]"></ng-content>
+	<ng-content select="[buttonContent]"></ng-content>
+</button>

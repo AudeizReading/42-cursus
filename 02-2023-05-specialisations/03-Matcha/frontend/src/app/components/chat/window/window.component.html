@@ -1,0 +1,76 @@
+<ng-template cdkPortal>
+	<div class="content">
+		@if (mode === 'SEND_VIDEO' || mode === 'VIDEO') {
+			<video class="myWebcam {{ mode }}" autoplay #myWebcam></video>
+		}
+		@if (mode === 'VIDEO') {
+			<video class="callWebcam" autoplay #callWebcam></video>
+		}
+		@if (mode === 'AUDIO') {
+			<audio class="callAudio" autoplay #callAudio></audio>
+			<canvas class="specteAudio" #audioSpecteCanvas></canvas>
+			<div class="userContact">
+				<img [src]="userPictureUrl" alt="Picture User" loading="lazy" />
+			</div>
+		}
+		@if (mode === 'SEND_VIDEO') {
+			<div class="blur"></div>
+		}
+		@if (mode === 'SEND_VIDEO' || mode === 'SEND_AUDIO') {
+			<div class="username">
+				@switch (mode) {
+					@case ('SEND_VIDEO') {
+						<p>CALL VIDEO</p>
+					}
+					@case ('SEND_AUDIO') {
+						<p>CALL AUDIO</p>
+					}
+				}
+				<p>{{ username }}</p>
+			</div>
+		}
+		@if (mode === 'RECEIPE_AUDIO' || mode === 'RECEIPE_VIDEO') {
+			<div class="username">
+				<p>{{ username }}</p>
+				@switch (mode) {
+					@case ('RECEIPE_AUDIO') {
+						<p>CALL YOU IN AUDIO</p>
+					}
+					@case ('RECEIPE_VIDEO') {
+						<p>CALL YOU IN VIDEO</p>
+					}
+				}
+			</div>
+		}
+		@if (mode === 'RECEIPE_AUDIO' || mode === 'RECEIPE_VIDEO' || mode === 'SEND_AUDIO') {
+			<div class="pictureUser">
+				<img [src]="userPictureUrl" alt="Picture User" loading="lazy" />
+			</div>
+		}
+		@if (mode !== 'END' && mode !== 'NOT_AVAILABLE') {
+			<button class="btnRefuse {{ mode }}" (click)="changeMode('END')">
+				<app-call-refuse />
+			</button>
+		}
+		@if (mode === 'RECEIPE_AUDIO' || mode === 'RECEIPE_VIDEO') {
+			<button class="btnAccept" (click)="mode === 'RECEIPE_AUDIO' ? changeMode('AUDIO') : changeMode('VIDEO')">
+				<app-call-accept />
+			</button>
+		}
+		@if (mode === 'END' || mode === 'NOT_AVAILABLE') {
+			<div class="end">
+				<div class="callEnd">
+					<img [src]="userPictureUrl" alt="Picture User" loading="lazy" />
+				</div>
+				@switch (mode) {
+					@case ('END') {
+						<p>The call with {{ username }} has ended.</p>
+					}
+					@case ('NOT_AVAILABLE') {
+						<p>Unfortunately, {{ username }} is currently unavailable.</p>
+					}
+				}
+			</div>
+		}
+	</div>
+</ng-template>

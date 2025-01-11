@@ -1,0 +1,30 @@
+.notificationButton {
+	position: relative;
+	z-index: 0;
+	background: none;
+	border: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+
+	.bulle {
+		z-index: 1;
+		position: absolute;
+		border: 2px solid #fd3f92;
+		color: #fd3f92;
+		background: white !important;
+		top: -40%;
+		right: -20%;
+		padding: 10px;
+		border-radius: 100%;
+		width: 17px;
+		height: 17px;
+		font-size: 12px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}

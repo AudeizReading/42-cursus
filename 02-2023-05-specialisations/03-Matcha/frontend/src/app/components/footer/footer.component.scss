@@ -1,0 +1,36 @@
+@use 'color';
+@use 'font';
+@use 'breakpoint';
+@use 'mixins';
+
+app-footer {
+	color: color.get-palette-value('foreground', secondary-text);
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	position: sticky;
+	bottom: 0;
+
+	footer {
+		height: 100%;
+		.footer-signup-container {
+			padding-bottom: 27px;
+			display: flex;
+			align-items: baseline;
+			justify-content: space-evenly;
+			flex-shrink: 1;
+			flex-grow: 1;
+			width: 80vw;
+			max-width: 300px;
+			margin: auto;
+			.footer-signup-content {
+				font-size: 16px;
+				text-align: left;
+			}
+		}
+
+		&.shadow {
+			box-shadow: 0px -3px 4px 0px rgba(0, 0, 0, 0.25);
+		}
+	}
+}

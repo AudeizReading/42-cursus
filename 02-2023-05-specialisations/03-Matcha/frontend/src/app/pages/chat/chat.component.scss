@@ -1,0 +1,43 @@
+app-chat {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+
+	app-message-preview {
+		width: 100%;
+		height: 100%;
+		display: block;
+	}
+}
+
+.chat-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	gap: 25px;
+	overflow-y: auto;
+	padding: 15px 25px;
+	.item-container {
+		width: 100%;
+		display: flex;
+		justify-content: flex-start;
+		cursor: pointer;
+	}
+	.no-conversation {
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+		cursor: default;
+	}
+
+	@media screen and (min-width: 769px) {
+		max-width: 1200px;
+		margin: auto;
+	}
+}

@@ -1,0 +1,8 @@
+<div class="gapComponent">
+	<p>{{ min }}</p>
+	<mat-slider [min]="minValue" [max]="maxValue" tickInterval="1" (change)="change($event)">
+		<input matSliderStartThumb id="min" />
+		<input matSliderEndThumb id="max" />
+	</mat-slider>
+	<p>{{ max }}</p>
+</div>

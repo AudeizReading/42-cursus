@@ -1,0 +1,19 @@
+<app-layout>
+	<div layoutHeader>
+		<app-header-action
+			[title]="'profile'"
+			[back]="{ active: activeBack, title: backName, location: backTo }"
+			[notif]="true"
+			[logout]="me ? false : true"
+			[more]="me ? false : true"
+		></app-header-action>
+	</div>
+	<div layoutMain class="profile-container">
+		<app-profile-details [profile]="profile"></app-profile-details>
+	</div>
+	<div layoutFooter>
+		@if (me) {
+			<app-footer-action></app-footer-action>
+		}
+	</div>
+</app-layout>

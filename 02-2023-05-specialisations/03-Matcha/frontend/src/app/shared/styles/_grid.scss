@@ -1,0 +1,22 @@
+@use './size';
+$col-xxs: 1;
+$col-xs: 2;
+$col-sm: 4;
+$col-md: 6;
+$col-lg: 8;
+$col-xl: 10;
+$col-xxl: 12;
+
+$gutter-xxxs: size.$xxxs;
+$gutter-xxs: size.$xxs;
+$gutter-xs: size.$xs;
+$gutter-sm: size.$sm;
+$gutter-md: size.$md;
+$gutter-lg: size.$lg;
+$gutter-xl: size.$xl;
+$gutter-xxl: size.$xxl;
+
+// grid
+$grid-gap: size.$md;
+$grid-col-gap: size.$md;
+$grid-row-gap: size.$md;

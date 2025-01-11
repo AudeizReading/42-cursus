@@ -1,0 +1,85 @@
+@if (connect && settings && !fbImport) {
+	<app-window [settings]="settings"></app-window>
+}
+<div class="upload-overlay-container">
+	<button class="upload-overlay-cross-btn" (click)="onCloseModal()">
+		<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" style="stroke: #fff">
+			<path
+				d="M16.5 16.5L9 9M9 9L1.5 1.5M9 9L16.5 1.5M9 9L1.5 16.5"
+				stroke-width="3"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+			/>
+		</svg>
+	</button>
+	<div class="upload-overlay-modal">
+		@if (previews && previews.length > 0) {
+			<div class="upload-preview-container">
+				@for (preview of previews; track $index) {
+					<img
+						class="preview-img"
+						[class.clicked]="fbChoiceIdx === $index || (!fbImport && $index === 0 && fbChoiceIdx === -1)"
+						[src]="preview.preview.url"
+						alt="Preview of {{ preview.preview.name }}"
+						title="Preview of {{ preview.preview.name }}"
+						(click)="onFacebookChoice(preview, $index)"
+						(keypress)="onFacebookChoice(preview, $index)"
+						role="selection image from facebook import"
+						tabindex="0"
+					/>
+				}
+			</div>
+		}
+		<div class="upload-btns-container">
+			@if (!fbImport) {
+				<button class="btn-base" (click)="onConfirmChoice()">
+					@if (previews && previews.length > 0) {
+						Save Picture
+					} @else {
+						Import Picture
+						<div class="import-file-container" aria-roledescription="input used for new picture upload">
+							<input
+								accept="image/*"
+								files="true"
+								capture="user"
+								id="file"
+								type="file"
+								class=""
+								name="file"
+								(change)="onChange($event)"
+								appClickStopPropagation
+							/>
+						</div>
+					}
+				</button>
+			} @else if (fbImport) {
+				<button [disabled]="!prev || loadingBtnFacebook" class="btn-base" (click)="onPrevFacebook()">
+					@if (loadingBtnFacebook) {
+						<app-loader />
+					} @else {
+						Prev
+					}
+				</button>
+			}
+			@if (previews && previews.length > 0 && !fbImport) {
+				<button class="btn-base" (click)="onCloseModal()">Cancel Import</button>
+			} @else if (fbImport) {
+				<button [disabled]="!next || loadingBtnFacebook" class="btn-base" (click)="onNextFacebook()">
+					@if (loadingBtnFacebook) {
+						<app-loader />
+					} @else {
+						Next
+					}
+				</button>
+			} @else {
+				<button class="btn-base" (click)="onImportFromFacebook()" [disabled]="loadingBtnFacebook">
+					@if (loadingBtnFacebook) {
+						<app-loader />
+					} @else {
+						Import Facebook
+					}
+				</button>
+			}
+		</div>
+	</div>
+</div>

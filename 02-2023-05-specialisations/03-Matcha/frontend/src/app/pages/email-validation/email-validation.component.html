@@ -1,0 +1,16 @@
+<app-layout>
+	<div layoutHeader class="'home-header-container'">
+		<app-header-action
+			[title]="'registration'"
+			[back]="{ active: true, title: 'home', location: '/' }"
+			[notif]="false"
+		></app-header-action>
+	</div>
+	<div layoutMain class="email-main">
+		@if (valid) {
+			<p class="p-validate-email">Congratulations! Your have confirmed your subscription!</p>
+		}
+		<p class="p-validate-email">You will be redirected to the login page</p>
+	</div>
+	<div layoutFooter></div>
+</app-layout>

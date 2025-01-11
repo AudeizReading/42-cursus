@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+<symbol preservedAspectRatio="xMidYMid meet"  width="30" height="30" viewBox="0 0 30 30" fill="none" id="at-sign">
+<rect width="30" height="30" rx="15" fill="white"/>
+<g id="Group 2">
+<path id="Vector" d="M21.7222 23.7077C19.8633 25.1449 17.5315 26 15 26C8.92487 26 4 21.0751 4 15C4 8.92487 8.92487 4 15 4C21.0751 4 26 8.92487 26 15C26 21.7222 18.6667 21.7222 18.6667 17.4444C18.6667 15 18.6667 10.1111 18.6667 10.1111" stroke="#FD3F92" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M18.6667 15V13.1666C18.6667 11.4791 17.0251 10.1111 15 10.1111C12.975 10.1111 11.3334 11.4791 11.3334 13.1666V15" stroke="#FD3F92" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_3" d="M18.6667 15V16.8334C18.6667 18.5209 17.0251 19.8889 15 19.8889C12.975 19.8889 11.3334 18.5209 11.3334 16.8334V15" stroke="#FD3F92" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</symbol>
+</svg>

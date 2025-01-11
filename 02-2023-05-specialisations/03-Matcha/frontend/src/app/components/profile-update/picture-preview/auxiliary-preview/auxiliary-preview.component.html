@@ -1,0 +1,9 @@
+<div class="aux-pictures-container">
+	@for (item of pictures; track $index) {
+		@if (item.name !== 'placeholder') {
+			<app-picture-preview [config]="item" (clickAction)="onClick($event)" />
+		} @else {
+			<app-preview-placeholder [config]="item" (clickAction)="onClick($event)" />
+		}
+	}
+</div>

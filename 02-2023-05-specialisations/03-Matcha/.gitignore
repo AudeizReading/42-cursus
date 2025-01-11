@@ -1,0 +1,14 @@
+.env
+.env.prod*
+.env.dev*
+
+frontend/src/environments/environment.production.ts
+frontend/src/environments/environment.development.ts
+frontend/src/proxy.conf.json
+./frontend/src/environments/environment.production.ts
+./frontend/src/environments/environment.development.ts
+./frontend/src/proxy.conf.json
+/socket-connection.*
+/frontend/client_secret*
+data/
+.DS_Store

@@ -1,0 +1,44 @@
+@if (this.isTyping) {
+	<span class="label-holder">{{ placeholder }}</span>
+}
+<label class="tooltip" [ngClass]="labelClasses" [for]="id" [formGroup]="parentForm">
+	<ng-content select="[inputIcon]"></ng-content>
+
+	@if (type === 'file') {
+		<input
+			[ngClass]="inputClasses"
+			[id]="id"
+			[formControlName]="id"
+			[type]="type"
+			[placeholder]="placeholder"
+			[multiple]="multiple"
+			autocomplete="off"
+			accept="image/*"
+			files="true"
+			capture="user"
+			(change)="onChange($event)"
+			(click)="onClick($event)"
+			(input)="onInput($event)"
+			(blur)="onBlur($event)"
+			(focus)="onFocus($event)"
+		/>
+	} @else {
+		<input
+			[attr.autocomplete]="type === 'password' ? 'current-password' : 'username'"
+			[ngClass]="inputClasses"
+			[id]="id"
+			[formControlName]="id"
+			[type]="type"
+			[placeholder]="placeholder"
+			autocomplete="off"
+			(change)="onChange($event)"
+			(click)="onClick($event)"
+			(input)="onInput($event)"
+			(blur)="onBlur($event)"
+			(focus)="onFocus($event)"
+		/>
+	}
+	@if (tooltip) {
+		<span class="tooltiptext">{{ tooltip }}</span>
+	}
+</label>

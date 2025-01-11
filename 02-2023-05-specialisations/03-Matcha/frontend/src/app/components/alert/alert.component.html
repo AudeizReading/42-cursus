@@ -1,0 +1,13 @@
+@for (alert of alerts; track alert) {
+	<div [@fade]="alert.open ? 'open' : 'closed'" role="alert" class="alert">
+		<app-notification-popup
+			[msg]="alert.message!"
+			[level]="alert.type!"
+			[labelAction]="alert.label ? alert.label : undefined"
+			(closePopup)="removeAlert(alert)"
+			(actionPopup)="onAction(alert)"
+			[attr.aria-hidden]="!alert.open"
+			[attr.role]="alert.type === 'ERROR' ? 'alert' : 'status'"
+		></app-notification-popup>
+	</div>
+}

@@ -1,0 +1,14 @@
+#
+/node_modules
+/dist
+.env
+/.angular
+/.nx
+/.vscode
+./client_secret*
+.gitignore
+.git
+./src/enviroments/*
+./src/proxy.conf.*
+./proxy.conf.sh
+./TODO.md

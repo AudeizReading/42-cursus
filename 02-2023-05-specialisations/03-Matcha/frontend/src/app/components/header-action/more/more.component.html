@@ -1,0 +1,34 @@
+<div class="more">
+	@if (display.loading) {
+		<div class="loader">
+			<app-loader />
+		</div>
+	}
+	@if (display.profile) {
+		<button class="moreButton" [routerLink]="['/profile', display.userId]">{{ display.username }} profile</button>
+	}
+	@if (display.report) {
+		<button class="moreButton" (click)="onReport()">Report {{ display.username }}</button>
+	}
+	@if (display.block) {
+		<button class="moreButton" (click)="onBlock()">Block {{ display.username }}</button>
+	}
+
+	<button
+		class="moreButton events"
+		[routerLink]="['/event']"
+		[queryParams]="{ tab: 'list', matchId: display.userId }"
+		[state]="{
+			previousUrl: router.url,
+			currentUrl: state.url,
+			code: 200,
+			status: 'OK',
+			message: 'Authorized',
+		}"
+	>
+		<div class="icon">
+			<app-current></app-current>
+		</div>
+		<p>My evenements</p>
+	</button>
+</div>

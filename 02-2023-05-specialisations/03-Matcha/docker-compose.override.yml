@@ -1,0 +1,25 @@
+services:
+  backend:
+    container_name: backend_dev
+    build:
+      target: dev
+    environment:
+      PORT: 3000
+      SWAGGER_UI_DOC: true
+      MAILER_SERVICE: "gmail"
+      TEST: true
+      FRONTEND_EMAIL_VALIDATE_URL: "${FRONTEND_URL}/email/validate/"
+      FRONTEND_EMAIL_RECOVERY_URL: "${FRONTEND_URL}/user/changePasswordByToken/"
+      FRONTEND_FONT_TITLE_URL: "${FRONTEND_URL}/assets/fonts/Cera-Pro/cerapro-medium.otf"
+      FRONTEND_FONT_BODY_URL: "${FRONTEND_URL}/assets/fonts/Cera-Pro/cerapro-regular.otf"
+      FRONTEND_FONT_EMPHASE_URL: "${FRONTEND_URL}/assets/fonts/Cera-Pro/cerapro-regularitalic.otf"
+      FRONTEND_URL: ${FRONTEND_URL?FRONTEND_URL is required}
+      SECRET_JWT: ${SECRET_JWT?SECRET_JWT is required}
+    volumes:
+      - ./backend:/var/tmp
+    ports:
+      - "3000:3000"
+
+  redis:
+    ports:
+      - "9000:6379"

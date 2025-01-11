@@ -1,0 +1,26 @@
+.gapComponent {
+	background: #391625;
+	width: 100%;
+	padding: 10px;
+	border-radius: 10px;
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	height: 43.5px;
+
+	mat-slider {
+		width: 100%;
+
+		--mdc-slider-handle-color: #fd3f92;
+		--mdc-slider-focus-handle-color: #fd3f92;
+		--mdc-slider-active-track-color: #fd3f92;
+		--mdc-slider-inactive-track-color: #ff87bb;
+		--mat-slider-hover-state-layer-color: #fd3f912d;
+		--mat-slider-focus-state-layer-color: #fd3f912d;
+	}
+
+	p {
+		color: #fd3f92;
+		font-size: 12px;
+	}
+}

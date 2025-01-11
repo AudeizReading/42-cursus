@@ -1,0 +1,51 @@
+app-message-preview-loading {
+	width: 100%;
+	background: #712647;
+	padding: 10px;
+	border-radius: 10px;
+	position: relative;
+	display: flex;
+	gap: 10px;
+
+	.picture {
+		width: 40px;
+		height: 40px;
+		background: #fd3f92;
+		border-radius: 100%;
+	}
+
+	.messageContent {
+		width: calc(100% - 40px - 10px);
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+
+		.username,
+		.lastmesage {
+			background: #fd3f92;
+			height: 15px;
+			border-radius: 10px;
+		}
+		.username {
+			width: 50%;
+		}
+	}
+}
+
+app-message-preview-loading .picture,
+app-message-preview-loading .messageContent .username,
+app-message-preview-loading .messageContent .lastmesage {
+	animation: blink 1s infinite;
+}
+
+@keyframes blink {
+	0% {
+		background-color: #fd3f92;
+	}
+	50% {
+		background-color: #fd3f912d;
+	}
+	100% {
+		background-color: #fd3f92;
+	}
+}

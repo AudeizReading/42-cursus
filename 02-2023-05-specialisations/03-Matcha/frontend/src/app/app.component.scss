@@ -1,0 +1,101 @@
+@use 'color';
+@use 'font';
+@use 'line';
+@use 'size';
+@use 'mixins';
+
+:root,
+html,
+body {
+	min-height: 100vh;
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: font.$body;
+	background: color.get-palette-value('background', gradient);
+	color: color.get-palette-value('foreground', text);
+	background-attachment: fixed;
+}
+
+button,
+input,
+::-webkit-file-upload-button,
+textarea,
+select,
+option {
+	font-family: font.$body;
+}
+
+input {
+	background: transparent;
+	outline: none;
+	border: none;
+	width: 100%;
+}
+app-root {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: font.$title;
+}
+
+h1 {
+	font-size: font.$xxxl;
+}
+
+h2 {
+	font-size: font.$xxl;
+}
+
+h3 {
+	font-size: font.$xl;
+}
+
+h4 {
+	font-size: font.$lg;
+}
+
+h5 {
+	font-size: font.$md;
+}
+
+h6 {
+	font-size: font.$sm;
+}
+
+p {
+	font-size: font.$base-size;
+	line-height: line.$height-base;
+}
+
+::-webkit-scrollbar {
+	width: 5px;
+	height: 5px;
+	padding: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: color.get-palette-value('background', scrollbar, thumb);
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+	background: color.get-palette-value('background', scrollbar, track);
+}
+
+::-webkit-scrollbar-corner {
+	background: color.get-palette-value('background', scrollbar, corner);
+}

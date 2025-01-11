@@ -1,0 +1,12 @@
+<footer [ngClass]="{ shadow: shadow, footerClasses }">
+	@if (footerClasses === 'home-footer') {
+		<div class="footer-signup-container">
+			<p class="footer-signup-content">Do not have account ?</p>
+			<button class="btn-base" (click)="onClick($event)">
+				<span>Create</span>
+			</button>
+		</div>
+	} @else {
+		<ng-content></ng-content>
+	}
+</footer>

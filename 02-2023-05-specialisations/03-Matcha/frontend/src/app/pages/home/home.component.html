@@ -1,0 +1,41 @@
+@if (!isLogged) {
+	<app-layout
+		[headerClasses]="'home-header'"
+		[footerClasses]="'home-footer'"
+		[btnClasses]="'btn-primary btn-footer'"
+		[footerLink]="'/registration'"
+		[shadow]="false"
+	>
+		<div layoutHeader class="home-header-container">
+			<div class="home-heart-logo-container">
+				<img
+					class="home-heart-logo"
+					src="/assets/img/heart-logo.png"
+					alt="Matcha Heart Logo"
+					title="Logo of the Matcha Application - A Red Heart with shadow on a light background"
+				/>
+			</div>
+			<h1 class="home-h1">
+				I want to
+				<span class="matcha-main-title">MatchA</span>
+				you
+			</h1>
+		</div>
+
+		<div layoutMain class="home-main">
+			@if (!isLogged) {
+				<app-form-signin (isLoggedEmitter)="onLogged()" (hasFailedEmitter)="onFailed()"></app-form-signin>
+				<app-recovery-password-button />
+				<p class="or-signin-p">OR</p>
+				<div class="oauth-signin-div">
+					<app-oauth-button [oauthType]="'google'"> </app-oauth-button>
+					<app-oauth-button [oauthType]="'facebook'"> </app-oauth-button>
+				</div>
+			} @else {
+				<app-load-spinner></app-load-spinner>
+			}
+		</div>
+	</app-layout>
+} @else {
+	<app-load-spinner></app-load-spinner>
+}

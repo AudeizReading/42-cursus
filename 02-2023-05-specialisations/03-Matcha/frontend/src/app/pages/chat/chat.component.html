@@ -1,0 +1,48 @@
+<app-layout>
+	<div layoutHeader>
+		<app-header-action
+			[title]="'messages'"
+			[back]="{ active: false, title: 'home', location: '/' }"
+			[notif]="true"
+		></app-header-action>
+	</div>
+	<div layoutMain class="chat-container" (scroll)="onScroll()" #chat>
+		@if (messages && messages.length > 0) {
+			@for (item of messages; track item) {
+				<div
+					class="item-container"
+					[routerLink]="['/chat/conversation', item.match!.id]"
+					[state]="{
+						previousUrl: router.url,
+						currentUrl: state.url,
+						code: 200,
+						status: 'OK',
+						message: 'Authorized',
+					}"
+				>
+					<app-message-preview
+						[isOnline]="item.online"
+						[lastMessageRead]="item.message.read"
+						[displayName]="item.match.username"
+						[lastMessage]="item.message.message"
+						[urlPicture]="item.match.defaultPicture.url"
+					/>
+				</div>
+			}
+		} @else if (!needToFetchTheNextSet) {
+			<div class="item-container no-conversation">
+				<p>No conversation founds</p>
+			</div>
+		}
+		@if (needToFetchTheNextSet) {
+			@for (char of '01234'; track char) {
+				<div class="item-container">
+					<app-message-preview-loading />
+				</div>
+			}
+		}
+	</div>
+	<div layoutFooter>
+		<app-footer-action></app-footer-action>
+	</div>
+</app-layout>

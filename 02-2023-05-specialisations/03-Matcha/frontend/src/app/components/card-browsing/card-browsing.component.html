@@ -1,0 +1,65 @@
+<div class="card {{ isOnline }}">
+	<div class="id">
+		<p>#{{ profile.id }} Matcha traiding card</p>
+	</div>
+	<div class="content">
+		<div class="header">
+			<p>{{ profile.username }}</p>
+			<p><b>YR</b>{{ getProfile().getAge() }}</p>
+		</div>
+		<div class="picture">
+			<img src="{{ profile.defaultPicture.url }}" alt="Default picture user" loading="lazy" />
+			<div class="gender">
+				<app-badge [badge]="profile.gender" [badgeClasses]="profile.gender"></app-badge>
+			</div>
+			<div class="sexualPreference">
+				<app-badge [badge]="profile.sexualPreference" [badgeClasses]="profile.sexualPreference"></app-badge>
+			</div>
+		</div>
+		<div class="nbOfTagCommon">
+			<p>{{ commonTagsCount }} {{ commonTagsCount > 1 ? 'Tags' : 'Tag' }} in common</p>
+		</div>
+		<div class="displayName">
+			<p>{{ profile.firstName }}</p>
+			<p>{{ profile.lastName }}</p>
+		</div>
+		<div class="fameRating">
+			<p>Fame {{ profile.fameRating }}</p>
+		</div>
+		@if (distance) {
+			<div class="distance">
+				<p>{{ distance }}</p>
+			</div>
+		}
+		@if (displayTag && profile.tags.length >= 1) {
+			<div class="tags">
+				@for (tag of profile.tags; track tag) {
+					<app-tag tag="{{ tag.name }}" />
+				}
+			</div>
+		}
+		<div class="description">
+			<p>{{ profile.description }}</p>
+		</div>
+		<div class="actions">
+			@if (displayLikeUnlikeButton) {
+				<app-like (like)="onLike($event, profile.id)" [liked]="false" />
+			}
+			<button
+				[routerLink]="['/profile', profile.id]"
+				[state]="{
+					previousUrl: router.url,
+					currentUrl: state.url,
+					code: 200,
+					status: 'OK',
+					message: 'Authorized',
+				}"
+			>
+				view profile
+			</button>
+			@if (displayLikeUnlikeButton) {
+				<app-like (like)="onLike($event, profile.id)" [liked]="true" />
+			}
+		</div>
+	</div>
+</div>

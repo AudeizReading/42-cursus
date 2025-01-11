@@ -1,0 +1,21 @@
+<div class="footer-action-container">
+	@for (icon of icons; track $index) {
+		<button (click)="execAction(icon.action)" [ngClass]="{ newMessage: icon.name === 'message' && newMessage }">
+			<app-icon
+				buttonIcon
+				[icon]="icon.icon"
+				[iconClasses]="'icon-footer-action'"
+				[iconType]="'svg'"
+				[width]="'24'"
+				[height]="'24'"
+			></app-icon>
+			<p buttonContent class="btn-footer-action-content">{{ icon.name }}</p>
+			@if (displayBulle(icon)) {
+				<div class="bulle"></div>
+			}
+		</button>
+		@if ($index !== icons.length - 1) {
+			<div class="separator"></div>
+		}
+	}
+</div>

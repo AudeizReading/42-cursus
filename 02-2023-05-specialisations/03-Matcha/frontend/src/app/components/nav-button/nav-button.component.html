@@ -1,0 +1,6 @@
+<app-button [btnClasses]="btnClasses" [type]="'button'" (triggered)="onClick()">
+	@if (icon) {
+		<app-icon buttonIcon [icon]="icon" [iconClasses]="iconClasses" [iconType]="iconType"></app-icon>
+	}
+	<ng-content buttonContent select="[buttonContent]"></ng-content>
+</app-button>

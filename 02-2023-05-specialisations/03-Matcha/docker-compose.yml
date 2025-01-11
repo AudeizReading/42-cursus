@@ -1,0 +1,44 @@
+services:
+  frontend:
+    container_name: matcha_frontend
+    image: matcha/frontend
+    build:
+      context: frontend/
+      args:
+        - PUBLIC_PORT_FRONT
+        - MATCHA_HOSTNAME
+        - FRONTEND_URL
+        - BACKEND_PROXY_URL
+    env_file:
+      - .env
+    ports:
+      - "${PUBLIC_PORT_FRONT}:${PUBLIC_PORT_FRONT}"
+    restart: always
+    depends_on:
+      - backend
+    hostname: angular
+
+  backend:
+    depends_on:
+      - redis
+    image: matcha/backend
+    build:
+      context: backend/
+    env_file:
+      - .env
+    restart: always
+    hostname: nestjs
+
+  redis:
+    container_name: matcha_redis
+    image: redis:7.4.1
+    restart: always
+    env_file:
+      - .env
+    command: redis-server --save 20 1 --loglevel warning --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - redis-data:/data
+
+volumes:
+  redis-data:
+    name: redis-data

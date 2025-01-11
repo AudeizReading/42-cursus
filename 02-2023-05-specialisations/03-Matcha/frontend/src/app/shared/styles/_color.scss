@@ -1,0 +1,235 @@
+//
+/*
+* email link color #652541
+* email link visited color #a86381
+*/
+// colors
+@function luminance($color) {
+	$r: red($color) / 255;
+	$g: green($color) / 255;
+	$b: blue($color) / 255;
+
+	$r: if($r <= 0.03928, $r / 12.92, pow(($r + 0.055) / 1.055, 2.4));
+	$g: if($g <= 0.03928, $g / 12.92, pow(($g + 0.055) / 1.055, 2.4));
+	$b: if($b <= 0.03928, $b / 12.92, pow(($b + 0.055) / 1.055, 2.4));
+
+	@return 0.2126 * $r + 0.7152 * $g + 0.0722 * $b;
+}
+@function contrast-ratio($color1, $color2) {
+	$luminance1: luminance($color1);
+	$luminance2: luminance($color2);
+
+	@if ($luminance1 > $luminance2) {
+		@return ($luminance1 + 0.05) / ($luminance2 + 0.05);
+	} @else {
+		@return ($luminance2 + 0.05) / ($luminance1 + 0.05);
+	}
+}
+
+@function adjust-contrast-color($base-color, $contrast-color, $min-ratio) {
+	$ratio: contrast-ratio($base-color, $contrast-color);
+	$luminance-diff: abs(lightness($base-color) - lightness($contrast-color));
+
+	@if $ratio < $min-ratio {
+		// Si la luminance de la couleur de contraste est plus grande que celle de la couleur de base,
+		// éclaircir la couleur de contraste, sinon l'assombrir
+		@if lightness($contrast-color) > lightness($base-color) {
+			$contrast-color: lighten($contrast-color, $luminance-diff);
+		} @else {
+			$contrast-color: darken($contrast-color, $luminance-diff);
+		}
+	}
+
+	@return $contrast-color;
+}
+
+@function generate-color-palette($base-color, $contrast-color, $light-steps, $dark-steps, $min-contrast-ratio: 4.5) {
+	// Création d'une palette de couleurs à partir d'une couleur de base
+	$palette: (
+		base: $base-color,
+		contrast: adjust-contrast-color($base-color, $contrast-color, $min-contrast-ratio),
+	);
+
+	// Générer les nuances plus claires
+	@for $i from 1 through $light-steps {
+		$lightness: $i * 5;
+		$palette: map-merge($palette, (l-#{$lightness}: lighten($base-color, $lightness)));
+	}
+
+	// Générer les nuances plus sombres
+	@for $i from 1 through $dark-steps {
+		$darkness: $i * 5;
+		$palette: map-merge($palette, (d-#{$darkness}: darken($base-color, $darkness)));
+	}
+
+	// Renvoyer la palette de couleurs générée
+	@return $palette;
+}
+
+// Fonction pour récupérer la valeur de couleur à partir de la clé
+@function get-color-value($palette, $key) {
+	@return map-get($palette, $key);
+}
+
+$primary-palette: generate-color-palette(#fd3f92, #fff, 10, 10, 4.5);
+$secondary-palette: generate-color-palette(#fff, #391625, 10, 10, 4.5);
+$tertiary-palette: generate-color-palette(#959595, #242424, 10, 10, 4.5);
+$quaternary-palette: generate-color-palette(#391625, #fd3f92, 10, 10, 4.5);
+$quinary-palette: generate-color-palette(#242424, #fff, 10, 10, 4.5);
+$success-palette: generate-color-palette(#28a745, #fff, 10, 10, 4.5);
+$warning-palette: generate-color-palette(#ffc107, #fff, 10, 10, 4.5);
+$error-palette: generate-color-palette(#dc3545, #fff, 10, 10, 4.5);
+$tag-palette: generate-color-palette(#4285f4, #fff, 10, 20, 4.5);
+
+$bisexual-gradient: linear-gradient(to bottom, #d60270 0%, #8a2bbf 50%, #0038a8 100%);
+$gay-gradient: linear-gradient(to bottom, #e50000 0%, #ff8d00 20%, #ffee00 40%, #028121 59%, #004cff 78%, #770088 100%);
+$lesbian-gradient: linear-gradient(to bottom, #d62800 0%, #ff9b56 25%, #ffffff 51%, #d462a6 76%, #a40062 100%);
+$hetero-gradient: linear-gradient(to bottom, #ff0040 0%, #243c63 100%);
+$man-gradient: linear-gradient(to bottom, #4285f4 0%, #243c63 100%);
+$woman-gradient: linear-gradient(to bottom, #ff87bb 0%, #630019 100%);
+$google-gradient: linear-gradient(to right, #ff1400 0%, #d41d0e 100%);
+$facebook-gradient: linear-gradient(90deg, #213358 0%, #141e34 100%);
+$basic-gradient: linear-gradient(90deg, #fd3f92 0%, #ad004c 100%);
+$bg-gradient: linear-gradient(180deg, #fd3f92 0%, #ff87bb 50%, #ffffff 100%);
+
+$disconnected-gradient: radial-gradient(
+	circle,
+	lighten(rgba(get-color-value($quinary-palette, base), 0.15), 0%) 0%,
+	lighten(rgba(get-color-value($quinary-palette, base), 0.25), 0%) 35%,
+	lighten(rgba(get-color-value($quinary-palette, base), 0.95), 0%) 99%,
+	lighten(rgba(get-color-value($quinary-palette, base), 0.95), 0%) 100%
+);
+$connected-gradient: radial-gradient(
+	circle,
+	lighten(rgba(get-color-value($success-palette, base), 0.95), 25%) 0%,
+	lighten(rgba(get-color-value($success-palette, base), 0.65), 10%) 35%,
+	lighten(rgba(get-color-value($quinary-palette, base), 0.95), 0%) 95%,
+	lighten(rgba(get-color-value($quinary-palette, base), 0.95), 0%) 100%
+);
+
+$palette: (
+	background: (
+		base: get-color-value($primary-palette, base),
+		oauth-button-google: $google-gradient,
+		oauth-button-facebook: $facebook-gradient,
+		button: $basic-gradient,
+		gradient: $bg-gradient,
+		success: rgba(get-color-value($success-palette, d-20), 0.9),
+		warning: rgba(get-color-value($warning-palette, d-30), 0.9),
+		error: rgba(get-color-value($error-palette, d-50), 0.9),
+		connected: $connected-gradient,
+		disconnected: $disconnected-gradient,
+		border: (
+			button: (
+				0: rgba(get-color-value($quaternary-palette, base), 0.35),
+				1: lighten(rgba(get-color-value($quaternary-palette, base), 0.85), 1%),
+			),
+			button-hover: rgba(get-color-value($primary-palette, base), 0.35),
+			button-active: get-color-value($primary-palette, d-20),
+			icon: rgba(get-color-value($primary-palette, contrast), 0.35),
+			checkbox: get-color-value($primary-palette, base),
+		),
+		badge: (
+			bisexual: $bisexual-gradient,
+			gay: $gay-gradient,
+			lesbian: $lesbian-gradient,
+			hetero: $hetero-gradient,
+			man: $man-gradient,
+			woman: $woman-gradient,
+		),
+		shadow: (
+			button: (
+				first: rgba(get-color-value($quaternary-palette, base), 0.3),
+				second: rgba(get-color-value($tertiary-palette, base), 0.1),
+				third: rgba(get-color-value($primary-palette, d-20), 0.5),
+			),
+			checkbox: (
+				first: rgba(get-color-value($quaternary-palette, base), 0.3),
+				second: rgba(get-color-value($tertiary-palette, base), 0.1),
+			),
+			icon: (
+				first: rgba(get-color-value($primary-palette, contrast), 0.35),
+			),
+		),
+		hover: get-color-value($primary-palette, 'contrast'),
+		checkbox: (
+			base: get-color-value($primary-palette, 'contrast'),
+			mark: rgba(get-color-value($quaternary-palette, base), 0.1),
+		),
+		active: get-color-value($primary-palette, base),
+		disabled: rgba(get-color-value($primary-palette, base), 0.5),
+		divider: get-color-value($tertiary-palette, l-30),
+		selected: get-color-value($primary-palette, base),
+		scrollbar: (
+			thumb: rgba(get-color-value($primary-palette, d-30), 0.5),
+			corner: rgba(get-color-value($primary-palette, base), 0.35),
+			track: rgba(get-color-value($primary-palette, contrast), 0.15),
+		),
+		surface: rgba(get-color-value($quaternary-palette, base), 0.4),
+		tooltip: rgba(get-color-value($quaternary-palette, l-30), 1),
+		focus: get-color-value($primary-palette, d-30),
+		tags: linear-gradient(
+				to bottom,
+				get-color-value($tag-palette, base) 0%,
+				get-color-value($tag-palette, d-60) 100%
+			),
+	),
+	foreground: (
+		text: get-color-value($primary-palette, 'contrast'),
+		oauth-button: get-color-value($primary-palette, 'contrast'),
+		placeholder: rgba(get-color-value($primary-palette, 'contrast'), 0.6),
+		disabled: rgba(get-color-value($primary-palette, base), 0.5),
+		link: get-color-value($primary-palette, 'contrast'),
+		link-hover: get-color-value($primary-palette, base),
+		link-visited: get-color-value($primary-palette, base),
+		link-active: get-color-value($primary-palette, 'contrast'),
+		link-focus: get-color-value($primary-palette, 'contrast'),
+		link-disabled: rgba(get-color-value($primary-palette, 'contrast'), 0.6),
+		divider: get-color-value($primary-palette, 'contrast'),
+		divider-light: get-color-value($quaternary-palette, base),
+		divider-dark: get-color-value($quaternary-palette, base),
+		input: get-color-value($primary-palette, 'contrast'),
+		secondary-text: get-color-value($tertiary-palette, base),
+		tertiary-text: get-color-value($quaternary-palette, base),
+		hover: get-color-value($primary-palette, base),
+		active: get-color-value($primary-palette, 'contrast'),
+		focus: get-color-value($primary-palette, 'contrast'),
+		success: get-color-value($success-palette, l-40),
+		warning: get-color-value($warning-palette, l-20),
+		error: get-color-value($error-palette, base),
+		icon: get-color-value($primary-palette, 'contrast'),
+		selected: get-color-value($primary-palette, 'contrast'),
+		surface: get-color-value($quaternary-palette, 'contrast'),
+		tooltip: get-color-value($quaternary-palette, 'contrast'),
+		tags: get-color-value($primary-palette, 'contrast'),
+		badge: (
+			bisexual: get-color-value($primary-palette, contrast),
+			gay: get-color-value($quaternary-palette, base),
+			lesbian: get-color-value($quaternary-palette, base),
+			hetero: get-color-value($primary-palette, contrast),
+			man: get-color-value($primary-palette, contrast),
+			woman: get-color-value($primary-palette, contrast),
+		),
+	),
+);
+
+@function get-palette-value($map-name, $sub-map, $keys...) {
+	$map: if($map-name == 'background', map-get($palette, background), map-get($palette, foreground));
+	$sub-map: map-get($map, $sub-map);
+	$value: $sub-map;
+
+	@each $key in $keys {
+		@if type-of($value) == map {
+			$value: map-get($value, $key);
+		} @else {
+			@return $value;
+		}
+	}
+
+	@return $value;
+}
+
+@mixin badge-colors($badge) {
+	background: get-palette-value('background', 'badge', $badge);
+	color: get-palette-value('foreground', 'badge', $badge);
+}

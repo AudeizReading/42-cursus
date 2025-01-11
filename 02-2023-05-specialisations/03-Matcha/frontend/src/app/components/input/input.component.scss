@@ -1,0 +1,242 @@
+@use 'color';
+@use 'font';
+@use 'border';
+@use 'shadow';
+@use 'mixins';
+
+app-input {
+	position: relative;
+	margin-top: 0.33rem;
+}
+
+.label-holder {
+	position: absolute;
+	top: 0;
+	left: 15%;
+	padding: 0.1rem 0.5rem 0.1rem 0.25rem;
+	width: auto;
+	display: block;
+	z-index: 1;
+	font-style: italic;
+	font-size: 75%;
+	border-radius: 25px; // Bord arrondi
+	transform: translate(0%, -35%);
+}
+
+/* Tooltip container */
+.tooltip {
+	position: relative;
+	display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+	visibility: hidden;
+	width: 200px;
+	// height: 120px;
+	// overflow: auto;
+	background-color: color.get-palette-value('background', tooltip);
+	color: color.get-palette-value('foreground', base);
+	font-size: small;
+	border: border.$btn-primary;
+	box-shadow: shadow.$btn-primary;
+	padding: 5%;
+	border-radius: 6px;
+
+	/* Position the tooltip text */
+	position: absolute;
+	z-index: 1;
+	bottom: 125%;
+	left: 50%;
+	margin-left: -60px;
+
+	/* Fade in tooltip */
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+	content: '';
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -12px;
+	border-width: 12px;
+	border-style: solid;
+	border-color: color.get-palette-value('background', tooltip) transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+	opacity: 1;
+}
+
+.input-signin {
+	margin-top: 2.5rem;
+}
+.label-primary {
+	position: relative;
+	display: flex; // Utilisation de flexbox pour aligner les éléments
+	align-items: center; // Alignement vertical des éléments
+	border-radius: 25px; // Bord arrondi
+	background-color: color.get-palette-value('background', base); // Couleur de fond
+	color: color.get-palette-value('foreground', text); // Couleur du texte
+	padding: 3px; // Espacement intérieur
+	margin: 7.5px; // Marge en bas pour séparer les éléments
+	border: border.$btn-primary;
+	box-shadow: shadow.$btn-primary;
+	max-width: 80vw;
+	width: 300px;
+}
+
+.label-button-icon-primary {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 100%;
+	border-radius: 5px; // Bord arrondi
+	background-color: color.get-palette-value('background', base); // Couleur de fond
+	color: color.get-palette-value('foreground', text); // Couleur du texte
+	border: border.$btn-primary;
+	box-shadow: shadow.$btn-primary;
+	padding: 3px 5px;
+	input {
+		margin: 0;
+		color: color.get-palette-value('foreground', text); // Couleur du texte
+		flex: 2 1;
+		padding-left: 8%;
+		text-align: left;
+	}
+	width: 120px;
+}
+
+.label-primary input {
+	height: 23px;
+	font-size: 1rem; // Taille de la police
+	color: color.get-palette-value('foreground', text); // Couleur du texte
+	margin-left: 1em; // Espacement intérieur à gauche
+	margin-right: 0.5em; // Espacement intérieur à right
+	border-bottom: 1px solid color.get-palette-value('background', base);
+	transition:
+		box-shadow 180ms ease-in-out,
+		border-color 180ms ease-in-out;
+}
+
+.label-primary input::-webkit-datetime-edit {
+	color: color.get-palette-value('foreground', placeholder); // Couleur du texte
+}
+
+.label-primary input::-webkit-calendar-picker-indicator {
+	cursor: pointer;
+	height: 16px;
+	padding-left: 1.5em; // Espacement intérieur à gauche
+	padding-right: 0.5em; // Espacement intérieur à right
+	position: relative;
+	z-index: 0;
+	filter: invert(100%); // c'est ca qui passe en blanc le date pciker
+}
+
+.label-primary input::-webkit-file-upload-button {
+	background: color.get-palette-value('background', hover); // Couleur de fond
+	color: color.get-palette-value('foreground', text-secondary); // Couleur du texte
+	border: 1px inset color.get-palette-value('foreground', secondary-text);
+	border-radius: 5px;
+}
+
+/* CHECKBOX */
+/* Pour aligner la case à cocher et son label sur le bord gauche */
+label.checkbox-label {
+	display: block;
+	position: relative;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	margin: 1%;
+}
+
+/* On masque la checkbox par defaut */
+label.checkbox-label input[type='checkbox'] {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
+}
+
+/* Pour aligner le label avec la case à cocher */
+label.checkbox-label span.checkbox-mark {
+	position: absolute;
+	top: 15%;
+	left: 5%;
+	margin-right: 2rem;
+	height: 12px;
+	width: 12px;
+	background-color: color.get-palette-value('background', checkbox, base);
+	border: border.$btn-primary;
+	box-shadow: shadow.$checkbox-primary;
+}
+
+span.checkbox-text {
+	margin-left: 4rem;
+}
+
+@include mixins.respond-to-hover {
+	label.checkbox-label:hover input ~ span.checkbox-mark {
+		background-color: color.get-palette-value(
+			'background',
+			checkbox,
+			mark
+		); /* Marge à gauche du texte du label pour l'espacement */
+	}
+}
+
+label.checkbox-label input:checked ~ span.checkbox-mark {
+	background-color: color.get-palette-value(
+		'background',
+		checkbox,
+		base
+	); /* Marge à gauche du texte du label pour l'espacement */
+}
+
+span.checkbox-mark:after {
+	content: '';
+	position: absolute;
+	display: none;
+}
+
+label.checkbox-label input:checked ~ span.checkbox-mark:after {
+	display: block;
+}
+
+label.checkbox-label span.checkbox-mark:after {
+	left: 4px;
+	top: 1px;
+	width: 3px;
+	height: 6px;
+	border: solid color.get-palette-value('background', border, checkbox);
+	border-width: 0 2px 2px 0;
+	transform: rotate(45deg);
+}
+
+/* PSEUDO CLASS & ELEMENTS */
+.label-primary input::placeholder {
+	color: color.get-palette-value('foreground', placeholder); // Couleur du texte
+}
+
+.label-primary input:focus {
+	outline: transparent solid 3px;
+	border-color: color.get-palette-value('foreground', focus);
+	box-shadow: 0 3px 3px -3px rgba(color.get-palette-value('background', focus), 0.2);
+}
+
+.label-primary input:disabled {
+	outline: none; // Suppression du contour par défaut
+	border: none; // Suppression de la bordure
+	pointer-events: none;
+	opacity: 0.5;
+	cursor: not-allowed;
+}

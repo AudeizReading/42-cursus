@@ -1,0 +1,18 @@
+@if (coords.latitude !== undefined && coords.longitude !== undefined) {
+	<form class="" [formGroup]="form" (ngSubmit)="onSubmit()">
+		<app-map
+			[latitude]="coords.latitude"
+			[longitude]="coords.longitude"
+			[zoom]="coords.zoom"
+			(moving)="updateCoordinates($event)"
+		></app-map>
+		<div>
+			<app-input
+				[inputClasses]="'btn-primary btn-base'"
+				[id]="'submit'"
+				[parentForm]="form"
+				[type]="'submit'"
+			></app-input>
+		</div>
+	</form>
+}

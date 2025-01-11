@@ -1,0 +1,13 @@
+@if (tag) {
+	<span> #{{ tag | truncate: 8 }} </span>
+	@if (canDelete) {
+		<app-icon
+			(click)="deleteTag(tag)"
+			[icon]="'closeXs'"
+			[iconClasses]="'icon-base'"
+			[iconType]="'svg'"
+			[width]="'10'"
+			[height]="'10'"
+		></app-icon>
+	}
+}

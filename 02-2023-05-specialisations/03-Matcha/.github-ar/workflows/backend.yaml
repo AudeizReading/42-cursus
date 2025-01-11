@@ -1,0 +1,99 @@
+name: Backend Workflow
+
+on: workflow_call
+
+jobs:
+  setup-backend:
+    name: Backend Setup
+    runs-on: self-hosted
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Copy .env.example to .env
+        working-directory: backend/
+        run: cp .env.example .env
+
+      - name: Cache node_modules
+        id: cache-node-modules
+        uses: actions/cache@v4
+        with:
+          path: backend/node_modules
+          key: backend-node-modules-${{ hashFiles('backend/package-lock.json') }}
+          restore-keys: |
+            backend-node-modules-
+
+      - name: Copy .env.example to .env
+        working-directory: backend/
+        run: cp .env.example .env
+
+      - name: Install dependencies
+        working-directory: backend/
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm install
+
+  lint-backend:
+    name: Check lint backend
+    runs-on: self-hosted
+    needs: setup-backend
+
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Cache node_modules
+        id: cache-node-modules-lint
+        uses: actions/cache@v4
+        with:
+          path: backend/node_modules
+          key: backend-node-modules-${{ hashFiles('backend/package-lock.json') }}
+          restore-keys: |
+            backend-node-modules-
+
+      - name: Run Norm Lint
+        working-directory: backend/
+        run: npm run lint
+
+  test-backend:
+    name: Check test backend
+    runs-on: self-hosted
+    needs: setup-backend
+
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install ffmpeg
+        uses: FedericoCarboni/setup-ffmpeg@v3
+        id: setup-ffmpeg
+        with:
+            ffmpeg-version: release
+            architecture: ''
+            github-token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Cache node_modules
+        id: cache-node-modules-test
+        uses: actions/cache@v4
+        with:
+          path: backend/node_modules
+          key: backend-node-modules-${{ hashFiles('backend/package-lock.json') }}
+          restore-keys: |
+            backend-node-modules-
+
+      - name: Run build
+        working-directory: backend/
+        run: npm run build
+
+      - name: Run tests
+        working-directory: backend/
+        run: npm run test

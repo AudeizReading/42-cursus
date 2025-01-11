@@ -1,0 +1,17 @@
+p {
+	color: #fff;
+	font-size: 12px;
+	text-wrap: nowrap;
+	margin: 0;
+	padding: 0;
+}
+
+.notifications {
+	color: #fff;
+	min-width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	max-height: min(450px, calc(60vh));
+	overflow-y: auto;
+}

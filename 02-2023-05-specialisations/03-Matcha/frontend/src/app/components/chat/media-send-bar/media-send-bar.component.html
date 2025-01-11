@@ -1,0 +1,145 @@
+<!--  eslint-disable @angular-eslint/template/elements-content -->
+<div class="container">
+	<button class="addButton" (click)="onAdd($event)">
+		<app-add />
+	</button>
+	@if (open) {
+		<div class="menuFile">
+			<p class="label">Import media</p>
+			@for (media of medias; track media) {
+				<div class="zoning" [attr.role]="'upload {{ media.type | titlecase }}'" tabindex="-1">
+					<input
+						accept="{{ media.mime }}"
+						files="true"
+						id="file{{ media.type | titlecase }}"
+						type="file"
+						name="filetitlecase"
+						(change)="onChange($event, media)"
+						appClickStopPropagation
+					/>
+					<div class="icon">
+						<app-add />
+					</div>
+					<p class="title">{{ media.type | titlecase }}</p>
+				</div>
+			}
+			<p class="label">Stream media</p>
+			<div class="actions">
+				<button class="micro" (mousedown)="onMicro()" (mouseup)="onStopMicro()">
+					<app-micro />
+				</button>
+				<button class="webcamButton" (click)="onWebcam()">
+					<app-webcam />
+				</button>
+			</div>
+			<p class="label">Call</p>
+			<div class="actions">
+				<button class="callAudio" (click)="emitCall('AUDIO')">
+					<app-call-audio />
+				</button>
+				<button class="callVideo" (click)="emitCall('VIDEO')">
+					<app-call-video />
+				</button>
+			</div>
+			<p class="label">Event</p>
+			<div class="actions">
+				<button class="newEvent" (click)="newEvent()">
+					<div class="iconNewEvent">
+						<app-create></app-create>
+					</div>
+					<p>Create event</p>
+				</button>
+			</div>
+		</div>
+	}
+</div>
+
+@if (modalWebcam) {
+	<div class="container-webcam">
+		<button class="close" (click)="closeModalWebcam()">
+			<app-icon-cross color="white" />
+		</button>
+		<div class="webcam">
+			@if (recorder?.state === 'recording') {
+				<div class="recording"></div>
+			}
+			<video autoplay #webcam></video>
+			<button (click)="onTake()" class="{{ cameraMode }}"></button>
+		</div>
+		<div class="modes">
+			<div class="mode">
+				<input
+					name="mode"
+					value="picture"
+					type="radio"
+					id="picture"
+					checked
+					(click)="onChangeModeWebcam('picture')"
+				/>
+				<label for="picture" class="{{ cameraMode === 'picture' ? 'active' : '' }}">Picture</label>
+			</div>
+			<div class="mode">
+				<input name="mode" value="video" type="radio" id="video" (click)="onChangeModeWebcam('video')" />
+				<label for="video" class="{{ cameraMode === 'video' ? 'active' : '' }}">Video</label>
+			</div>
+		</div>
+	</div>
+}
+
+@if (modalEvent && this.formEvent) {
+	<div class="createEvent">
+		<button class="close" (click)="closeModalEvent()">
+			<app-icon-cross color="white" />
+		</button>
+		<div class="contentFormCreateEvent" [formGroup]="formEvent">
+			<div class="containerInputPicture">
+				@if (loadPicture) {
+					<app-loader />
+				} @else if (inputFile) {
+					<div class="containerPictureForEvent">
+						<button class="close" (click)="onRemovePicture()">
+							<app-icon-trash color="white" />
+						</button>
+						<img [src]="inputFile.url" [alt]="inputFile.name" />
+					</div>
+				} @else {
+					<input type="file" accept="image/*" (change)="onChangePicture($event)" />
+				}
+			</div>
+			<div class="location">
+				<app-fake-location-dialog
+					usecase="event"
+					[coords]="getLocationInit"
+					(closed)="onClosedModalMap($event)"
+				></app-fake-location-dialog>
+				<div class="coord">
+					@if (location) {
+						<p>Latitude: {{ location.latitude }}</p>
+						<p>Longitude: {{ location.longitude }}</p>
+					}
+				</div>
+				@if (location) {
+					<button (click)="onRemoveLocation()">
+						<app-icon-trash color="white" />
+					</button>
+				}
+			</div>
+			<app-input-icon [parentForm]="formEvent" id="datetime" type="datetime-local" icon="date" />
+			<app-input-icon [parentForm]="formEvent" id="title" type="text" placeholder="Title of event" />
+			<app-textarea
+				[formControl]="getDescriptionFormControl"
+				[textareaClasses]="'textarea-primary'"
+				[labelClasses]="'label-primary-textarea'"
+				id="description"
+				placeholder="Description"
+			></app-textarea>
+			@if (loadSendEvent) {
+				<app-loader />
+			} @else {
+				<button class="saveButton" (click)="onSubmitCreateEvent()">
+					<p>Create Event</p>
+				</button>
+			}
+		</div>
+	</div>
+}

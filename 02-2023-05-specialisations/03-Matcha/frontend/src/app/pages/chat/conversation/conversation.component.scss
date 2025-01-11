@@ -1,0 +1,47 @@
+app-conversation {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	.conversation-container {
+		width: 100%;
+		max-width: 100vw;
+		overflow: hidden;
+		scroll-x: hidden;
+		overflow-x: hidden;
+		position: relative;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: 25px;
+		overflow-y: auto;
+		padding: 15px 25px;
+		.item-container {
+			width: 100%;
+		}
+	}
+	.writing {
+		position: fixed;
+		bottom: 70px;
+		left: 10px;
+		color: #fd3f92;
+	}
+
+	app-footer {
+		overflow: visible;
+		color: white;
+		padding: 5px 25px;
+
+		footer {
+			box-shadow: none !important;
+			app-send-bar {
+				display: block;
+				width: 100%;
+				max-width: 90vw;
+			}
+		}
+	}
+}

@@ -1,0 +1,40 @@
+<app-layout>
+	<div layoutHeader class="'home-header-container'">
+		<app-header-action
+			[title]="'password recovery'"
+			[back]="{ active: true, title: 'home', location: '/' }"
+			[notif]="false"
+		></app-header-action>
+	</div>
+	<div layoutMain class="password-main">
+		@if (!message) {
+			<p class="password-recovery-p">Please, enter the email you have registered with.</p>
+			<form class="password-recovery-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+				<div class="password-container-form">
+					<label for="email">Enter your email: </label>
+					<app-input-icon id="email" type="email" placeholder="Email" icon="email" [parentForm]="form" />
+				</div>
+				<div class="validation-btn-form">
+					<app-input
+						[inputClasses]="'btn-primary btn-base'"
+						[id]="'reset'"
+						[parentForm]="form"
+						[type]="'reset'"
+						(click)="onReset()"
+					></app-input>
+					<app-input
+						[inputClasses]="'btn-primary btn-base'"
+						[id]="'submit'"
+						[parentForm]="form"
+						[type]="'submit'"
+					></app-input>
+				</div>
+			</form>
+		} @else {
+			<p class="password-message-p">
+				{{ message }}
+			</p>
+		}
+	</div>
+	<div layoutFooter></div>
+</app-layout>

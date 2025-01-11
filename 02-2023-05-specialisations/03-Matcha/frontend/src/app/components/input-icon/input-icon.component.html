@@ -1,0 +1,40 @@
+<div class="input" [formGroup]="parentForm">
+	@if (icon) {
+		<div class="icon">
+			<div class="iconComponent">
+				@switch (icon) {
+					@case ('username') {
+						<app-username />
+					}
+					@case ('password') {
+						<app-password />
+					}
+					@case ('email') {
+						<app-email color="#FD3F92" />
+					}
+					@case ('date') {
+						<app-date color="#FD3F92" />
+					}
+				}
+			</div>
+		</div>
+	}
+	<input
+		[attr.autocomplete]="autocomplete"
+		[id]="id"
+		[type]="type"
+		[attr.placeholder]="placeholder"
+		[formControlName]="id"
+	/>
+	@if (id.includes('password') || id.includes('confirmPassword') || id.includes('newPassword')) {
+		<div
+			class="icon-container"
+			role="display or hide password"
+			(click)="onSeePassword()"
+			tabindex="-1"
+			(keydown)="onSeePassword()"
+		>
+			<app-icon-eye [color]="'white'" />
+		</div>
+	}
+</div>

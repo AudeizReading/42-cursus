@@ -1,0 +1,23 @@
+@if (history) {
+	<div class="cards-container">
+		@if (type === 'profile') {
+			<app-card-profile-history
+				*ngFor="let user of history"
+				[userId]="user.userId"
+				[urlPicture]="user.urlPicture"
+				[username]="user.username"
+				[count]="user.count"
+			></app-card-profile-history>
+		} @else if (type === 'blocked') {
+			<app-blocked-user-card
+				*ngFor="let user of history"
+				[userId]="user.userId"
+				[urlPicture]="user.urlPicture"
+				[username]="user.username"
+				(unblock)="onUnblockRequest($event)"
+			></app-blocked-user-card>
+		} @else {
+			<p>There is no data to display.</p>
+		}
+	</div>
+}

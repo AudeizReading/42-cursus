@@ -1,0 +1,11 @@
+<router-outlet></router-outlet>
+<app-alert aria-live="polite"></app-alert>
+@if (call) {
+	<app-window
+		(closeEvent)="closeWindow()"
+		[mode]="mode"
+		[username]="username"
+		[userPictureUrl]="userPictureUrl"
+		[userId]="userId"
+	/>
+}

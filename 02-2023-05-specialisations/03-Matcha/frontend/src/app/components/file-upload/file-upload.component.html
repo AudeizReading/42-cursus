@@ -1,0 +1,14 @@
+<h2 class="completion-h2">Profile Completion</h2>
+<p class="completion-p">Show us how you look like.</p>
+
+<app-update-pictures />
+<form class="completion-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+	<div class="validation-btn-form">
+		<app-input
+			[inputClasses]="'btn-primary btn-base'"
+			[id]="'submit'"
+			[parentForm]="form"
+			[type]="'submit'"
+		></app-input>
+	</div>
+</form>

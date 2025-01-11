@@ -1,0 +1,16 @@
+<h2 class="completion-h2">Profile Completion</h2>
+<p class="completion-p">What are your interests?</p>
+<form class="completion-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+	<div class="completion-container-form">
+		<label for="tags">Tell us more about them: </label>
+		<app-tag-update />
+	</div>
+	<div class="validation-btn-form">
+		<app-input
+			[inputClasses]="'btn-primary btn-base'"
+			[id]="'submit'"
+			[parentForm]="form"
+			[type]="'submit'"
+		></app-input>
+	</div>
+</form>

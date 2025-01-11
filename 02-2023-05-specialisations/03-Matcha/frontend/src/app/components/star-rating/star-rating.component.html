@@ -1,0 +1,7 @@
+<div class="rating-container-icon" (click)="onClick()" (keyup)="onClick()" tabindex="-1">
+	<app-icon [width]="'30'" [height]="'30'" [icon]="'starMedium'" iconType="svg"></app-icon>
+</div>
+
+<div class="rating-container" [@show]="showRate ? 'start' : 'end'">
+	<div class="rating-container-fame">Fame Rating: {{ rating ? rating : 0 }}</div>
+</div>

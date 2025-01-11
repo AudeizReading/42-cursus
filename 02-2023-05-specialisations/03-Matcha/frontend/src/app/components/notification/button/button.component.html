@@ -1,0 +1,6 @@
+<button class="notificationButton">
+	@if (getNbOfNotifications()) {
+		<div class="bulle">{{ getNbOfNotifications() }}</div>
+	}
+	<app-icon [icon]="'notification'" [iconClasses]="'icon-base icon-action'" [iconType]="'svg'"></app-icon>
+</button>

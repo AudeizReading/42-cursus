@@ -1,0 +1,14 @@
+<form class="signin-form" [formGroup]="signinForm" (ngSubmit)="onSubmit(signinForm)">
+	<div class="form-signin-input">
+		<app-input-icon id="username" type="text" placeholder="Username" icon="username" [parentForm]="signinForm" />
+		<app-input-icon
+			id="password"
+			type="{{ field }}"
+			placeholder="Password"
+			icon="password"
+			[parentForm]="signinForm"
+			(toggleEyeVisibility)="onToggleEyeVisibility()"
+		/>
+	</div>
+	<app-signin class="form-signin-div" />
+</form>

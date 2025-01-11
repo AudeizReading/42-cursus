@@ -1,0 +1,23 @@
+@if (userId) {
+	<div class="history-card-container" pTooltip="({{ count }} times)" tooltipPosition="bottom">
+		<div class="history-card-user-datas">
+			<img src="{{ urlPicture }}" alt="picture user" loading="lazy" />
+		</div>
+		<div class="username">
+			<p>{{ username }}</p>
+		</div>
+		<button
+			class="btn-base"
+			[routerLink]="['/profile', userId]"
+			[state]="{
+				previousUrl: router.url,
+				currentUrl: state.url,
+				code: 200,
+				status: 'OK',
+				message: 'Authorized',
+			}"
+		>
+			View Profile
+		</button>
+	</div>
+}

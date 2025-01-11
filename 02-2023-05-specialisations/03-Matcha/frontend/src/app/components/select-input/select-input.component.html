@@ -1,0 +1,11 @@
+<label [ngClass]="labelClasses" [for]="id" [formGroup]="parentForm">
+	<ng-content></ng-content>
+
+	<select [ngClass]="selectClasses" [id]="id" [formControlName]="id" [multiple]="multiple">
+		@for (option of options; track $index) {
+			<option [value]="option">
+				{{ option }}
+			</option>
+		}
+	</select>
+</label>

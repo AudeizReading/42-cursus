@@ -1,0 +1,59 @@
+@use 'color';
+@use 'font';
+@use 'border';
+@use 'shadow';
+
+.label-primary-textarea {
+	position: relative;
+	display: flex; // Utilisation de flexbox pour aligner les éléments
+	align-items: center; // Alignement vertical des éléments
+	padding: 3px; // Espacement intérieur
+	margin: 7.5px; // Marge en bas pour séparer les éléments
+	border: border.$btn-primary;
+	box-shadow: shadow.$btn-primary;
+	max-width: 80vw;
+	width: 300px;
+	border-radius: 5px;
+	background-color: color.get-palette-value('background', base); // Couleur de fond
+}
+
+.textarea-primary {
+	width: 100%;
+	height: auto;
+	resize: vertical;
+	border-radius: inherit;
+	background-color: transparent;
+	color: color.get-palette-value('foreground', text); // Couleur du texte
+	padding: 0.35em; // Espacement intérieur à right
+	padding-right: 0.5em; // Espacement intérieur à right
+	padding-left: 1em; // Espacement intérieur à gauche
+	border: 1px solid color.get-palette-value('background', base);
+	font-size: font.$sm; // Taille de la police
+	overflow: auto;
+	transition:
+		box-shadow 180ms ease-in-out,
+		border-color 180ms ease-in-out;
+}
+.textarea-primary::placeholder {
+	color: color.get-palette-value('foreground', placeholder); // Couleur du texte
+	border: 1px solid color.get-palette-value('background', base);
+}
+
+.textarea-primary:focus,
+.textarea-primary:active {
+	outline: transparent solid 3px;
+	border-color: color.get-palette-value('foreground', focus);
+	box-shadow: 0 0 0px 3px rgba(color.get-palette-value('background', focus), 0.2);
+}
+
+.container {
+	textarea {
+		padding: 10px !important;
+		resize: vertical;
+		width: calc(100% - 20px);
+		min-height: 100px;
+	}
+	textarea:focus {
+		width: 100%;
+	}
+}

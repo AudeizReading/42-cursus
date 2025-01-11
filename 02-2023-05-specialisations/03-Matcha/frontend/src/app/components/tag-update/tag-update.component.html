@@ -1,0 +1,17 @@
+<div class="tagsUpdate">
+	<app-tag-search (selectedTag)="addTag($event)" [create]="true" />
+	<div class="tags">
+		@if (tags.length === 0) {
+			<p>No tag</p>
+		}
+		@for (tag of tags; track tag) {
+			<app-tag
+				tag="{{ tag.name }}"
+				[canDelete]="removeLast === false ? tags.length > 1 : true"
+				[realDelete]="true"
+				[emitDelete]="true"
+				(action)="onDeleteTag($event)"
+			/>
+		}
+	</div>
+</div>

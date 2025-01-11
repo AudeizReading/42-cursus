@@ -1,0 +1,15 @@
+<div class="notificationPopUp {{ getClassLevel() }}">
+	<div class="content">
+		<div class="icon">
+			<app-icon-heart color="{{ getColorIcon() }}"></app-icon-heart>
+		</div>
+		<p class="{{ getClassLevel() }}">{{ msg }}</p>
+		<button class="buttonClose" (click)="onClose()">
+			<app-icon-cross color="{{ getColorIcon() }}"></app-icon-cross>
+		</button>
+	</div>
+
+	@if (labelAction !== undefined) {
+		<button class="actionButton" (click)="onAction()">{{ labelAction }}</button>
+	}
+</div>

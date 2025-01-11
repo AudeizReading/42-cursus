@@ -1,0 +1,143 @@
+@use 'color';
+@use 'size';
+@use 'font';
+@use 'mixins';
+@use 'breakpoint';
+@use 'shadow';
+@use 'border';
+
+.btn-xs {
+	@include size.button-styles(x-small);
+}
+.btn-sm {
+	@include size.button-styles(small);
+}
+.btn-md {
+	@include size.button-styles(medium);
+}
+.btn-lg {
+	@include size.button-styles(large);
+}
+.btn-xl {
+	@include size.button-styles(x-large);
+}
+
+.btn-footer {
+	@include size.button-styles(small);
+	margin-top: 0px;
+}
+
+.btn-icon {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 100%;
+	border-radius: 5px; // Bord arrondi
+	background-color: color.get-palette-value('background', base); // Couleur de fond
+	color: color.get-palette-value('foreground', text); // Couleur du texte
+	border: border.$btn-primary;
+	box-shadow: shadow.$btn-primary;
+	padding: 3px 5px;
+	> [buttonContent] {
+		flex: 2 1;
+		padding-left: 8%;
+		text-align: left;
+	}
+}
+.btn-text-xs {
+	font-size: 0.65em;
+}
+
+input[type='submit'],
+input[type='reset'] {
+	@include size.button-styles(medium);
+	margin-top: 20px;
+	padding: 1%;
+}
+
+.btn-base {
+	border-radius: 3px;
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+	background: color.get-palette-value('background', button); // Couleur de fond
+	color: color.get-palette-value('foreground', text);
+	border: none;
+	min-width: 80px;
+	height: 34px;
+	font-size: 12px;
+}
+
+button.btn-base:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.btn-send-message {
+	width: 100px;
+}
+input[type='submit']:disabled,
+.btn-primary:disabled {
+	pointer-events: none;
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+@include mixins.respond-to-hover {
+	button:hover,
+	input[type='submit']:hover {
+		cursor: pointer;
+	}
+}
+
+input[type='submit']:focus {
+	outline: none; // Supprimer le contour par défaut lorsqu'on met le focus sur le bouton
+}
+
+.btn-primary,
+.btn-primary:active,
+.btn-primary:focus {
+	background-color: color.get-palette-value('background', base);
+	color: color.get-palette-value('foreground', text);
+	border: border.$btn-primary;
+	box-shadow: shadow.$btn-primary;
+	transition: background-color 0.3s ease;
+}
+
+@include mixins.respond-to-hover {
+	.btn-primary:hover {
+		background: color.get-palette-value('background', hover);
+		color: color.get-palette-value('foreground', hover);
+		border: border.$btn-primary-hover;
+		box-shadow: shadow.$btn-primary;
+		transition: background-color 0.3s ease;
+	}
+}
+
+.btn-primary:active {
+	border: border.$btn-primary-active;
+	box-shadow: shadow.$btn-primary-active;
+}
+
+.btn-footer-action {
+	display: flex;
+	height: inherit;
+	flex-direction: column;
+	align-items: center;
+	border-radius: 0px;
+	border: none;
+	margin: 0;
+	border-left: 1px solid color.get-palette-value('background', divider);
+	outline: none; // Supprimer le contour par défaut lorsqu'on met le focus sur le bouton
+}
+
+.btn-primary-contrast,
+.btn-primary-contrast:active,
+.btn-primary-contrast:focus {
+	color: color.get-palette-value('background', base);
+	background-color: color.get-palette-value('foreground', text);
+}
+@include mixins.respond-to-hover {
+	.btn-primary-contrast:hover {
+		color: color.get-palette-value('background', base);
+		background-color: color.get-palette-value('foreground', text);
+	}
+}

@@ -1,0 +1,37 @@
+<app-layout>
+	<div layoutHeader>
+		<app-header-action
+			[title]="'navigation'"
+			[back]="{ active: false, title: 'home', location: '/' }"
+			[notif]="isOk ? true : false"
+		></app-header-action>
+	</div>
+	<div layoutMain class="browsing-container">
+		@if (isOk) {
+			<app-search-bar-browsing (search)="onSearch($event)" />
+			@if (end && profiles.length === 0) {
+				<p class="end">There is no profile anymore to browse</p>
+			} @else {
+				@if (loading) {
+					<app-loader />
+				} @else {
+					<div class="profilesContainer">
+						@for (profile of profiles; track $index) {
+							<app-card-browsing
+								[ownerPosition]="ownerPosition"
+								[profile]="profile"
+								[ownerTags]="ownerTags"
+								(like)="onActionLike($event)"
+							/>
+						}
+					</div>
+				}
+			}
+		}
+	</div>
+	<div layoutFooter>
+		@if (isOk) {
+			<app-footer-action />
+		}
+	</div>
+</app-layout>

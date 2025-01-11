@@ -1,0 +1,42 @@
+@use 'size';
+@use 'color';
+
+.badge-container {
+	display: flex;
+	align-items: center;
+	border-radius: 7px;
+	padding-left: 1%;
+	padding-right: 1%;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 10px;
+	margin-right: 10px;
+	p {
+		flex: 2 1;
+		font-size: size.$xs;
+		text-align: center;
+	}
+}
+
+.badge-container-bisexual {
+	@include color.badge-colors(bisexual);
+}
+.badge-container-gay {
+	@include color.badge-colors(gay);
+}
+.badge-container-lesbian {
+	@include color.badge-colors(lesbian);
+}
+.badge-container-hetero {
+	@include color.badge-colors(hetero);
+}
+.badge-container-man {
+	@include color.badge-colors(man);
+}
+.badge-container-woman {
+	@include color.badge-colors(woman);
+}
+
+.badge-sm {
+	@include size.button-styles(small);
+}

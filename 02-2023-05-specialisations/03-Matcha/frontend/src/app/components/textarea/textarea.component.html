@@ -1,0 +1,16 @@
+<label [ngClass]="labelClasses" class="container" [for]="id">
+	<ng-content></ng-content>
+	<textarea
+		[ngClass]="textareaClasses"
+		[id]="id"
+		[placeholder]="placeholder"
+		rows="5"
+		cols="80"
+		maxlength="512"
+		autocomplete="off"
+		wrap="hard"
+		required
+		spellcheck
+		[formControl]="control"
+	></textarea>
+</label>

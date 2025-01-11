@@ -1,0 +1,60 @@
+<!--  eslint-disable @angular-eslint/template/elements-content -->
+<div class="content" [class]="isMe ? 'me' : 'you'">
+	<div class="imgContent">
+		<img src="{{ message.sender!.defaultPicture.url }}" alt="picture user" loading="lazy" />
+	</div>
+	<div class="msg">
+		@if (isUrlMessage()) {
+			@for (item of partMessage(); track item) {
+				@if (item.type === 'YOUTUBE' && getYoutubeURL(item.value)) {
+					<iframe [src]="getYoutubeURL(item.value)" frameborder="0" allowfullscreen></iframe>
+				} @else if (item.type === 'DAILYMOTION' && getDailymotion(item.value)) {
+					<iframe [src]="getDailymotion(item.value)" frameborder="0" allowfullscreen></iframe>
+				} @else if (item.type === 'VIMEO' && getVimeo(item.value)) {
+					<iframe [src]="getVimeo(item.value)" frameborder="0" allowfullscreen></iframe>
+				} @else if (
+					item.type === 'URL' ||
+					item.type === 'YOUTUBE' ||
+					item.type === 'DAILYMOTION' ||
+					item.type === 'VIMEO'
+				) {
+					<p>
+						<a href="{{ item.value }}" target="_blank">{{ item.value }}</a>
+					</p>
+				} @else {
+					<p>{{ item.value }}</p>
+				}
+			}
+		} @else if (message.message) {
+			<p>{{ message.message }}</p>
+		} @else if (message.file) {
+			@if (message.file.type === 'AUDIO') {
+				<app-audio [src]="message.file.url" />
+			}
+			@if (message.file.type === 'VIDEO') {
+				<app-video [src]="message.file.url" />
+			}
+			@if (message.file.type === 'PICTURE') {
+				<img
+					src="{{ message.file.url }}"
+					alt="picture"
+					(click)="openPicture()"
+					(keydown)="openPicture()"
+					tabindex="1"
+				/>
+			}
+		}
+	</div>
+</div>
+
+@if (pictureIsOpen && message.file?.url) {
+	<div class="pictureOpen">
+		<button class="closedModal" (click)="closePicture()"></button>
+		<div class="container-image">
+			<img src="{{ message.file!.url }}" alt="picture" />
+		</div>
+		<button class="closed" (click)="closePicture()">
+			<app-icon-cross color="white" />
+		</button>
+	</div>
+}

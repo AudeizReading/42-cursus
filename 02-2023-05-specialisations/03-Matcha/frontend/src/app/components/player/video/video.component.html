@@ -1,0 +1,53 @@
+<div class="video">
+	<video #video></video>
+	<div class="content">
+		<div class="filter"></div>
+		<button class="fullscreen" (click)="onFullSize()">
+			<app-fullscreen color="#FD3F92" />
+		</button>
+		<button class="settings" (click)="onOpenSettings()">
+			<app-settings color="#FD3F92" />
+		</button>
+		@if (settingOpen) {
+			<div class="modalSettings">
+				<button class="item" (click)="onDownloads()">
+					<span>
+						<app-save color="#FD3F92" />
+					</span>
+					<p>Downloads</p>
+				</button>
+				<div class="item">
+					<button (click)="onMuted()">
+						@if (muted) {
+							<app-sound value="muted" color="#FD3F92" />
+						} @else if (soundValue < 0.5) {
+							<app-sound value="low" color="#FD3F92" />
+						} @else {
+							<app-sound value="hight" color="#FD3F92" />
+						}
+					</button>
+					<div>
+						<input type="range" min="0" max="1" step="0.1" (change)="onChangeSound()" #sound />
+						<div class="containerCursorSound" style="--soundValue: {{ soundValue * 100 }}%">
+							<app-favorite color="#FD3F92" />
+						</div>
+						<div class="soundBard">
+							<div class="soundBardPercent" style="--soundValue: {{ soundValue * 100 }}%"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		}
+		<button class="playPauseButton" (click)="onPlay()">
+			<app-play-pause color="#FD3F92" [paused]="isPaused" />
+		</button>
+		<div class="progressBackground">
+			<div class="progress" style="--progress: {{ progressVideo }}%"></div>
+		</div>
+		<div class="cursorContainer">
+			<button class="cursor" style="--progress: {{ progressVideo }}%">
+				<app-favorite color="#FD3F92" />
+			</button>
+		</div>
+	</div>
+</div>

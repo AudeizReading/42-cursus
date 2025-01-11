@@ -1,0 +1,76 @@
+<div class="location-container" [formGroup]="form">
+	<div class="location-card-container">
+		<div class="location-card-left-container">
+			<span class="location-card-title">Location IP</span>
+			@if (settings.isIP) {
+				<span class="text-overflow">{{ settings.context }}</span>
+			}
+		</div>
+		<div class="location-card-middle-container"></div>
+		<div class="location-card-right-container">
+			<div class="switch-box">
+				<label class="switch">
+					<input id="IP" type="radio" name="location" value="ip" formControlName="location" />
+					<span class="slider round"></span>
+				</label>
+			</div>
+		</div>
+	</div>
+	<div class="location-card-container">
+		<div class="location-card-left-container">
+			<span class="location-card-title">GPS</span>
+			@if (settings.isGPS) {
+				<span class="text-overflow">{{ settings.context }}</span>
+			}
+		</div>
+		<div class="location-card-middle-container">
+			@if (!settings.isGPS && canAskGPS) {
+				<button class="btn-base" (click)="onGPSUpdate()">Request Right</button>
+			}
+		</div>
+		<div class="location-card-right-container">
+			@if (!settings.isGPS && canAskGPS) {
+				<span class="location-card-right-content"> Allow GPS location GPS</span>
+			} @else {
+				<div class="switch-box">
+					<label class="switch">
+						<input
+							id="NAVIGATOR"
+							type="radio"
+							value="navigator"
+							name="location"
+							formControlName="location"
+						/>
+						<span class="slider round"></span>
+					</label>
+				</div>
+			}
+		</div>
+	</div>
+
+	<div class="location-card-container">
+		<div class="location-card-left-container">
+			<span class="location-card-title">Custom Location</span>
+			@if (settings.isFake) {
+				<span class="text-overflow">{{ settings.context }}</span>
+			}
+		</div>
+
+		@if (location === 'fake') {
+			<app-fake-location-dialog
+				[ngClass]="'location-card-middle-container'"
+				[coords]="fakeCoords"
+				(closed)="onFakeUpdate($event)"
+				[open]="settings.openFake"
+			/>
+		}
+		<div class="location-card-right-container">
+			<div class="switch-box">
+				<label class="switch">
+					<input id="FAKE" type="radio" name="location" value="fake" formControlName="location" />
+					<span class="slider round"></span>
+				</label>
+			</div>
+		</div>
+	</div>
+</div>

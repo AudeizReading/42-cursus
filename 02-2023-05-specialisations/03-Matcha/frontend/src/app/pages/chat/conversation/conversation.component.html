@@ -1,0 +1,27 @@
+<app-layout>
+	<div layoutHeader>
+		<app-header-action
+			[title]="correspondantUsername"
+			[back]="{ active: true, title: 'Chat', location: '/chat' }"
+			[notif]="true"
+			[logout]="true"
+			[more]="true"
+			[load]="correspondantUsername === ''"
+		></app-header-action>
+	</div>
+	<div layoutMain class="conversation-container" (scroll)="onScroll($event)" #div>
+		@if (getMessages() && getMessages().length > 0) {
+			@for (item of messages; track item) {
+				<div class="item-container" id="{{ item.id }}">
+					<app-message [message]="item" [isMe]="item.receiver!.id === correspondantId"></app-message>
+				</div>
+			}
+		}
+		@if (isWriting && correspondantUsername) {
+			<div class="container writing">{{ correspondantUsername }} is writing...</div>
+		}
+	</div>
+	<div layoutFooter>
+		<app-send-bar [correspondant]="correspondant" [user]="user" (chatCall)="onSendChatCall($event)"></app-send-bar>
+	</div>
+</app-layout>

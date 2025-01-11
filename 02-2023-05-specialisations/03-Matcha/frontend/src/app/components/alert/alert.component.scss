@@ -1,0 +1,19 @@
+app-alert {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: column;
+	position: absolute;
+	top: 10vh;
+	right: 2.5rem;
+	@media screen and (min-width: 768px) {
+		right: 2.5%;
+	}
+	max-height: 80vh;
+	z-index: 1000;
+	overflow-y: auto;
+}
+
+.alert {
+	margin: 0.3rem 0;
+}

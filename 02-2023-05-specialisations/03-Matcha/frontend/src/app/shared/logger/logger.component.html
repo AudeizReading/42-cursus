@@ -1,0 +1,16 @@
+@if (loggerService.getAll().length > 0 && !isHidden) {
+	<div class="logger">
+		<h2>Logs</h2>
+		<button class="btn btn--danger" (click)="clear()">Clear</button>
+		<button class="btn btn--danger" (click)="hide()">Hide</button>
+		@for (log of logs; track $index) {
+			<div class="logger__item" [ngClass]="log.type">
+				<span class="logger__item__time">[{{ log.type | lowercase }}]: </span>
+				<span class="logger__item__time">{{ log.timestamp | date: 'HH:mm:ss' }}</span> <span> - </span>
+				<span class="logger__item__message">{{ log.value }}</span>
+			</div>
+		}
+	</div>
+} @else {
+	<button class="btn btn--danger" (click)="hide()">Hide</button>
+}

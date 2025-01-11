@@ -1,0 +1,27 @@
+.buttonSignIn {
+	display: flex;
+	background: #391625;
+	color: white;
+	border-radius: 3px;
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+	border: none;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	p {
+		font-size: 12px;
+		text-wrap: nowrap;
+	}
+	width: 100px;
+	height: 35px;
+	padding: 10px 0;
+}
+
+.logoContainer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px;
+	height: 25px;
+	padding-top: 5px;
+}

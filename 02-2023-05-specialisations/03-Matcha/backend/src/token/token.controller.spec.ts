@@ -1,0 +1,22 @@
+import { Test, TestingModule } from '@nestjs/testing';
+import { TokenController } from './token.controller';
+import { TokenService } from './token.service';
+import { ADatabase } from '$app/database/ADatabase';
+
+describe('TokenController', () => {
+	let controller: TokenController;
+
+	beforeEach(async () => {
+		await ADatabase.initialize();
+		const module: TestingModule = await Test.createTestingModule({
+			controllers: [TokenController],
+			providers: [TokenService],
+		}).compile();
+
+		controller = module.get<TokenController>(TokenController);
+	});
+
+	it('should be defined', () => {
+		expect(controller).toBeDefined();
+	});
+});

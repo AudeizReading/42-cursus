@@ -1,0 +1,28 @@
+<h2 class="completion-h2">Profile Completion</h2>
+<p class="completion-p">Tell us a little more about you.</p>
+<form class="completion-form" [formGroup]="form" (ngSubmit)="onSubmit(form)">
+	<label for="description">Fill your description: </label>
+	<app-textarea
+		#descriptionTextArea
+		[textareaClasses]="'textarea-primary'"
+		[labelClasses]="'label-primary-textarea'"
+		[id]="'description'"
+		[placeholder]="'Description'"
+		[formControlName]="'description'"
+	></app-textarea>
+	<div class="validation-btn-form">
+		<app-input
+			[inputClasses]="'btn-primary btn-base'"
+			[id]="'reset'"
+			[parentForm]="form"
+			[type]="'reset'"
+			(inputClick)="descriptionTextArea.clear($event)"
+		></app-input>
+		<app-input
+			[inputClasses]="'btn-primary btn-base'"
+			[id]="'submit'"
+			[parentForm]="form"
+			[type]="'submit'"
+		></app-input>
+	</div>
+</form>

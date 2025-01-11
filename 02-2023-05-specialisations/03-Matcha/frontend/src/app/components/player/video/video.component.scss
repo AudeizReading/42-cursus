@@ -1,0 +1,209 @@
+.video {
+	max-width: 500px;
+	min-width: 100px;
+	width: 100%;
+	aspect-ratio: 16/9;
+	border-radius: 20px;
+	overflow: hidden;
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.5);
+	position: relative;
+	background: black;
+
+	video {
+		width: 100%;
+		height: calc(100% + 20px);
+	}
+
+	.filter {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.5);
+	}
+
+	.fullscreen,
+	.settings {
+		position: absolute;
+		top: 10px;
+		width: 40px;
+		height: 40px;
+		background: none;
+		border: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.settings {
+		right: 10px;
+	}
+
+	.fullscreen {
+		right: calc(20px + 40px);
+	}
+
+	.modalSettings {
+		position: absolute;
+		right: 10px;
+		top: calc(20px + 40px);
+		border-radius: 15px;
+		background: rgba(253, 63, 146, 0.5);
+		box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+		padding: 10px;
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+
+		.item {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			justify-content: space-between;
+			margin: 0;
+			padding: 0;
+			border: none;
+			background: none;
+
+			span {
+				width: 15px;
+				height: 15px;
+			}
+
+			p {
+				margin: 0;
+				padding: 0;
+				font-size: 12px;
+				color: #fd3f92;
+			}
+
+			button {
+				margin: 0;
+				padding: 0;
+				border: none;
+				background: none;
+				width: 15px;
+				height: 15px;
+			}
+
+			div {
+				position: relative;
+				width: 100%;
+
+				input {
+					z-index: 10;
+					opacity: 0;
+					position: relative;
+				}
+
+				.containerCursorSound {
+					z-index: 1;
+					position: absolute;
+					top: 0;
+					left: calc(var(--soundValue) - 10px);
+					width: 20px;
+					height: 20px;
+					cursor: pointer;
+				}
+
+				.soundBard {
+					z-index: 0;
+					position: absolute;
+					top: 5px;
+					left: 2px;
+					width: 100%;
+					height: 10px;
+					border-radius: 10px;
+					background: #ff87bb;
+					overflow: hidden;
+
+					.soundBardPercent {
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: var(--soundValue);
+						height: 100%;
+						background: #fd3f92;
+					}
+				}
+			}
+		}
+	}
+
+	.playPauseButton {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 100px;
+		height: 100px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: none;
+		background: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.progressBackground {
+		position: absolute;
+		left: 5%;
+		bottom: 10px;
+		border-radius: 10px;
+		background: #ff87bb;
+		width: 90%;
+		height: 10px;
+		overflow: hidden;
+
+		.progress {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			background: #fd3f92;
+			width: var(--progress);
+		}
+	}
+
+	.progress,
+	.cursor {
+		transition: width 0.2s ease;
+		transition: left 0.2s ease;
+	}
+
+	.cursorContainer {
+		position: absolute;
+		left: 5%;
+		bottom: 20px;
+		width: 90%;
+		height: 10px;
+
+		.cursor {
+			position: absolute;
+			bottom: 0;
+			left: var(--progress);
+			width: 30px;
+			height: 30px;
+			transform: translateX(-50%);
+			padding: 0;
+			margin: 0;
+			border: none;
+			background: none;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+
+	.content {
+		opacity: 0;
+		transition: opacity 1s ease;
+	}
+
+	&:hover {
+		.content {
+			opacity: 1;
+		}
+	}
+}
